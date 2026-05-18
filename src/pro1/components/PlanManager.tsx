@@ -60,7 +60,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
   const yearName = activeMonth.toLocaleString('bn-BD', { year: 'numeric' });
 
   return (
-    <div className="flex-1 flex flex-col pt-20 pb-32 px-4 md:px-8 bg-bg-page overflow-y-auto">
+    <div className="flex-1 flex flex-col bg-bg-page overflow-y-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">

@@ -11,8 +11,20 @@ import WeatherManager from './components/WeatherManager';
 import PlanManager from './components/PlanManager';
 import { AddProfileModal, AddExpenseModal, HarvestModal } from './components/Modals';
 import { CropProfile, CategoryType, Expense, SaleEntry, StockEntry, StockSaleEntry, WeatherLog, FarmPlan } from './types';
-import { AlertCircle, Trash2 } from 'lucide-react';
+import {
+  AlertCircle, Trash2,
+  LayoutDashboard, Zap, Wallet, Package, BarChart3,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+// ── Bottom nav items (mobile) ─────────────────────────────────────────────────
+const BOTTOM_NAV = [
+  { id: 'dashboard', label: 'ড্যাশবোর্ড', icon: LayoutDashboard },
+  { id: 'live',      label: 'সচল',        icon: Zap             },
+  { id: 'sales',     label: 'বিক্রি',     icon: Wallet          },
+  { id: 'stocks',    label: 'স্টক',       icon: Package         },
+  { id: 'analytics', label: 'বিশ্লেষণ',  icon: BarChart3       },
+] as const;
 
 type View = 'dashboard' | 'profile-detail' | 'analytics' | 'fields' | 'harvesting' | 'sales' | 'stocks' | 'weather' | 'plans' | 'settings' | 'live' | 'archived';
 
@@ -260,11 +272,11 @@ export default function App() {
     const updated = profiles.map(p => {
       if (p.id === id) {
         const currentStatus = p.status || 'live';
-        const newStatus = currentStatus === 'live' ? 'archived' : 'live';
-        return { 
-          ...p, 
+        const newStatus: 'live' | 'archived' = currentStatus === 'live' ? 'archived' : 'live';
+        return {
+          ...p,
           status: newStatus,
-          archivedDate: newStatus === 'archived' ? new Date().toISOString() : undefined
+          archivedDate: newStatus === 'archived' ? new Date().toISOString() : undefined,
         };
       }
       return p;
@@ -491,10 +503,48 @@ export default function App() {
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-h-screen overflow-y-auto overflow-x-hidden">
+      {/* Main Content Area — extra bottom padding on mobile for bottom nav */}
+      <div className="flex-1 flex flex-col min-h-screen overflow-y-auto overflow-x-hidden pb-20 lg:pb-0">
         {renderContent()}
       </div>
+
+      {/* ── Mobile Bottom Navigation ── */}
+      <nav
+        className="fixed bottom-0 left-0 right-0 lg:hidden z-40 bg-primary border-t border-white/10"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0)' }}
+      >
+        <div className="flex items-center justify-around py-1.5 px-1">
+          {BOTTOM_NAV.map(({ id, label, icon: Icon }) => {
+            const isActive = currentView === id || (id === 'live' && currentView === 'profile-detail');
+            return (
+              <button
+                key={id}
+                onClick={() => setCurrentView(id as View)}
+                className={`flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-all active:scale-95 ${
+                  isActive ? '' : 'text-white/40 hover:text-white/70'
+                }`}
+              >
+                <div className={`p-1.5 rounded-xl transition-all ${isActive ? 'bg-secondary' : ''}`}>
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-primary' : ''}`} />
+                </div>
+                <span className={`text-[9px] font-bold ${isActive ? 'text-secondary' : ''}`}>{label}</span>
+              </button>
+            );
+          })}
+          {/* "More" opens the sidebar drawer for the remaining items */}
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl text-white/40 hover:text-white/70 active:scale-95 transition-all"
+          >
+            <div className="p-1.5 rounded-xl">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </div>
+            <span className="text-[9px] font-bold">আরও</span>
+          </button>
+        </div>
+      </nav>
 
       {/* Modals */}
       {showAddProfile && (

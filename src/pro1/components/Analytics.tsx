@@ -225,30 +225,35 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-[#FDFEFA]">
-      <header className="sticky top-0 z-30 bg-[#FDFEFA]/80 backdrop-blur-md border-b border-border-subtle p-8 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={onOpenSidebar}
-            className="lg:hidden p-3 bg-white rounded-2xl shadow-sm border border-border-subtle transition-all hover:bg-emerald-50"
-          >
-            <LayoutDashboard className="w-6 h-6 text-primary" />
-          </button>
-          <div className="flex items-center gap-6">
-            <div className="w-12 h-12 bg-white rounded-2xl p-1.5 shadow-sm border border-border-subtle">
-               <img src="/portal-logo.png" alt="Prime Agro Biotech Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-black text-primary font-display tracking-tight leading-none">সার্বিক বিশ্লেষণ (Analytics)</h1>
-              <p className="text-sm font-bold text-emerald-600 uppercase tracking-[0.2em] mt-2 pl-1">Profit/Loss Dynamics & Global Performance</p>
-            </div>
-          </div>
+      <header className="sticky top-0 z-30 bg-[#FDFEFA]/90 backdrop-blur-md border-b border-border-subtle px-4 py-3 sm:p-6 lg:p-8 flex items-center gap-3">
+        <button
+          onClick={onOpenSidebar}
+          className="lg:hidden shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle"
+        >
+          <LayoutDashboard className="w-5 h-5 text-primary" />
+        </button>
+        <div className="hidden sm:block w-10 h-10 bg-white rounded-xl p-1 shadow-sm border border-border-subtle shrink-0">
+          <img src="/portal-logo.png" alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
         </div>
+        <div className="min-w-0">
+          <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-primary font-display tracking-tight leading-none truncate">সার্বিক বিশ্লেষণ</h1>
+          <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.15em] mt-0.5 hidden sm:block">Profit/Loss Dynamics</p>
+        </div>
+        <button
+          onClick={() => { window.location.href = '/home'; }}
+          className="ml-auto shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle text-primary/50 hover:text-primary"
+          title="হোম"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+        </button>
       </header>
 
-      <main className="p-8 lg:p-12 space-y-12 pb-24 max-w-7xl mx-auto w-full">
+      <main className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-10 lg:space-y-12 pb-24 max-w-7xl mx-auto w-full">
         {/* Top Stats - High Impact Bento Style */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
             <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট বিনিয়োগ (সচল)</p>
             <h3 className="text-3xl font-black text-primary tracking-tighter tabular-nums leading-none">{formatCurrency(totalActiveExpenses)}</h3>
             <p className="text-[10px] font-bold text-primary/20 mt-1 italic">{numberToBanglaWords(totalActiveExpenses)}</p>
@@ -258,7 +263,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
+          <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
             <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট বিক্রয় (সচল)</p>
             <h3 className="text-3xl font-black text-emerald-600 tracking-tighter tabular-nums leading-none">{formatCurrency(totalActiveSales)}</h3>
             <p className="text-[10px] font-bold text-emerald-600/30 mt-1 italic">{numberToBanglaWords(totalActiveSales)}</p>
@@ -268,7 +273,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
+          <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
             <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট লাভ/ক্ষতি (সচল)</p>
             <h3 className={`text-3xl font-black tracking-tighter tabular-nums leading-none ${totalActiveProfit >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                {formatCurrency(Math.abs(totalActiveProfit))}
@@ -298,7 +303,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         </div>
 
         {/* Detailed Stock Report - New Section */}
-        <div className="bg-white rounded-[3.5rem] p-12 shadow-premium border border-border-subtle grid grid-cols-1 md:grid-cols-4 gap-12 items-center">
+        <div className="bg-white rounded-[2rem] sm:rounded-[3.5rem] p-5 sm:p-8 lg:p-12 shadow-premium border border-border-subtle grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 items-center">
            <div className="md:col-span-1 border-r border-border-subtle pr-8 flex flex-col gap-3">
               <h3 className="text-2xl font-black text-primary leading-none tracking-tight">স্টক বিশ্লেষণ</h3>
               <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.2em]">Detailed Inventory Analysis</p>

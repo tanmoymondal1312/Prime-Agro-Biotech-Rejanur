@@ -64,7 +64,7 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-bg-page transition-colors duration-500">
-      <header className="sticky top-0 z-30 bg-bg-page/80 backdrop-blur-md border-b border-border-subtle p-8 flex items-center justify-between">
+      <header className="sticky top-0 z-30 bg-bg-page/80 backdrop-blur-md border-b border-border-subtle px-4 py-3 sm:px-6 sm:py-4 lg:p-8 flex items-center gap-3">
         <div className="flex items-center gap-6">
           <button 
             onClick={onOpenSidebar}

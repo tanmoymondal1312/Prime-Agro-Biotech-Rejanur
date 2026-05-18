@@ -62,9 +62,9 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
   const yearName = activeMonth.toLocaleString('bn-BD', { year: 'numeric' });
 
   return (
-    <div className="flex-1 flex flex-col pt-20 pb-32 px-4 md:px-8 bg-bg-page overflow-y-auto">
+    <div className="flex-1 flex flex-col bg-bg-page overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center gap-3 px-4 py-3 sm:px-6 sticky top-0 z-30 bg-bg-page/90 backdrop-blur-md border-b border-border-subtle mb-6">
         <div className="flex items-center gap-4">
           <button 
             onClick={onOpenSidebar}
@@ -73,8 +73,8 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             <Plus className="w-5 h-5 rotate-45" />
           </button>
           <div>
-            <h1 className="text-3xl font-black text-primary dark:text-white flex items-center gap-3">
-              <Cloud className="w-8 h-8" />
+            <h1 className="text-lg sm:text-2xl font-black text-primary dark:text-white flex items-center gap-2">
+              <Cloud className="w-5 h-5" />
               আবহাওয়া ও কৃষি দিনলিপি
             </h1>
             <p className="text-text-main/40 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
@@ -82,7 +82,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 px-4 md:px-8">
         {/* Entry Panel */}
         <div className="lg:col-span-5 space-y-6">
           <div className="p-8 bg-white dark:bg-white/5 rounded-[2.5rem] shadow-premium border border-border-subtle">
@@ -198,7 +198,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
 
           {/* Monthly Logs */}
           <div className="bg-white dark:bg-white/5 rounded-[2.5rem] border border-border-subtle p-8 shadow-premium">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3 px-4 py-3 sm:px-6 sticky top-0 z-30 bg-bg-page/90 backdrop-blur-md border-b border-border-subtle mb-6">
               <h2 className="text-xl font-black">{monthName} {yearName} - এর লগের তালিকা</h2>
               <div className="flex items-center gap-2">
                 <button 
