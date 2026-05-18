@@ -381,7 +381,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden">
+    <div className="flex flex-col bg-gray-50 p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden">
       <main className="space-y-12">
         {/* প্রধান রিপোর্ট সেকশন - Only Dashboard */}
         {view === 'dashboard' && (
