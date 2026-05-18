@@ -71,11 +71,11 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
             <Plus className="w-5 h-5 rotate-45" />
           </button>
           <div>
-            <h1 className="text-3xl font-black text-stone-900 dark:text-white flex items-center gap-3">
+            <h1 style={{ color:"#111827" }} className="text-3xl font-black flex items-center gap-3">
               <Sparkles className="w-8 h-8 text-emerald-600" />
               চাষাবাদ পরিকল্পনা
             </h1>
-            <p className="text-stone-700 font-bold mt-1">ভবিষ্যৎ ফসলের সময়সূচী এবং কার্যক্রম নির্ধারণ করুন</p>
+            <p className="text-[#374151] font-bold mt-1">ভবিষ্যৎ ফসলের সময়সূচী এবং কার্যক্রম নির্ধারণ করুন</p>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">শুরুর তারিখ</label>
+                  <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">শুরুর তারিখ</label>
                   <input 
                     type="date"
                     value={selectedDate}
@@ -101,7 +101,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">শেষের তারিখ (ঐচ্ছিক)</label>
+                  <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">শেষের তারিখ (ঐচ্ছিক)</label>
                   <input 
                     type="date"
                     value={endDate}
@@ -112,7 +112,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">কি করতে চান? (কার্যক্রম)</label>
+                <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">কি করতে চান? (কার্যক্রম)</label>
                 <input 
                   type="text"
                   value={activity}
@@ -123,7 +123,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">চিহ্নিত করার রঙ</label>
+                <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">চিহ্নিত করার রঙ</label>
                 <div className="flex flex-wrap gap-3 px-2">
                   {COLORS.map(c => (
                     <button
@@ -153,7 +153,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
               <ListTodo className="w-4 h-4" />
               কেন পরিকল্পনা করবেন?
             </h3>
-            <p className="text-xs font-bold text-stone-700 leading-relaxed">
+            <p className="text-xs font-bold text-[#374151] leading-relaxed">
               সঠিক সময়ে চাষাবাদ সম্পন্ন করতে এবং আগাম প্রস্তুতির জন্য আপনার পরিকল্পনাগুলো এখানে তালিকাভুক্ত করুন। এটি আপনার খামারের উৎপাদনশীলতা বাড়াতে সাহায্য করবে।
             </p>
           </div>
@@ -161,11 +161,11 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
 
         {/* Display Panel */}
         <div className="lg:col-span-7">
-          <div className="bg-white dark:bg-white/5 rounded-[2.5rem] border border-border-subtle p-8 shadow-premium">
+          <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-xl font-black">{monthName} {yearName}</h2>
-                <p className="text-xs font-bold text-stone-700 uppercase tracking-widest leading-none mt-1">পরিকল্পনার তালিকা</p>
+                <h2 style={{ color:"#111827" }} className="text-xl font-black">{monthName} {yearName}</h2>
+                <p style={{ color:"#374151" }} className="text-xs font-bold uppercase tracking-widest leading-none mt-1">পরিকল্পনার তালিকা</p>
               </div>
               <div className="flex items-center gap-2">
                 <button 
@@ -174,9 +174,9 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                     d.setMonth(d.getMonth() - 1);
                     setActiveMonth(d);
                   }}
-                  className="p-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors"
+                  className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-5 h-5 text-[#111827]" />
                 </button>
                 <button 
                   onClick={() => {
@@ -184,9 +184,9 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                     d.setMonth(d.getMonth() + 1);
                     setActiveMonth(d);
                   }}
-                  className="p-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors"
+                  className="p-2 hover:bg-gray-100 rounded-xl transition-colors"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5 text-[#111827]" />
                 </button>
               </div>
             </div>
@@ -197,12 +197,12 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="py-16 text-center text-stone-700 flex flex-col items-center justify-center gap-4"
+                    style={{ color:"#374151" }} className="py-16 text-center flex flex-col items-center justify-center gap-4"
                   >
-                    <div className="p-6 bg-bg-page dark:bg-black/20 rounded-full">
+                    <div className="p-6 bg-gray-100 rounded-full">
                       <Sparkles className="w-12 h-12" />
                     </div>
-                    <p className="font-black">এই মাসে আপনার কোন পরিকল্পনা নেই</p>
+                    <p style={{ color:"#111827" }} className="font-black">এই মাসে আপনার কোন পরিকল্পনা নেই</p>
                   </motion.div>
                 ) : (
                   filteredPlans.map((plan) => (
@@ -215,14 +215,14 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                       className={`group p-6 rounded-3xl border transition-all flex items-center justify-between gap-4 ${
                         plan.status === 'completed' 
                           ? 'bg-emerald-500/5 border-emerald-500/20' 
-                          : 'bg-bg-page dark:bg-black/20 border-border-subtle hover:border-primary'
+                          : 'bg-gray-50 border-gray-200 hover:border-gray-400'
                       }`}
                     >
                       <div className="flex items-center gap-6">
                         <button 
                           onClick={() => onToggleStatus(plan.id)}
                           className={`p-1 rounded-full transition-transform hover:scale-110 active:scale-95 ${
-                            plan.status === 'completed' ? 'text-emerald-500' : 'text-stone-700 group-hover:text-stone-700'
+                            plan.status === 'completed' ? 'text-emerald-500' : 'text-[#374151] group-hover:text-[#111827]'
                           }`}
                         >
                           {plan.status === 'completed' ? <CheckCircle2 className="w-7 h-7" /> : <Circle className="w-7 h-7" />}
@@ -239,7 +239,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                             )}
                           </div>
                           <p className={`font-black text-lg transition-all ${
-                            plan.status === 'completed' ? 'line-through text-stone-700' : 'dark:text-white'
+                            plan.status === 'completed' ? 'line-through text-[#374151]' : 'dark:text-white'
                           }`}>
                             {plan.activity}
                           </p>
@@ -273,7 +273,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
               <Calendar className="w-6 h-6" />
               বার্ষিক সময়সূচী ({activeMonth.getFullYear().toLocaleString('bn-BD', { useGrouping: false })})
             </h2>
-            <p className="text-xs font-bold text-stone-700 uppercase tracking-widest leading-none mt-1">পুরো বছরের পরিকল্পনা এক নজরে</p>
+            <p className="text-xs font-bold text-[#374151] uppercase tracking-widest leading-none mt-1">পুরো বছরের পরিকল্পনা এক নজরে</p>
           </div>
           <div className="flex items-center gap-2 bg-white dark:bg-white/5 p-1.5 rounded-2xl shadow-sm border border-border-subtle">
             <button 
@@ -282,7 +282,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                 d.setFullYear(d.getFullYear() - 1);
                 setActiveMonth(d);
               }}
-              className="px-4 py-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors text-xs font-black uppercase tracking-widest text-stone-700 hover:text-[#1e211f]"
+              className="px-4 py-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors text-xs font-black uppercase tracking-widest text-[#374151] hover:text-[#1e211f]"
             >
               আগের বছর
             </button>
@@ -295,7 +295,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                 d.setFullYear(d.getFullYear() + 1);
                 setActiveMonth(d);
               }}
-              className="px-4 py-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors text-xs font-black uppercase tracking-widest text-stone-700 hover:text-[#1e211f]"
+              className="px-4 py-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors text-xs font-black uppercase tracking-widest text-[#374151] hover:text-[#1e211f]"
             >
               পরের বছর
             </button>
@@ -333,7 +333,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                   
                   <div className="grid grid-cols-7 gap-1">
                     {['র', 'সো', 'ম', 'বু', 'বৃ', 'শু', 'শ'].map(d => (
-                      <div key={d} className="text-[8px] font-black text-stone-700 text-center">{d}</div>
+                      <div key={d} className="text-[8px] font-black text-[#374151] text-center">{d}</div>
                     ))}
                     {Array.from({ length: firstDayOfMonth }).map((_, i) => (
                       <div key={`empty-${i}`} />
@@ -354,7 +354,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                           className={`aspect-square flex items-center justify-center text-xs font-bold rounded-lg transition-all ${
                             activePlanInRange 
                               ? 'text-white shadow-sm scale-110 z-10' 
-                              : 'text-stone-700 group-hover:text-[#1a1a1a]/60'
+                              : 'text-[#374151] group-hover:text-[#1a1a1a]/60'
                           }`}
                           style={activePlanInRange ? { backgroundColor: activePlanInRange.color || '#d9f35c' } : {}}
                         >
@@ -367,12 +367,12 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                   {monthPlans.length > 0 && (
                     <div className="pt-2 border-t border-border-subtle space-y-1">
                       {monthPlans.slice(0, 2).map(p => (
-                        <div key={p.id} className="flex items-center gap-2 text-xs font-bold text-stone-700 truncate">
+                        <div key={p.id} className="flex items-center gap-2 text-xs font-bold text-[#374151] truncate">
                           <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: p.color || '#d9f35c' }} />
                           <span className="truncate">{p.activity}</span>
                         </div>
                       ))}
-                      {monthPlans.length > 2 && <p className="text-[8px] font-black text-stone-700">+ আরও {monthPlans.length - 2}টি</p>}
+                      {monthPlans.length > 2 && <p className="text-[8px] font-black text-[#374151]">+ আরও {monthPlans.length - 2}টি</p>}
                     </div>
                   )}
                 </div>

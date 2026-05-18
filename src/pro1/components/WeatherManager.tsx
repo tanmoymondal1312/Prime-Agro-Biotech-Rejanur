@@ -64,7 +64,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
   return (
     <div className="flex-1 flex flex-col bg-bg-page overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 sm:px-6 sticky top-0 z-30 bg-bg-page/90 backdrop-blur-md border-b border-border-subtle mb-6">
+      <div className="flex items-center gap-3 px-2 py-2 mb-4 border-b border-gray-200 bg-white">
         <div className="flex items-center gap-4">
           <button 
             onClick={onOpenSidebar}
@@ -73,11 +73,11 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             <Plus className="w-5 h-5 rotate-45" />
           </button>
           <div>
-            <h1 className="text-lg sm:text-2xl font-black text-stone-900 dark:text-white flex items-center gap-2">
+            <h1 style={{ color:"#111827" }} className="text-lg sm:text-2xl font-black flex items-center gap-2">
               <Cloud className="w-5 h-5" />
               আবহাওয়া ও কৃষি দিনলিপি
             </h1>
-            <p className="text-stone-700 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
+            <p className="text-[#374151] font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
+                <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
                 <input 
                   type="date"
                   value={selectedDate}
@@ -103,7 +103,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
+                <label className="text-xs font-black uppercase text-[#374151] tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
                 <textarea 
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -197,9 +197,9 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
           )}
 
           {/* Monthly Logs */}
-          <div className="bg-white dark:bg-white/5 rounded-[2.5rem] border border-border-subtle p-8 shadow-premium">
-            <div className="flex items-center gap-3 px-4 py-3 sm:px-6 sticky top-0 z-30 bg-bg-page/90 backdrop-blur-md border-b border-border-subtle mb-6">
-              <h2 className="text-xl font-black">{monthName} {yearName} - এর লগের তালিকা</h2>
+          <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
+            <div className="flex items-center gap-3 px-2 py-2 mb-4 border-b border-gray-200 bg-white">
+              <h2 style={{ color:"#111827" }} className="text-xl font-black">{monthName} {yearName} - এর লগের তালিকা</h2>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => {
@@ -209,7 +209,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   }}
                   className="p-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-5 h-5 text-[#111827]" />
                 </button>
                 <button 
                   onClick={() => {
@@ -219,7 +219,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   }}
                   className="p-2 hover:bg-bg-page dark:hover:bg-black/20 rounded-xl transition-colors"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-5 h-5 text-[#111827]" />
                 </button>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="py-12 text-center text-stone-700"
+                    className="py-12 text-center text-[#374151]"
                   >
                     <Cloud className="w-12 h-12 mx-auto mb-4" />
                     <p className="font-black">এই মাসে কোন রেকর্ড নেই</p>
@@ -251,8 +251,8 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                           <span className="text-xl font-black text-[#1e211f]">{new Date(log.date).toLocaleString('bn-BD', { day: '2-digit' })}</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg dark:text-white">{log.comment}</p>
-                          <span className="text-xs font-black text-stone-700 uppercase tracking-widest block mt-2">
+                          <p style={{ color:"#111827" }} className="font-bold text-lg">{log.comment}</p>
+                          <span className="text-xs font-black text-[#374151] uppercase tracking-widest block mt-2">
                             {new Date(log.date).getFullYear().toLocaleString('bn-BD', { useGrouping: false })} সাল
                           </span>
                         </div>
