@@ -112,24 +112,24 @@ export default function ProfileDetail({
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-3 min-w-0">
           <button onClick={onBack} className="p-2.5 bg-white rounded-2xl shadow-premium border border-border-subtle hover:bg-bg-page transition-colors shrink-0">
-            <ArrowLeft className="w-5 h-5 text-primary" />
+            <ArrowLeft className="w-5 h-5 text-[#1e211f]" />
           </button>
           <div className="min-w-0">
-            <h1 className="text-base sm:text-xl font-bold text-text-main leading-tight truncate">{profile.name}</h1>
-            <p className="text-xs font-bold text-primary opacity-60 uppercase tracking-widest">{age} দিন অতিবাহিত</p>
+            <h1 className="text-base sm:text-xl font-bold text-[#1a1a1a] leading-tight truncate">{profile.name}</h1>
+            <p className="text-xs font-bold text-[#1e211f] opacity-60 uppercase tracking-widest">{age} দিন অতিবাহিত</p>
           </div>
         </div>
         <div className="flex gap-1.5 sm:gap-2 shrink-0">
           <button
             onClick={onEditProfile}
-            className="flex items-center gap-1.5 px-3 py-2.5 bg-white rounded-2xl border border-border-subtle text-primary hover:bg-stone-50 transition-all font-black text-xs uppercase tracking-widest"
+            className="flex items-center gap-1.5 px-3 py-2.5 bg-white rounded-2xl border border-border-subtle text-[#1e211f] hover:bg-stone-50 transition-all font-black text-xs uppercase tracking-widest"
           >
             <Edit3 className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">সম্পাদন</span>
           </button>
           <button
             onClick={onArchive}
-            className={`flex items-center gap-1.5 px-3 py-2.5 rounded-2xl border transition-all ${profile.status === 'archived' ? 'bg-secondary text-white border-transparent' : 'bg-white text-text-main/60 border-border-subtle hover:text-secondary'}`}
+            className={`flex items-center gap-1.5 px-3 py-2.5 rounded-2xl border transition-all ${profile.status === 'archived' ? 'bg-secondary text-white border-transparent' : 'bg-white text-[#1a1a1a]/60 border-border-subtle hover:text-lime-400'}`}
           >
             <Archive className="w-4 h-4 shrink-0" />
             <span className="text-xs font-black uppercase tracking-widest hidden sm:inline">
@@ -176,7 +176,7 @@ export default function ProfileDetail({
              <div className="text-xs font-black uppercase tracking-widest opacity-60">লভ্যাংশ বিশ্লেষণ (Status):</div>
              <div className="flex items-center gap-2">
                 <span className="text-xs font-bold opacity-60">{formatCurrency(totalSale)} - {formatCurrency(profileTotal)} =</span>
-                <span className={`text-lg font-black ${profit >= 0 ? 'text-secondary-light' : 'text-red-200'}`}>
+                <span className={`text-lg font-black ${profit >= 0 ? 'text-lime-400-light' : 'text-red-200'}`}>
                    {profit >= 0 ? 'মুনাফা' : 'লোকসান'} {formatCurrency(Math.abs(profit))}
                 </span>
              </div>
@@ -199,7 +199,7 @@ export default function ProfileDetail({
                 <p className="text-xs font-black uppercase tracking-widest opacity-60">রিপোর্ট কার্ড (Report Card)</p>
                 <h3 className="text-xl font-bold mt-1">{profit >= 0 ? 'নীট লাভ (Net Profit)' : 'নীট ক্ষতি (Net Loss)'}</h3>
               </div>
-              <div className={`text-3xl font-black ${profit >= 0 ? 'text-secondary-light' : 'text-red-200'}`}>
+              <div className={`text-3xl font-black ${profit >= 0 ? 'text-lime-400-light' : 'text-red-200'}`}>
                 {profitPercentage.toFixed(1)}%
               </div>
             </div>
@@ -241,8 +241,8 @@ export default function ProfileDetail({
                       </p>
                    </div>
                    <div className="bg-secondary/10 p-4 rounded-2xl border border-secondary/20 col-span-2">
-                      <p className="text-[8px] font-black text-secondary/40 uppercase tracking-widest mb-1">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
-                      <p className="text-lg font-black text-secondary leading-none">{formatCurrency(totalActualSale)}</p>
+                      <p className="text-[8px] font-black text-lime-400 uppercase tracking-widest mb-1">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
+                      <p className="text-lg font-black text-lime-400 leading-none">{formatCurrency(totalActualSale)}</p>
                    </div>
                 </div>
              </div>
@@ -254,8 +254,8 @@ export default function ProfileDetail({
       {/* Expense Categories */}
       <div className="space-y-6">
         <div className="flex items-center justify-between px-1">
-          <h2 className="text-sm font-black text-primary uppercase tracking-widest flex items-center gap-2">
-            <Info className="w-5 h-5 text-secondary" /> বিস্তারিত খরচসমূহ (Details)
+          <h2 className="text-sm font-black text-[#1e211f] uppercase tracking-widest flex items-center gap-2">
+            <Info className="w-5 h-5 text-lime-400" /> বিস্তারিত খরচসমূহ (Details)
           </h2>
         </div>
 
@@ -285,11 +285,11 @@ export default function ProfileDetail({
                          <CreditCard className="w-7 h-7" />
                       </div>
                       <div>
-                        <h3 className="font-black text-text-main text-lg leading-none mb-2">{CATEGORY_LABELS[catId] || catId}</h3>
+                        <h3 className="font-black text-[#1a1a1a] text-lg leading-none mb-2">{CATEGORY_LABELS[catId] || catId}</h3>
                         <div className="flex items-center gap-5">
                           <div className="flex flex-col">
                             <span className="text-xs font-black text-stone-700 uppercase tracking-widest leading-none mb-1">মোট (Total)</span>
-                            <span className="font-black text-primary text-xl leading-none">{formatCurrency(catTotal)}</span>
+                            <span className="font-black text-[#1e211f] text-xl leading-none">{formatCurrency(catTotal)}</span>
                           </div>
                           {catDue > 0 && (
                             <>
@@ -310,7 +310,7 @@ export default function ProfileDetail({
                           e.stopPropagation();
                           setExpandedCategory(isExpanded ? null : catId as CategoryType);
                         }}
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${isExpanded ? 'bg-primary text-white' : 'bg-bg-page text-stone-700 hover:text-primary hover:bg-primary/10'}`}
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${isExpanded ? 'bg-primary text-white' : 'bg-bg-page text-stone-700 hover:text-[#1e211f] hover:bg-primary/10'}`}
                       >
                         <ChevronDown className={`w-6 h-6 transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`} />
                       </button>
@@ -332,7 +332,7 @@ export default function ProfileDetail({
                         e.stopPropagation();
                         setExpandedCategory(isExpanded ? null : catId as CategoryType);
                       }}
-                      className={`flex items-center justify-center gap-2 py-4 rounded-[1.25rem] text-[11px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95 ${expenses.length > 0 ? (isExpanded ? 'bg-primary text-white' : 'bg-bg-page text-primary hover:bg-stone-50') : 'bg-bg-page text-stone-700 cursor-not-allowed'}`}
+                      className={`flex items-center justify-center gap-2 py-4 rounded-[1.25rem] text-[11px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95 ${expenses.length > 0 ? (isExpanded ? 'bg-primary text-white' : 'bg-bg-page text-[#1e211f] hover:bg-stone-50') : 'bg-bg-page text-stone-700 cursor-not-allowed'}`}
                     >
                       <Edit3 className="w-4 h-4" /> বিস্তারিত / সম্পাদন
                     </button>
@@ -350,7 +350,7 @@ export default function ProfileDetail({
                       <div className="p-6 space-y-4">
                         {expenses.length === 0 ? (
                           <div className="text-center py-10">
-                            <Info className="w-10 h-10 text-text-main/10 mx-auto mb-3" />
+                            <Info className="w-10 h-10 text-[#1a1a1a]/10 mx-auto mb-3" />
                             <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">এখনো কোন তথ্য নেই</p>
                           </div>
                         ) : (
@@ -364,10 +364,10 @@ export default function ProfileDetail({
                                       {new Date(expense.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}
                                     </p>
                                   </div>
-                                  <p className="text-sm font-bold text-text-main leading-relaxed pr-8">{expense.note || 'কোন বর্ণনা নেই'}</p>
+                                  <p className="text-sm font-bold text-[#1a1a1a] leading-relaxed pr-8">{expense.note || 'কোন বর্ণনা নেই'}</p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="text-xl font-black text-primary leading-none mb-1">{formatCurrency(expense.amount)}</p>
+                                  <p className="text-xl font-black text-[#1e211f] leading-none mb-1">{formatCurrency(expense.amount)}</p>
                                   <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">মোট পরিশোধযোগ্য</p>
                                 </div>
                               </div>
@@ -392,7 +392,7 @@ export default function ProfileDetail({
                                         e.stopPropagation();
                                         setViewImage(expense.image!);
                                       }}
-                                      className="w-10 h-10 flex items-center justify-center bg-stone-50 text-primary rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm"
+                                      className="w-10 h-10 flex items-center justify-center bg-stone-50 text-[#1e211f] rounded-xl hover:bg-primary hover:text-white transition-all shadow-sm"
                                     >
                                       <ImageIcon className="w-5 h-5" />
                                     </button>
@@ -402,7 +402,7 @@ export default function ProfileDetail({
                                       e.stopPropagation();
                                       onEditExpense(expense);
                                     }}
-                                    className={`flex items-center gap-2 px-4 h-10 rounded-xl transition-all text-xs font-black uppercase tracking-widest shadow-sm ${expense.due > 0 ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-stone-50 text-primary hover:bg-primary/10'}`}
+                                    className={`flex items-center gap-2 px-4 h-10 rounded-xl transition-all text-xs font-black uppercase tracking-widest shadow-sm ${expense.due > 0 ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-stone-50 text-[#1e211f] hover:bg-primary/10'}`}
                                   >
                                     <Edit3 className="w-4 h-4" /> {expense.due > 0 ? 'বাকি প্রদান' : 'সম্পাদন'}
                                   </button>
@@ -438,11 +438,11 @@ export default function ProfileDetail({
              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 sm:mb-12 gap-4 sm:gap-6">
                 <div className="text-left">
                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                      <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-[#1e211f]">
                         <BarChart2 className="w-6 h-6" />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-black text-primary leading-none">সার্বিক খরচ বিশ্লেষণ</h2>
+                        <h2 className="text-2xl font-black text-[#1e211f] leading-none">সার্বিক খরচ বিশ্লেষণ</h2>
                         <p className="text-xs uppercase font-black tracking-widest text-stone-700 mt-1">Advanced Project Investment Analytics</p>
                       </div>
                    </div>
@@ -450,7 +450,7 @@ export default function ProfileDetail({
                 <div className="bg-white/60 backdrop-blur-md p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] border border-white shadow-xl flex items-center gap-4 sm:gap-8 sm:px-10">
                    <div className="text-right border-r border-stone-200 pr-8">
                       <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">সর্বমোট খরচ</p>
-                      <p className="text-3xl font-black text-primary">{formatCurrency(profileTotal)}</p>
+                      <p className="text-3xl font-black text-[#1e211f]">{formatCurrency(profileTotal)}</p>
                    </div>
                    <div className="text-right">
                       <p className="text-xs font-black text-red-500/40 uppercase tracking-widest mb-1">মোট বাকি</p>
@@ -467,7 +467,7 @@ export default function ProfileDetail({
                  return (
                    <div key={catId} className="bg-white/80 backdrop-blur-sm p-4 rounded-[1.5rem] border border-white shadow-sm hover:shadow-md transition-shadow group">
                      <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1.5 truncate group-hover:text-stone-700 transition-colors">{label}</p>
-                     <p className="text-lg font-black text-primary truncate leading-none">{formatCurrency(total)}</p>
+                     <p className="text-lg font-black text-[#1e211f] truncate leading-none">{formatCurrency(total)}</p>
                      <div className="mt-2.5 h-1 w-full bg-stone-50 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
@@ -485,10 +485,10 @@ export default function ProfileDetail({
                 {/* Comparison Bar Chart */}
                 <div className="bg-white/60 backdrop-blur-md p-4 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-white shadow-xl">
                    <div className="flex justify-between items-center mb-6 sm:mb-10">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-primary flex items-center gap-2">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-[#1e211f] flex items-center gap-2">
                         <BarChart2 className="w-4 h-4" /> খরচের খাতসমূহের তুলনা
                       </h3>
-                      <span className="text-xs font-black bg-stone-50 text-primary px-3 py-1 rounded-full uppercase">Top Categories</span>
+                      <span className="text-xs font-black bg-stone-50 text-[#1e211f] px-3 py-1 rounded-full uppercase">Top Categories</span>
                    </div>
                    <div className="h-[250px] w-full">
                       <ResponsiveContainer width="100%" height="100%">
@@ -523,7 +523,7 @@ export default function ProfileDetail({
                 {/* Distribution Pie Chart */}
                 <div className="bg-white/60 backdrop-blur-md p-4 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-white shadow-xl flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
                    <div className="flex-1 w-full text-center sm:text-left">
-                      <h3 className="text-xs font-black uppercase tracking-widest text-primary flex items-center justify-center sm:justify-start gap-2 mb-6">
+                      <h3 className="text-xs font-black uppercase tracking-widest text-[#1e211f] flex items-center justify-center sm:justify-start gap-2 mb-6">
                         <PieChartIcon className="w-4 h-4" /> মূলধন বন্টন (Allocation)
                       </h3>
                       <div className="space-y-4 max-h-[180px] overflow-y-auto pr-2 scrollbar-hide">
@@ -531,7 +531,7 @@ export default function ProfileDetail({
                            <div key={cat.id} className="flex items-center justify-between group">
                               <div className="flex items-center gap-3">
                                 <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-                                <span className="text-[11px] font-black text-stone-700 group-hover:text-primary transition-colors">{cat.label}</span>
+                                <span className="text-[11px] font-black text-stone-700 group-hover:text-[#1e211f] transition-colors">{cat.label}</span>
                               </div>
                               <span className="text-xs font-black text-stone-700">{Math.round((cat.total / profileTotal) * 100)}%</span>
                            </div>
@@ -558,7 +558,7 @@ export default function ProfileDetail({
                       </ResponsiveContainer>
                       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                          <span className="text-xs font-black text-stone-700 uppercase tracking-widest leading-none mb-1">বন্টন হার</span>
-                         <span className="text-xl font-black text-primary">100%</span>
+                         <span className="text-xl font-black text-[#1e211f]">100%</span>
                       </div>
                    </div>
                 </div>
@@ -570,7 +570,7 @@ export default function ProfileDetail({
                    <div className="w-12 h-12 bg-stone-50 rounded-full flex items-center justify-center">
                       <Info className="w-6 h-6 text-stone-700" />
                    </div>
-                   <p className="text-[11px] font-black text-primary opacity-40 uppercase tracking-widest leading-relaxed max-w-[200px]">
+                   <p className="text-[11px] font-black text-[#1e211f] opacity-40 uppercase tracking-widest leading-relaxed max-w-[200px]">
                       আপনার সকল খরচ সম্বলিত একটি পূর্ণাঙ্গ রিপোর্ট
                    </p>
                 </div>
@@ -585,7 +585,7 @@ export default function ProfileDetail({
                 </button>
              </div>
            </div>
-           <Sprout className="absolute -left-10 -bottom-10 w-80 h-80 opacity-[0.05] rotate-12 text-primary pointer-events-none" />
+           <Sprout className="absolute -left-10 -bottom-10 w-80 h-80 opacity-[0.05] rotate-12 text-[#1e211f] pointer-events-none" />
            <div className="absolute top-0 right-0 w-64 h-64 bg-stone-50 blur-[120px] rounded-full -mr-32 -mt-32 pointer-events-none" />
         </div>
       </div>

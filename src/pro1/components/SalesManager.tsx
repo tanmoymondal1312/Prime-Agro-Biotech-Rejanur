@@ -103,15 +103,15 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
             onClick={onOpenSidebar}
             className="lg:hidden p-3 bg-white rounded-2xl shadow-sm border border-border-subtle transition-all hover:bg-emerald-50"
           >
-            <LayoutDashboard className="w-6 h-6 text-primary" />
+            <LayoutDashboard className="w-6 h-6 text-[#1e211f]" />
           </button>
           <div className="flex items-center gap-6">
             <div className="w-12 h-12 bg-white rounded-2xl p-1.5 shadow-sm border border-border-subtle">
                <img src="/portal-logo.png" alt="Prime Agro Biotech Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-primary font-display tracking-tight leading-none">পণ্য বিক্রি (Product Sales)</h1>
-              <p className="text-sm font-bold text-secondary-dark uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Record and manage project harvests</p>
+              <h1 className="text-3xl font-black text-[#1e211f] font-display tracking-tight leading-none">পণ্য বিক্রি (Product Sales)</h1>
+              <p className="text-sm font-bold text-lime-500 uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Record and manage project harvests</p>
             </div>
           </div>
         </div>
@@ -137,12 +137,12 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                       <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-[1.5rem] flex items-center justify-center group-hover:scale-110 transition-transform">
                         <ShoppingCart className="w-7 h-7" />
                       </div>
-                      <div className="bg-secondary/20 text-secondary-dark px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
+                      <div className="bg-secondary/20 text-lime-500 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
                         Live Now
                       </div>
                     </div>
                     
-                    <h3 className="text-xl font-black text-primary mb-2 truncate">{profile.name}</h3>
+                    <h3 className="text-xl font-black text-[#1e211f] mb-2 truncate">{profile.name}</h3>
                     <p className="text-xs font-black text-stone-700 uppercase tracking-[0.2em] mb-6">বীজ বপন: {new Date(profile.startDate).toLocaleDateString('bn-BD')}</p>
                     
                     <div className="space-y-4">
@@ -177,7 +177,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                   setSelectedProfileId(null);
                   setIsAdding(false);
                 }}
-                className="flex items-center gap-3 text-stone-700 hover:text-primary transition-colors mb-4 group"
+                className="flex items-center gap-3 text-stone-700 hover:text-[#1e211f] transition-colors mb-4 group"
               >
                 <ArrowRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-sm font-black uppercase tracking-widest">ফিরে যান</span>
@@ -196,8 +196,8 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                       </p>
                     </div>
                     <div className="p-6 bg-secondary/10 backdrop-blur-md rounded-2xl border border-secondary/20">
-                      <p className="text-xs font-black text-secondary/40 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
-                      <p className="text-2xl font-black text-secondary">
+                      <p className="text-xs font-black text-lime-400 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
+                      <p className="text-2xl font-black text-lime-400">
                         {formatCurrency(selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0)}
                       </p>
                     </div>
@@ -229,7 +229,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                   className="bg-white p-10 rounded-[3rem] shadow-premium border border-emerald-200"
                 >
                   <div className="flex justify-between items-center mb-8">
-                    <h3 className="text-lg font-black text-primary">নতুন বিক্রয়</h3>
+                    <h3 className="text-lg font-black text-[#1e211f]">নতুন বিক্রয়</h3>
                     <button type="button" onClick={() => setIsAdding(false)} className="text-red-400 hover:text-red-500">
                       <Trash2 className="w-5 h-5" />
                     </button>
@@ -341,10 +341,10 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
               <div className="bg-white p-12 rounded-[3.5rem] shadow-premium border border-border-subtle min-h-[600px] flex flex-col group">
                 <div className="flex items-center justify-between mb-12">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-primary">
+                    <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-[#1e211f]">
                       <History className="w-6 h-6" />
                     </div>
-                    <h3 className="text-2xl font-black text-primary leading-none tracking-tight">বিক্রয় ইতিহাস (Sales Log)</h3>
+                    <h3 className="text-2xl font-black text-[#1e211f] leading-none tracking-tight">বিক্রয় ইতিহাস (Sales Log)</h3>
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="w-4 h-4 text-stone-700" />
@@ -362,7 +362,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                            </div>
                            <div>
                               <div className="flex items-center gap-3 mb-1">
-                                <p className="text-lg font-black text-primary leading-none">{sale.quantity} {sale.unit}</p>
+                                <p className="text-lg font-black text-[#1e211f] leading-none">{sale.quantity} {sale.unit}</p>
                                 <span className="bg-stone-50 text-stone-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest">{formatCurrency(sale.unitPrice)} / {sale.unit}</span>
                               </div>
                               <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">{new Date(sale.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}</p>
@@ -400,7 +400,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                   <div className="mt-12 pt-10 border-t border-stone-200 flex justify-between items-end">
                     <div>
                       <p className="text-xs font-black text-stone-700 uppercase tracking-[0.2em] mb-2 leading-none">মোট উৎপাদিত পণ্য</p>
-                      <h4 className="text-xl font-black text-primary leading-none">
+                      <h4 className="text-xl font-black text-[#1e211f] leading-none">
                         {Array.from(new Set(selectedProfile.sales.map(s => s.unit))).map(unit => {
                           const qty = selectedProfile.sales?.filter(s => s.unit === unit).reduce((sum, s) => sum + s.quantity, 0);
                           return `${qty} ${unit}`;

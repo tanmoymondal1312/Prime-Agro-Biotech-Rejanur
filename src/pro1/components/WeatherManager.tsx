@@ -87,7 +87,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
         <div className="lg:col-span-5 space-y-6">
           <div className="p-8 bg-white dark:bg-white/5 rounded-[2.5rem] shadow-premium border border-border-subtle">
             <h2 className="text-xl font-black mb-6 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-primary" />
+              <Calendar className="w-5 h-5 text-[#1e211f]" />
               নতুন মন্তব্য করুন
             </h2>
             
@@ -126,11 +126,11 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
 
           {/* Tips Card */}
           <div className="p-8 bg-secondary/10 rounded-[2.5rem] border border-secondary/20">
-            <h3 className="font-black text-secondary flex items-center gap-2 mb-4">
+            <h3 className="font-black text-lime-400 flex items-center gap-2 mb-4">
               <Info className="w-5 h-5" />
               টিপস
             </h3>
-            <p className="text-sm font-bold text-secondary/70 leading-relaxed">
+            <p className="text-sm font-bold text-lime-400/70 leading-relaxed">
               প্রতিদিনের বিশেষ আবহাওয়া বা কাজ লিখে রাখলে পরবর্তী ২ বছর পর্যন্ত একই সময়ে আপনি কি করেছিলেন তা এক নজরে দেখতে পারবেন।
             </p>
           </div>
@@ -247,8 +247,8 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                     >
                       <div className="flex items-start gap-4">
                         <div className="flex flex-col items-center px-4 py-2 bg-white dark:bg-white/5 rounded-2xl shadow-sm min-w-[70px]">
-                          <span className="text-xs font-black text-primary uppercase">{new Date(log.date).toLocaleString('bn-BD', { month: 'short' })}</span>
-                          <span className="text-xl font-black text-primary">{new Date(log.date).toLocaleString('bn-BD', { day: '2-digit' })}</span>
+                          <span className="text-xs font-black text-[#1e211f] uppercase">{new Date(log.date).toLocaleString('bn-BD', { month: 'short' })}</span>
+                          <span className="text-xl font-black text-[#1e211f]">{new Date(log.date).toLocaleString('bn-BD', { day: '2-digit' })}</span>
                         </div>
                         <div>
                           <p className="font-bold text-lg dark:text-white">{log.comment}</p>

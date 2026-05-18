@@ -421,7 +421,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
         <div className="flex items-center gap-2 relative z-10 shrink-0">
           <div className="flex items-center gap-2 text-stone-900 dark:text-white font-black bg-white/60 dark:bg-white/10 px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl border border-white dark:border-white/10 shadow-premium backdrop-blur-md">
             <div className="w-6 h-6 sm:w-8 sm:h-8 bg-secondary/10 rounded-lg flex items-center justify-center shrink-0">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700 dark:text-secondary-dark" />
+              <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700 dark:text-lime-500" />
             </div>
             <span className="font-mono text-sm sm:text-base lg:text-xl tabular-nums tracking-widest leading-none">
               {currentTime.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
@@ -447,7 +447,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               <div className="flex flex-col md:flex-row items-center gap-10 bg-stone-50 dark:bg-white/5 p-6 rounded-[2rem] border border-stone-200 relative overflow-hidden group/live">
                 <div className="absolute top-0 left-0 w-24 h-24 bg-secondary/10 blur-3xl rounded-full -translate-x-1/2 -translate-y-1/2" />
                 <div className="relative z-10 space-y-3 text-center md:text-left">
-                  <p className="text-xs sm:text-xs font-black text-stone-700 dark:text-secondary/40 uppercase tracking-[0.2em] leading-none mb-1">সচল প্রজেক্ট ভলিউম</p>
+                  <p className="text-xs sm:text-xs font-black text-stone-700 dark:text-lime-400 uppercase tracking-[0.2em] leading-none mb-1">সচল প্রজেক্ট ভলিউম</p>
                   <p className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter tabular-nums leading-none">
                     {liveProfiles.length.toString().padStart(2, '০')} 
                     <span className="text-lg text-stone-700 ml-2">টা</span>
@@ -576,7 +576,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          <span className="text-lg font-bold opacity-60">বস্তা</span>
                        </div>
                        <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2">
-                          <Zap className="w-3 h-3 text-secondary" />
+                          <Zap className="w-3 h-3 text-lime-400" />
                           <p className="text-xs font-black uppercase tracking-widest text-emerald-100">ইনভেন্টরি রেডিনেস হাই</p>
                        </div>
                     </div>
@@ -626,10 +626,10 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                              <div className="absolute -right-2 -bottom-2 w-16 h-16 bg-stone-50 rounded-full scale-0 group-hover:scale-100 transition-transform" />
                              
                              <div className="flex justify-between items-start mb-3">
-                                <div className="w-8 h-8 bg-stone-50 rounded-xl flex items-center justify-center text-stone-700 group-hover:text-primary transition-colors">
+                                <div className="w-8 h-8 bg-stone-50 rounded-xl flex items-center justify-center text-stone-700 group-hover:text-[#1e211f] transition-colors">
                                    <Zap className="w-4 h-4" />
                                 </div>
-                                <ArrowUpRight className="w-4 h-4 text-stone-700 group-hover:text-primary transition-colors hover:rotate-45" />
+                                <ArrowUpRight className="w-4 h-4 text-stone-700 group-hover:text-[#1e211f] transition-colors hover:rotate-45" />
                              </div>
                              
                              <p className="text-xs font-black text-stone-700 uppercase tracking-widest group-hover:text-stone-700 transition-colors">{p.name}</p>
@@ -670,7 +670,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               <div className="relative z-10 flex flex-col justify-between h-full gap-8">
                 <div className="space-y-2">
                   <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                    <CloudSun className="w-6 h-6 text-secondary" />
+                    <CloudSun className="w-6 h-6 text-lime-400" />
                     আবহাওয়া লগার
                   </h2>
                   <p className="text-white/60 font-bold">
@@ -680,7 +680,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                 
                 {(lastYearSameMonthLogs.length > 0 || twoYearsAgoSameMonthLogs.length > 0) ? (
                   <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 border border-white/20">
-                    <p className="text-xs font-black text-secondary uppercase tracking-[0.2em] mb-2 leading-none">ইতিহাস থেকে:</p>
+                    <p className="text-xs font-black text-lime-400 uppercase tracking-[0.2em] mb-2 leading-none">ইতিহাস থেকে:</p>
                     <div className="space-y-1">
                       {lastYearSameMonthLogs.length > 0 && (
                         <p className="text-xs text-white font-bold truncate">
@@ -700,12 +700,12 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               className="p-5 sm:p-8 bg-white dark:bg-white/5 rounded-2xl sm:rounded-[3rem] shadow-premium border border-border-subtle relative overflow-hidden group cursor-pointer"
             >
               <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:scale-110 transition-transform">
-                <Sparkles className="w-32 h-32 text-primary" />
+                <Sparkles className="w-32 h-32 text-[#1e211f]" />
               </div>
               <div className="relative z-10 flex flex-col justify-between h-full gap-8">
                 <div className="space-y-2">
                   <h2 className="text-2xl font-black text-stone-900 dark:text-white flex items-center gap-3">
-                    <Sparkles className="w-6 h-6 text-emerald-600 dark:text-secondary" />
+                    <Sparkles className="w-6 h-6 text-emerald-600 dark:text-lime-300" />
                     চাষাবাদ পরিকল্পনা
                   </h2>
                   <p className="text-stone-700 font-bold">
@@ -715,7 +715,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                 
                 {upcomingPlans.length > 0 ? (
                   <div className="bg-bg-page dark:bg-black/20 rounded-3xl p-4 border border-border-subtle">
-                    <p className="text-xs font-black text-primary uppercase tracking-[0.2em] mb-2 leading-none">সামনের পরিকল্পনা:</p>
+                    <p className="text-xs font-black text-[#1e211f] uppercase tracking-[0.2em] mb-2 leading-none">সামনের পরিকল্পনা:</p>
                     <div className="flex items-center gap-2">
                       <div className="px-2 py-1 bg-primary text-white text-xs font-black rounded-lg">
                         {new Date(upcomingPlans[0].date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'short' })}
@@ -734,13 +734,13 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
         {/* ক্রপ কার্ডস (ভুট্টা, আলু, ধান) */}
         <section className="space-y-8">
           <div className="flex items-center justify-between px-2">
-            <h2 className="text-2xl font-black text-primary flex items-center gap-3">
+            <h2 className="text-2xl font-black text-[#1e211f] flex items-center gap-3">
                {view === 'archived' ? 'আর্কাইভকৃত প্রজেক্ট:' : 'চলমান প্রজেক্ট:'}
             </h2>
             {view !== 'archived' && (
               <button 
                 onClick={onAddProfile} 
-                className="bg-secondary text-primary px-5 py-3 rounded-2xl shadow-lg hover:shadow-secondary/50 font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2"
+                className="bg-secondary text-[#1e211f] px-5 py-3 rounded-2xl shadow-lg hover:shadow-secondary/50 font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" /> নিউ প্রজেক্ট
               </button>
@@ -810,7 +810,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             {profiles.length === 0 && view !== 'archived' && (
               <div 
                 onClick={onAddProfile} 
-                className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-700 hover:border-secondary hover:text-primary transition-all cursor-pointer group"
+                className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-700 hover:border-secondary hover:text-[#1e211f] transition-all cursor-pointer group"
               >
                 <Plus className="w-12 h-12 mb-4 group-hover:scale-125 transition-transform" />
                 <p className="text-sm font-black uppercase tracking-[0.3em]">নতুন প্রজেক্ট যোগ করুন</p>
@@ -876,7 +876,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       </div>
                       <div className="text-center">
                         <p className="text-xs font-black text-stone-700 dark:text-white/30 uppercase tracking-[0.2em] mb-1">Total invest</p>
-                        <p className="text-xl font-black text-primary dark:text-secondary">{formatCurrency(total)}</p>
+                        <p className="text-xl font-black text-[#1e211f] dark:text-lime-300">{formatCurrency(total)}</p>
                       </div>
                     </button>
                   );
@@ -902,7 +902,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     >
                       <div className="p-5 sm:p-10 border-b border-border-subtle flex items-center justify-between bg-bg-page/20">
                         <div>
-                          <h3 className="text-3xl font-black text-primary leading-none">{months[selectedMonthIndex]} মাসের খরচ রিপোর্ট</h3>
+                          <h3 className="text-3xl font-black text-[#1e211f] leading-none">{months[selectedMonthIndex]} মাসের খরচ রিপোর্ট</h3>
                           <p className="text-xs font-bold text-stone-700 uppercase tracking-[0.2em] mt-3">Itemized Expense History</p>
                         </div>
                         <button 
@@ -918,12 +918,12 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                           getMonthlyExpenses(selectedMonthIndex).map((item, idx) => (
                             <div key={idx} className="flex items-center justify-between p-6 bg-white border border-border-subtle rounded-3xl hover:border-primary transition-all group">
                               <div className="flex items-center gap-6">
-                                <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-[#1e211f] group-hover:scale-110 transition-transform">
                                    <Zap className="w-5 h-5" />
                                 </div>
                                 <div>
                                   <div className="flex items-center gap-3">
-                                    <p className="font-black text-primary text-lg">{item.expense.description}</p>
+                                    <p className="font-black text-[#1e211f] text-lg">{item.expense.description}</p>
                                     <span className="text-xs font-black text-white bg-primary/30 px-2.5 py-1 rounded-full uppercase tracking-widest">{item.profileName}</span>
                                   </div>
                                   <p className="text-xs sm:text-xs font-bold text-stone-700 uppercase tracking-[0.2em] mt-1">
@@ -932,7 +932,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                                 </div>
                               </div>
                               <div className="text-right">
-                                 <p className="text-2xl font-black text-primary leading-none">{formatCurrency(item.expense.amount)}</p>
+                                 <p className="text-2xl font-black text-[#1e211f] leading-none">{formatCurrency(item.expense.amount)}</p>
                                  {item.expense.due > 0 && (
                                    <p className="text-xs sm:text-xs font-black text-red-500 uppercase tracking-widest mt-2">বকেয়া: {formatCurrency(item.expense.due)}</p>
                                  )}
@@ -959,7 +959,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12">
               <section className="space-y-8">
-                <h2 className="text-2xl font-black text-primary px-2">কোন খাতে সর্বোচ্চ ব্যয়:</h2>
+                <h2 className="text-2xl font-black text-[#1e211f] px-2">কোন খাতে সর্বোচ্চ ব্যয়:</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {(() => {
                     const topExpenses = getTopExpensesOverall();
@@ -974,9 +974,9 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       <div key={idx} className="bg-white p-5 rounded-2xl border border-border-subtle shadow-sm hover:border-primary transition-all group">
                         <div className="flex justify-between items-center mb-2">
                           <p className="text-xs sm:text-xs font-black text-stone-700 uppercase tracking-widest">{expense.label}</p>
-                          <span className="text-xs sm:text-xs font-black text-primary">{expense.percentage}%</span>
+                          <span className="text-xs sm:text-xs font-black text-[#1e211f]">{expense.percentage}%</span>
                         </div>
-                        <p className="text-lg font-black text-primary leading-none">{formatCurrency(expense.amount)}</p>
+                        <p className="text-lg font-black text-[#1e211f] leading-none">{formatCurrency(expense.amount)}</p>
                         <div className="mt-3 w-full h-1 bg-stone-50 rounded-full overflow-hidden">
                           <motion.div 
                             initial={{ width: 0 }}
@@ -991,7 +991,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               </section>
 
               <section className="space-y-8">
-                <h2 className="text-2xl font-black text-primary px-2">লাভ ও ক্ষতি (Net Earnings):</h2>
+                <h2 className="text-2xl font-black text-[#1e211f] px-2">লাভ ও ক্ষতি (Net Earnings):</h2>
                 
                 {/* Overall Summary Card */}
                 {(() => {
@@ -1038,7 +1038,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto">
                              <div className="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-white shadow-premium flex flex-col items-center justify-center min-w-[160px] group/item hover:-translate-y-1 transition-all">
                                 <p className="text-xs font-black uppercase tracking-[0.2em] text-stone-700 mb-2">মোট বিনিয়োগ</p>
-                                <p className="text-xl font-black text-primary leading-none">{formatCurrency(totalInvested)}</p>
+                                <p className="text-xl font-black text-[#1e211f] leading-none">{formatCurrency(totalInvested)}</p>
                                 <div className="mt-3 w-full h-1 bg-stone-50 rounded-full" />
                              </div>
                              <div className="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-white shadow-premium flex flex-col items-center justify-center min-w-[160px] group/item hover:-translate-y-1 transition-all">
@@ -1065,7 +1065,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       <div key={p.id} className="bg-white rounded-[2rem] p-6 shadow-premium border border-border-subtle flex flex-col gap-4 relative overflow-hidden group">
                          <div className="flex justify-between items-center relative z-10">
                             <div>
-                               <h3 className="text-xl font-black text-primary">{p.name}</h3>
+                               <h3 className="text-xl font-black text-[#1e211f]">{p.name}</h3>
                                <p className="text-xs font-bold text-stone-700 uppercase tracking-widest mt-1">Status: {p.type}</p>
                             </div>
                             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl font-black text-xs uppercase tracking-widest ${isProfit ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>
@@ -1077,7 +1077,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          <div className="grid grid-cols-2 gap-6 relative z-10">
                             <div>
                                <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">Invest</p>
-                               <p className="text-lg font-bold text-primary leading-none">{formatCurrency(invest)}</p>
+                               <p className="text-lg font-bold text-[#1e211f] leading-none">{formatCurrency(invest)}</p>
                             </div>
                             <div>
                                <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">Sales</p>

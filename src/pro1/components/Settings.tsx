@@ -112,7 +112,7 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
         {/* Theme Settings */}
         <section className="bg-white dark:bg-card-bg rounded-[3.5rem] border border-border-subtle shadow-premium p-12 relative overflow-hidden group transition-colors">
            <div className="flex items-center gap-4 mb-10">
-              <div className="w-12 h-12 bg-secondary/10 dark:bg-secondary/20 rounded-2xl flex items-center justify-center text-secondary-dark">
+              <div className="w-12 h-12 bg-secondary/10 dark:bg-secondary/20 rounded-2xl flex items-center justify-center text-lime-500">
                  <Palette className="w-6 h-6" />
               </div>
               <div>
@@ -159,13 +159,13 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                  <button
                    key={font.name}
                    onClick={() => setFontSize(font.value)}
-                   className={`w-full flex items-center justify-between p-6 rounded-3xl border transition-all ${fontSize === font.value ? 'bg-primary text-white border-primary shadow-xl dark:bg-secondary dark:text-primary dark:border-secondary' : 'bg-bg-page/30 dark:bg-black/10 border-border-subtle dark:border-white/5 dark:text-white/60 hover:border-primary/30'}`}
+                   className={`w-full flex items-center justify-between p-6 rounded-3xl border transition-all ${fontSize === font.value ? 'bg-primary text-white border-primary shadow-xl dark:bg-secondary dark:text-[#1e211f] dark:border-secondary' : 'bg-bg-page/30 dark:bg-black/10 border-border-subtle dark:border-white/5 dark:text-white/60 hover:border-primary/30'}`}
                  >
                     <div className="flex items-center gap-6">
                        <span className={`font-black text-lg ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.name}</span>
                        <span className={`text-xs font-bold opacity-40 ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.label}</span>
                     </div>
-                    {fontSize === font.value && <Check className="w-6 h-6 text-secondary dark:text-primary" />}
+                    {fontSize === font.value && <Check className="w-6 h-6 text-lime-400 dark:text-[#1e211f]" />}
                  </button>
               ))}
            </div>

@@ -202,7 +202,7 @@ export default function StockManager({
             onClick={onOpenSidebar}
             className="lg:hidden p-3 bg-white dark:bg-card-bg rounded-2xl shadow-sm border border-border-subtle"
           >
-            <LayoutDashboard className="w-6 h-6 text-primary" />
+            <LayoutDashboard className="w-6 h-6 text-[#1e211f]" />
           </button>
           <div className="flex items-center gap-6">
             <div className="w-12 h-12 bg-white dark:bg-card-bg rounded-2xl p-1.5 shadow-sm border border-border-subtle">
@@ -210,7 +210,7 @@ export default function StockManager({
             </div>
             <div>
               <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight leading-none">পণ্য স্টক (Stock Product)</h1>
-              <p className="text-sm font-bold text-secondary-dark uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Warehouse & Inventory Management</p>
+              <p className="text-sm font-bold text-lime-500 uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Warehouse & Inventory Management</p>
             </div>
           </div>
         </div>
@@ -295,7 +295,7 @@ export default function StockManager({
             {/* Active Profiles that can receive new stock */}
             <div className="space-y-6">
               <div className="flex items-center justify-between px-4">
-                <h2 className="text-xl font-black text-primary">সচল প্রজেক্ট (নতুন স্টক যোগ করতে সিলেক্ট করুন)</h2>
+                <h2 className="text-xl font-black text-[#1e211f]">সচল প্রজেক্ট (নতুন স্টক যোগ করতে সিলেক্ট করুন)</h2>
                 <button 
                   onClick={() => onAddProfile?.()}
                   className="px-6 py-3 bg-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-black transition-all flex items-center gap-2"
@@ -316,7 +316,7 @@ export default function StockManager({
                         className="w-full bg-white dark:bg-card-bg p-8 rounded-[3.5rem] shadow-premium border border-border-subtle text-left hover:border-primary transition-all cursor-pointer relative overflow-hidden h-full"
                       >
                         <div className="flex justify-between items-start mb-6">
-                        <div className="w-12 h-12 bg-stone-50 text-primary rounded-2xl flex items-center justify-center">
+                        <div className="w-12 h-12 bg-stone-50 text-[#1e211f] rounded-2xl flex items-center justify-center">
                           <Warehouse className="w-6 h-6" />
                         </div>
                         <span className="bg-stone-50 text-stone-700 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
@@ -332,7 +332,7 @@ export default function StockManager({
                           <div className="flex justify-between items-end">
                             <div>
                                <p className="text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">মোট স্টক</p>
-                               <p className="text-sm font-black text-primary">{(profile.stocks || []).reduce((sum, s) => sum + (getRemainingStock(s, profile).bags), 0)} বস্তা</p>
+                               <p className="text-sm font-black text-[#1e211f]">{(profile.stocks || []).reduce((sum, s) => sum + (getRemainingStock(s, profile).bags), 0)} বস্তা</p>
                             </div>
                             <div className="text-right">
                                <p className="text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">গড় ক্রয়মূল্য</p>
@@ -364,7 +364,7 @@ export default function StockManager({
 
             {/* Total Stock View */}
             <div className="space-y-6">
-              <h2 className="text-xl font-black text-primary px-4">সব পণ্য স্টক (All Available Stocks)</h2>
+              <h2 className="text-xl font-black text-[#1e211f] px-4">সব পণ্য স্টক (All Available Stocks)</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {profilesWithStock.map(profile => {
                   const isLive = (profile.status || 'live') === 'live';
@@ -430,7 +430,7 @@ export default function StockManager({
                   setSelectedProfileId(null);
                   setActiveTab('view');
                 }}
-                className="flex items-center gap-3 text-stone-700 hover:text-primary transition-colors group"
+                className="flex items-center gap-3 text-stone-700 hover:text-[#1e211f] transition-colors group"
               >
                 <ArrowRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-sm font-black uppercase tracking-widest">প্রজেক্ট তালিকায় ফিরুন</span>
@@ -469,7 +469,7 @@ export default function StockManager({
                           return (
                             <div key={stock.id} className="bg-white dark:bg-card-bg rounded-[2.5rem] border border-border-subtle p-8 shadow-premium relative group">
                               <div className="flex justify-between items-start mb-6">
-                                <div className="p-3 bg-stone-50 text-primary rounded-xl">
+                                <div className="p-3 bg-stone-50 text-[#1e211f] rounded-xl">
                                   <Package className="w-6 h-6" />
                                 </div>
                                 {stock.source === 'external' && stock.purchasePrice && (
@@ -527,7 +527,7 @@ export default function StockManager({
                                   setActiveTab('sell_stock');
                                 }}
                                 disabled={remaining.quantity <= 0 && remaining.bags <= 0}
-                                className="w-full mt-8 py-4 bg-secondary text-primary font-black rounded-2xl text-xs uppercase tracking-widest shadow-sm hover:shadow-lg active:scale-95 transition-all disabled:opacity-30 flex items-center justify-center gap-2"
+                                className="w-full mt-8 py-4 bg-secondary text-[#1e211f] font-black rounded-2xl text-xs uppercase tracking-widest shadow-sm hover:shadow-lg active:scale-95 transition-all disabled:opacity-30 flex items-center justify-center gap-2"
                               >
                                 <ShoppingCart className="w-4 h-4" />
                                 এই স্টক থেকে বিক্রি করুন
@@ -557,7 +557,7 @@ export default function StockManager({
                                        <p className="text-xs font-bold text-white/30 uppercase">{new Date(sale.date).toLocaleDateString('bn-BD')}</p>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                       <p className="text-sm font-black text-secondary">{formatCurrency(sale.totalAmount)}</p>
+                                       <p className="text-sm font-black text-lime-400">{formatCurrency(sale.totalAmount)}</p>
                                        <button 
                                           type="button"
                                           onClick={(e) => {
@@ -675,9 +675,9 @@ export default function StockManager({
                               readOnly
                               value={calculatedInternalPrice}
                               placeholder="Calculated Cost"
-                              className="w-full bg-secondary/10 border border-secondary/20 rounded-2xl px-6 py-4 font-black outline-none text-2xl text-primary"
+                              className="w-full bg-secondary/10 border border-secondary/20 rounded-2xl px-6 py-4 font-black outline-none text-2xl text-[#1e211f]"
                            />
-                           <p className="text-xs font-bold text-secondary-dark/60 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
+                           <p className="text-xs font-bold text-lime-500/60 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
                         </div>
                       )}
                     </div>
@@ -772,7 +772,7 @@ export default function StockManager({
                   <form onSubmit={handleAddSale} className="bg-white dark:bg-card-bg p-12 rounded-[4rem] border border-border-subtle shadow-premium space-y-8">
                      <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-4">
-                           <div className="w-12 h-12 bg-secondary/10 text-secondary-dark rounded-2xl flex items-center justify-center">
+                           <div className="w-12 h-12 bg-secondary/10 text-lime-500 rounded-2xl flex items-center justify-center">
                               <ShoppingCart className="w-6 h-6" />
                            </div>
                            <div>
@@ -787,7 +787,7 @@ export default function StockManager({
 
                      <div className="p-6 bg-secondary/10 rounded-3xl border-2 border-secondary/20 flex justify-between items-center">
                         <div>
-                           <p className="text-xs font-black text-secondary-dark uppercase tracking-widest mb-1">Available for Sale</p>
+                           <p className="text-xs font-black text-lime-500 uppercase tracking-widest mb-1">Available for Sale</p>
                            <p className="text-2xl font-black text-stone-900 dark:text-white">
                               {getRemainingStock(selectedStock, selectedProfile!).bags} বস্তা / {getRemainingStock(selectedStock, selectedProfile!).quantity} {selectedStock.unit}
                            </p>
@@ -888,7 +888,7 @@ export default function StockManager({
                            />
                         </div>
                         {totalPrice && parseFloat(totalPrice) > 0 && (
-                          <p className="mt-2 text-xs font-bold text-secondary-dark/60 px-2 italic">
+                          <p className="mt-2 text-xs font-bold text-lime-500/60 px-2 italic">
                             কথায়: {numberToBanglaWords(totalPrice)}
                           </p>
                         )}
@@ -907,7 +907,7 @@ export default function StockManager({
 
                      <button 
                         type="submit"
-                        className="w-full bg-secondary text-primary font-black uppercase tracking-widest py-6 rounded-3xl shadow-xl hover:opacity-90 transition-all active:scale-95"
+                        className="w-full bg-secondary text-[#1e211f] font-black uppercase tracking-widest py-6 rounded-3xl shadow-xl hover:opacity-90 transition-all active:scale-95"
                      >
                         স্টক থেকে বিক্রি নিশ্চিত করুন
                      </button>
