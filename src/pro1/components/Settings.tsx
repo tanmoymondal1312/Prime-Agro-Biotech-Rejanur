@@ -1,20 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Settings as SettingsIcon, 
-  Palette, 
-  Type, 
-  LayoutDashboard,
-  Check,
-  ChevronRight,
-  ShieldCheck,
-  Smartphone,
-  Moon,
-  Sun,
-  Image as ImageIcon,
-  Upload,
-  Trash2,
-  RotateCcw,
-  AlertTriangle
+import {
+  Palette, Type, Check, ShieldCheck, Moon, Sun,
+  Image as ImageIcon, RotateCcw, AlertTriangle
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -24,196 +11,231 @@ interface SettingsProps {
 }
 
 const COLORS = [
-  { name: 'Emerald', value: '#34d399', class: 'bg-emerald-400' },
-  { name: 'Sky', value: '#0ea5e9', class: 'bg-sky-400' },
-  { name: 'Amber', value: '#f59e0b', class: 'bg-amber-400' },
-  { name: 'Rose', value: '#f43f5e', class: 'bg-rose-400' },
-  { name: 'Indigo', value: '#6366f1', class: 'bg-indigo-400' },
-  { name: 'Lime', value: '#d9f35c', class: 'bg-secondary' },
+  { name: 'Emerald', value: '#34d399', bg: '#34d399' },
+  { name: 'Sky',     value: '#0ea5e9', bg: '#0ea5e9' },
+  { name: 'Amber',   value: '#f59e0b', bg: '#f59e0b' },
+  { name: 'Rose',    value: '#f43f5e', bg: '#f43f5e' },
+  { name: 'Indigo',  value: '#6366f1', bg: '#6366f1' },
+  { name: 'Lime',    value: '#d9f35c', bg: '#d9f35c' },
 ];
 
 const FONT_SIZES = [
-  { name: 'Small', value: '90%', label: 'কখনো কখনো ছোট ফন্ট ভালো' },
-  { name: 'Default', value: '100%', label: 'সাধারণ ফন্ট সাইজ' },
-  { name: 'Large', value: '115%', label: 'বড় ফন্ট পড়তে সুবিধা' },
-  { name: 'X-Large', value: '140%', label: 'সবথেকে বড় ফন্ট - প্রিমিয়াম ভিউ' },
+  { name: 'Small',   value: '90%',  label: 'ছোট ফন্ট' },
+  { name: 'Default', value: '100%', label: 'সাধারণ' },
+  { name: 'Large',   value: '115%', label: 'বড়' },
+  { name: 'X-Large', value: '140%', label: 'সবচেয়ে বড়' },
 ];
+
+function SectionCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm">
+      {children}
+    </div>
+  );
+}
+
+function SectionHeader({
+  icon, title, subtitle, iconBg = '#f0fdf4', iconColor = '#059669',
+}: {
+  icon: React.ReactNode; title: string; subtitle?: string;
+  iconBg?: string; iconColor?: string;
+}) {
+  return (
+    <div className="flex items-center gap-3 mb-5">
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+        style={{ backgroundColor: iconBg, color: iconColor }}>
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <p style={{ color: '#111827' }} className="font-black text-base leading-tight">{title}</p>
+        {subtitle && (
+          <p style={{ color: '#6b7280' }} className="text-xs font-bold mt-0.5 truncate">{subtitle}</p>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) {
   const [activeColor, setActiveColor] = useState(localStorage.getItem('app-theme-color') || '#d9f35c');
-  const [fontSize, setFontSize] = useState(localStorage.getItem('app-font-size') || '1rem');
-  const [darkMode, setDarkMode] = useState(localStorage.getItem('app-dark-mode') === 'true');
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [fontSize,    setFontSize]    = useState(localStorage.getItem('app-font-size')    || '1rem');
+  const [darkMode,    setDarkMode]    = useState(localStorage.getItem('app-dark-mode') === 'true');
 
   useEffect(() => {
-    // Apply changes to document root
     document.documentElement.style.setProperty('--primary-theme', activeColor);
     document.documentElement.style.fontSize = fontSize;
-    
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
+    if (darkMode) document.documentElement.classList.add('dark');
+    else          document.documentElement.classList.remove('dark');
     localStorage.setItem('app-theme-color', activeColor);
-    localStorage.setItem('app-font-size', fontSize);
-    localStorage.setItem('app-dark-mode', darkMode.toString());
+    localStorage.setItem('app-font-size',   fontSize);
+    localStorage.setItem('app-dark-mode',   darkMode.toString());
   }, [activeColor, fontSize, darkMode]);
 
-
   return (
-    <div className="flex-1 flex flex-col min-h-screen bg-bg-page transition-colors duration-500">
-            <main className="p-8 lg:p-12 space-y-12 pb-24 max-w-4xl mx-auto w-full">
-        {/* Logo — static display */}
-        <section className="bg-white dark:bg-card-bg rounded-[3.5rem] border border-border-subtle shadow-premium p-12 transition-colors">
-            <div className="flex items-center gap-4 mb-10">
-               <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-2xl flex items-center justify-center text-amber-500">
-                  <ImageIcon className="w-6 h-6" />
-               </div>
-               <div>
-                  <h3 className="text-xl font-black text-stone-900 dark:text-white">অফিশিয়াল লোগো</h3>
-                  <p className="text-xs font-bold text-stone-700 dark:text-white/20 uppercase tracking-widest mt-1">Prime Agro Biotech Limited</p>
-               </div>
-            </div>
-            <div className="flex items-center gap-8">
-               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-secondary/20 shadow-lg flex-shrink-0">
-                  <img src="/portal-logo.png" alt="Prime Agro Biotech" className="w-full h-full object-cover" />
-               </div>
-               <div className="p-6 bg-bg-page/50 dark:bg-black/10 rounded-2xl border border-border-subtle flex-1">
-                  <p className="text-sm font-black text-stone-900 dark:text-white mb-1">Prime Agro Biotech Limited</p>
-                  <p className="text-xs font-bold text-stone-700 dark:text-white/40 uppercase tracking-widest leading-relaxed">
-                     লাঙল চষি, দু'মুঠো প্রেমের আশায়...
-                  </p>
-               </div>
-            </div>
-        </section>
+    <div className="flex-1 flex flex-col bg-gray-50">
+      <main className="p-3 sm:p-4 lg:p-8 space-y-4 sm:space-y-6 pb-24 max-w-2xl mx-auto w-full">
 
-        {/* Theme Settings */}
-        <section className="bg-white dark:bg-card-bg rounded-[3.5rem] border border-border-subtle shadow-premium p-12 relative overflow-hidden group transition-colors">
-           <div className="flex items-center gap-4 mb-10">
-              <div className="w-12 h-12 bg-secondary/10 dark:bg-secondary/20 rounded-2xl flex items-center justify-center text-emerald-600">
-                 <Palette className="w-6 h-6" />
-              </div>
-              <div>
-                 <h3 className="text-xl font-black text-stone-900 dark:text-white">থিম কালার (Theme Color)</h3>
-                 <p className="text-xs font-bold text-stone-700 dark:text-white/20 uppercase tracking-widest mt-1">Select your primary accent color</p>
-              </div>
-           </div>
+        {/* ── Logo ── */}
+        <SectionCard>
+          <SectionHeader
+            icon={<ImageIcon className="w-5 h-5" />}
+            title="অফিশিয়াল লোগো"
+            subtitle="Prime Agro Biotech Limited"
+            iconBg="#fffbeb" iconColor="#d97706"
+          />
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-gray-200 shrink-0">
+              <img src="/portal-logo.png" alt="Prime Agro Biotech" className="w-full h-full object-cover" />
+            </div>
+            <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex-1 min-w-0">
+              <p style={{ color: '#111827' }} className="text-sm font-black leading-tight">Prime Agro Biotech Limited</p>
+              <p style={{ color: '#6b7280' }} className="text-xs font-bold mt-1">লাঙল চষি, দু'মুঠো প্রেমের আশায়...</p>
+            </div>
+          </div>
+        </SectionCard>
 
-           <div className="grid grid-cols-3 sm:grid-cols-6 gap-6">
-              {COLORS.map((color) => (
+        {/* ── Theme Color ── */}
+        <SectionCard>
+          <SectionHeader
+            icon={<Palette className="w-5 h-5" />}
+            title="থিম কালার"
+            subtitle="Accent color preference"
+            iconBg="#f0fdf4" iconColor="#059669"
+          />
+          <div className="grid grid-cols-6 gap-3">
+            {COLORS.map((color) => (
+              <button
+                key={color.name}
+                onClick={() => setActiveColor(color.value)}
+                className="relative aspect-square rounded-xl sm:rounded-2xl flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all"
+                style={{ backgroundColor: color.bg }}
+              >
+                {activeColor === color.value && (
+                  <Check className="w-4 h-4 text-white drop-shadow" />
+                )}
+                <span style={{ color: '#374151' }} className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-black uppercase whitespace-nowrap hidden sm:block">
+                  {color.name}
+                </span>
+              </button>
+            ))}
+          </div>
+          <div className="mt-8 sm:mt-6 flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
+            <div className="w-8 h-8 rounded-lg border-2 border-gray-200 shrink-0"
+              style={{ backgroundColor: activeColor }} />
+            <div>
+              <p style={{ color: '#111827' }} className="text-xs font-black">সক্রিয় থিম রঙ</p>
+              <p style={{ color: '#6b7280' }} className="text-xs font-bold">{activeColor}</p>
+            </div>
+          </div>
+        </SectionCard>
+
+        {/* ── Font Size ── */}
+        <SectionCard>
+          <SectionHeader
+            icon={<Type className="w-5 h-5" />}
+            title="ফন্ট সাইজ"
+            subtitle="Text scale for readability"
+            iconBg="#eff6ff" iconColor="#3b82f6"
+          />
+          <div className="grid grid-cols-2 gap-3">
+            {FONT_SIZES.map((font) => {
+              const isActive = fontSize === font.value;
+              return (
                 <button
-                  key={color.name}
-                  onClick={() => setActiveColor(color.value)}
-                  className={`relative w-full aspect-square rounded-[2rem] ${color.class} transition-all hover:scale-105 active:scale-95 flex items-center justify-center shadow-lg`}
+                  key={font.name}
+                  onClick={() => setFontSize(font.value)}
+                  className="flex items-center justify-between p-4 rounded-xl border-2 transition-all active:scale-95"
+                  style={{
+                    backgroundColor: isActive ? '#111827' : '#f9fafb',
+                    borderColor:     isActive ? '#111827' : '#e5e7eb',
+                  }}
                 >
-                  {activeColor === color.value && (
-                    <motion.div 
-                      layoutId="color-check"
-                      className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40"
-                    >
-                      <Check className="w-5 h-5 text-white" />
-                    </motion.div>
-                  )}
-                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-black text-stone-700 uppercase tracking-widest">{color.name}</span>
+                  <div className="text-left min-w-0">
+                    <p className="font-black text-sm leading-tight"
+                      style={{ color: isActive ? '#ffffff' : '#111827' }}>
+                      {font.name}
+                    </p>
+                    <p className="text-xs font-bold mt-0.5"
+                      style={{ color: isActive ? '#d1d5db' : '#6b7280' }}>
+                      {font.label}
+                    </p>
+                  </div>
+                  {isActive && <Check className="w-4 h-4 text-emerald-400 shrink-0 ml-2" />}
                 </button>
-              ))}
-           </div>
-        </section>
+              );
+            })}
+          </div>
+        </SectionCard>
 
-        {/* Font Settings */}
-        <section className="bg-white dark:bg-card-bg rounded-[3.5rem] border border-border-subtle shadow-premium p-12 transition-colors">
-           <div className="flex items-center gap-4 mb-10">
-              <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center text-blue-500">
-                 <Type className="w-6 h-6" />
+        {/* ── System Toggles ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Dark Mode */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="bg-white border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm active:scale-[0.98] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: '#eef2ff', color: '#6366f1' }}>
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </div>
+              <div className="text-left">
+                <p style={{ color: '#111827' }} className="font-black text-sm">ডার্ক মোড</p>
+                <p style={{ color: '#6b7280' }} className="text-xs font-bold">{darkMode ? 'চালু' : 'বন্ধ'}</p>
+              </div>
+            </div>
+            <div className="w-11 h-6 rounded-full p-0.5 transition-colors shrink-0"
+              style={{ backgroundColor: darkMode ? '#111827' : '#e5e7eb' }}>
+              <motion.div
+                animate={{ x: darkMode ? 20 : 0 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className="w-5 h-5 bg-white rounded-full shadow-sm"
+              />
+            </div>
+          </button>
+
+          {/* Auto Backup */}
+          <div className="bg-white border border-gray-200 rounded-2xl p-4 flex items-center justify-between shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: '#f0fdf4', color: '#059669' }}>
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                 <h3 className="text-xl font-black text-stone-900 dark:text-white">ফন্ট সাইজ (Font Size)</h3>
-                 <p className="text-xs font-bold text-stone-700 dark:text-white/20 uppercase tracking-widest mt-1">Adjust text scale for better readability</p>
+                <p style={{ color: '#111827' }} className="font-black text-sm">অটো ব্যাকআপ</p>
+                <p style={{ color: '#059669' }} className="text-xs font-bold">সক্রিয়</p>
               </div>
-           </div>
-
-           <div className="space-y-4">
-              {FONT_SIZES.map((font) => (
-                 <button
-                   key={font.name}
-                   onClick={() => setFontSize(font.value)}
-                   className={`w-full flex items-center justify-between p-6 rounded-3xl border transition-all ${fontSize === font.value ? 'bg-primary text-white border-primary shadow-xl dark:bg-secondary dark:text-[#1e211f] dark:border-secondary' : 'bg-bg-page/30 dark:bg-black/10 border-border-subtle dark:border-white/5 dark:text-white/60 hover:border-primary/30'}`}
-                 >
-                    <div className="flex items-center gap-6">
-                       <span className={`font-black text-lg ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.name}</span>
-                       <span className={`text-xs font-bold opacity-40 ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.label}</span>
-                    </div>
-                    {fontSize === font.value && <Check className="w-6 h-6 text-emerald-600 dark:text-[#1e211f]" />}
-                 </button>
-              ))}
-           </div>
-        </section>
-
-        {/* System Settings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-           <div 
-             onClick={() => setDarkMode(!darkMode)}
-             className="bg-white dark:bg-card-bg p-10 rounded-[3rem] border border-border-subtle shadow-premium flex items-center justify-between group cursor-pointer hover:border-primary transition-all transition-colors"
-           >
-              <div className="flex items-center gap-6">
-                 <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-indigo-500 group-hover:rotate-12 transition-transform">
-                    {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
-                 </div>
-                 <div>
-                    <p className="text-lg font-black text-stone-900 dark:text-white">ডার্ক মোড (Dark Mode)</p>
-                    <p className="text-xs font-black text-stone-700 dark:text-white/20 uppercase tracking-widest">Enhanced for night viewing</p>
-                 </div>
-              </div>
-              <div className={`w-14 h-8 rounded-full p-1 transition-colors ${darkMode ? 'bg-secondary' : 'bg-primary/10'}`}>
-                 <motion.div 
-                   animate={{ x: darkMode ? 24 : 0 }}
-                   className="w-6 h-6 bg-white rounded-full shadow-sm" 
-                 />
-              </div>
-           </div>
-
-           <div className="bg-white dark:bg-card-bg p-10 rounded-[3rem] border border-border-subtle shadow-premium flex items-center justify-between group transition-colors">
-              <div className="flex items-center gap-6">
-                 <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl flex items-center justify-center text-emerald-500 group-hover:rotate-12 transition-transform">
-                    <ShieldCheck className="w-6 h-6" />
-                 </div>
-                 <div>
-                    <p className="text-lg font-black text-stone-900 dark:text-white">অটো ব্যাকআপ (Auto Backup)</p>
-                    <p className="text-xs font-black text-stone-700 dark:text-white/20 uppercase tracking-widest">Local storage synced</p>
-                 </div>
-              </div>
-              <div className="w-14 h-8 bg-emerald-500 rounded-full p-1 border border-emerald-600/20">
-                 <div className="w-6 h-6 bg-white rounded-full shadow-sm translate-x-6" />
-              </div>
-           </div>
+            </div>
+            <div className="w-11 h-6 rounded-full p-0.5 bg-emerald-500 shrink-0">
+              <div className="w-5 h-5 bg-white rounded-full shadow-sm translate-x-5" />
+            </div>
+          </div>
         </div>
 
-        {/* Danger Zone */}
-        <section className="bg-red-50/30 dark:bg-red-900/5 rounded-[3.5rem] border border-red-100 dark:border-red-900/20 p-12 transition-colors">
-           <div className="flex items-center gap-4 mb-10">
-              <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center text-red-600">
-                 <AlertTriangle className="w-6 h-6" />
-              </div>
-              <div>
-                 <h3 className="text-xl font-black text-red-600 dark:text-red-400">ডেটা রিসেট (Reset Data)</h3>
-                 <p className="text-xs font-bold text-red-600/40 dark:text-red-400/40 uppercase tracking-widest mt-1">Permanently clear all application data</p>
-              </div>
-           </div>
+        {/* ── Danger Zone ── */}
+        <div className="bg-red-50 border border-red-200 rounded-2xl p-4 sm:p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center shrink-0">
+              <AlertTriangle className="w-5 h-5 text-red-600" />
+            </div>
+            <div>
+              <p style={{ color: '#dc2626' }} className="font-black text-base">ডেটা রিসেট</p>
+              <p style={{ color: '#ef4444' }} className="text-xs font-bold">সব ডেটা স্থায়ীভাবে মুছে যাবে</p>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              if (window.confirm('আপনি কি নিশ্চিত যে আপনি সকল ডেটা মুছে ফেলতে চান? এটি আর ফিরে পাওয়া যাবে না।')) {
+                onResetData();
+              }
+            }}
+            className="w-full flex items-center justify-center gap-3 p-4 bg-red-600 text-white rounded-xl font-black text-sm uppercase tracking-wide hover:bg-red-700 active:scale-[0.98] transition-all shadow-md"
+          >
+            <RotateCcw className="w-5 h-5" />
+            সকল তথ্য রিসেট করুন
+          </button>
+        </div>
 
-           <button 
-             onClick={() => {
-               if (window.confirm('আপনি কি নিশ্চিত যে আপনি সকল ডেটা মুছে ফেলতে চান? এটি আর ফিরে পাওয়া যাবে না।')) {
-                 onResetData();
-               }
-             }}
-             className="w-full flex items-center justify-center gap-4 p-8 bg-red-600 text-white rounded-[2rem] font-black text-lg uppercase tracking-widest hover:bg-red-700 transition-all shadow-xl active:scale-[0.98]"
-           >
-              <RotateCcw className="w-6 h-6" />
-              সকল তথ্য রিসেট করুন (Reset All Data)
-           </button>
-        </section>
       </main>
     </div>
   );
