@@ -64,10 +64,10 @@
   --color-text-main:     #1a1a1a;
   --color-border-subtle: #eeeeee;
 
-  /* Prevent Chrome "Force Dark Mode" (chrome://flags/#enable-force-dark) from
-     inverting site colors on LAN/IP access. This does NOT disable the site's
-     own dark mode — that is handled by the .dark class separately. */
-  color-scheme: light dark;
+  /* "only light" prevents Chrome's aggressive forced-dark-mode flag from
+     inverting ALL colors on LAN/IP access. The site's own dark mode (via .dark
+     class) still works because it uses explicit CSS variable overrides. */
+  color-scheme: only light;
   forced-color-adjust: none;
 }
 

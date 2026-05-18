@@ -12,9 +12,9 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Prevent Chrome/Edge forced dark mode from inverting site colors -->
-    <!-- Without this, Android Chrome "Force Dark" flag inverts all text/bg colors via LAN -->
-    <meta name="color-scheme" content="light dark" />
+    <!-- Force light color scheme — prevents Chrome/Edge "Force Dark Mode" flag
+         from inverting colors when accessed via LAN IP on mobile devices -->
+    <meta name="color-scheme" content="only light" />
 
     <!-- Theme colour (Android Chrome toolbar) -->
     <meta name="theme-color" content="#10b981" />
