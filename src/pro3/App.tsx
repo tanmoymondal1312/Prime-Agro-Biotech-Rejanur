@@ -314,7 +314,11 @@ export default function App() {
             <button onClick={handleHeaderBack} className="p-2 hover:bg-stone-100 rounded-full transition-colors shrink-0">
               <ChevronLeft className="w-6 h-6 text-stone-600" />
             </button>
-            <img src="/logo.png" alt="Prime Agro Biotech" className="w-9 h-9 rounded-full object-cover shrink-0 shadow-sm" />
+            <img
+              src="/logo.png" alt="Prime Agro Biotech"
+              onClick={() => { window.location.href = '/khamar'; }}
+              className="w-9 h-9 rounded-full object-cover shrink-0 shadow-sm cursor-pointer hover:opacity-80 transition-opacity"
+            />
             <div className="flex flex-col">
               <h1 className="text-base font-bold text-stone-900 leading-tight">{t.appName}</h1>
               <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">
