@@ -63,6 +63,12 @@
   --color-card-bg:       #ffffff;
   --color-text-main:     #1a1a1a;
   --color-border-subtle: #eeeeee;
+
+  /* Prevent Chrome "Force Dark Mode" (chrome://flags/#enable-force-dark) from
+     inverting site colors on LAN/IP access. This does NOT disable the site's
+     own dark mode — that is handled by the .dark class separately. */
+  color-scheme: light dark;
+  forced-color-adjust: none;
 }
 
 /* ─── Base body (neutral — each app wrapper overrides) ─────────────────── */

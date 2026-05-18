@@ -383,64 +383,47 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-bg-page p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden transition-colors duration-500">
-      {/* Header */}
-      <header className="flex items-center justify-between gap-3 bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] px-4 py-3 sm:p-6 lg:p-8 border border-white/20 shadow-premium relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 via-transparent to-primary/5 opacity-50" />
-
-        {/* Left: Menu + Title */}
-        <div className="flex items-center gap-3 relative z-10 min-w-0">
-          <button onClick={onOpenSidebar} className="lg:hidden shrink-0 p-2 bg-white dark:bg-card-bg rounded-xl shadow-premium border border-border-subtle hover:scale-105 transition-transform">
-            <Menu className="w-5 h-5 dark:text-white" />
+    <div className="flex flex-col min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden">
+      {/* Header — solid colors only, no CSS variables, no backdrop-blur */}
+      <header className="flex items-center justify-between gap-3 bg-white border border-gray-200 rounded-2xl px-4 py-3 sm:px-6 sm:py-4 shadow-sm">
+        {/* Left: Hamburger + Logo + Title */}
+        <div className="flex items-center gap-3 min-w-0">
+          <button onClick={onOpenSidebar}
+            className="lg:hidden shrink-0 w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">
+            <Menu className="w-5 h-5 text-gray-700" />
           </button>
+          <img src="/portal-logo.png" alt="Logo"
+            className="hidden sm:block w-9 h-9 rounded-full object-cover shrink-0 border border-gray-100" />
           <div className="min-w-0">
-            <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight leading-none truncate">
+            <h1 style={{ color: '#111827' }} className="text-base sm:text-xl font-black leading-tight truncate">
               {getTitle()}
             </h1>
-            <div className="flex items-center gap-2 mt-0.5">
-              <div className="w-4 h-0.5 bg-secondary rounded-full" />
-              <p className="text-xs font-black text-stone-3000 uppercase tracking-[0.2em] opacity-80 hidden sm:block">
-                Prime Agro Biotech
-              </p>
-            </div>
+            <p style={{ color: '#059669' }} className="hidden sm:block text-xs font-bold leading-none mt-0.5">
+              Prime Agro Biotech
+            </p>
           </div>
         </div>
 
-        {/* Center: Logo (hidden on mobile) */}
-        <div className="hidden md:flex justify-center relative z-10">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="w-16 h-16 lg:w-20 lg:h-20 bg-white dark:bg-card-bg rounded-2xl p-3 shadow-active border-2 border-white dark:border-white/10 hover:border-secondary transition-all shrink-0 flex items-center justify-center overflow-hidden"
-          >
-            <img src="/portal-logo.png" alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-          </motion.div>
-        </div>
-
-        {/* Right: Time */}
-        <div className="flex items-center gap-2 relative z-10 shrink-0">
-          <div className="flex items-center gap-2 text-stone-900 dark:text-white font-black bg-white/60 dark:bg-white/10 px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl border border-white dark:border-white/10 shadow-premium backdrop-blur-md">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-secondary/10 rounded-lg flex items-center justify-center shrink-0">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700 dark:text-lime-500" />
-            </div>
-            <span className="font-mono text-sm sm:text-base lg:text-xl tabular-nums tracking-widest leading-none">
-              {currentTime.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-            </span>
-          </div>
+        {/* Right: Clock */}
+        <div className="shrink-0 flex items-center gap-2 bg-gray-100 rounded-xl px-3 py-2">
+          <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
+          <span style={{ color: '#111827' }} className="text-sm font-bold font-mono tabular-nums">
+            {currentTime.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          </span>
         </div>
       </header>
 
       <main className="space-y-12">
         {/* প্রধান রিপোর্ট সেকশন - Only Dashboard */}
         {view === 'dashboard' && (
-          <section className="bg-white dark:bg-card-bg rounded-2xl sm:rounded-[3rem] p-4 sm:p-8 lg:p-12 shadow-premium border border-border-subtle relative overflow-hidden group transition-all">
+          <section className="bg-white rounded-2xl sm:rounded-[3rem] p-4 sm:p-8 lg:p-12 shadow-sm border border-gray-200 relative overflow-hidden group transition-all">
             <div className="absolute top-0 right-0 p-12 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity dark:text-white group-hover:scale-110 transition-transform duration-700">
               <BarChart3 className="w-64 h-64" />
             </div>
             
             <div className="flex items-center gap-4 mb-10">
-               <div className="w-1 h-8 bg-gradient-to-b from-secondary to-secondary-dark rounded-full shadow-glow" />
-               <h2 className="text-lg sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight uppercase">ব্যবসার সার্বিক চিত্র (Overview)</h2>
+               <div className="w-1 h-8 bg-emerald-500 rounded-full" />
+               <h2 style={{ color: "#111827" }} className="text-lg sm:text-2xl font-black tracking-tight uppercase">ব্যবসার সার্বিক চিত্র (Overview)</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 items-center">
@@ -448,7 +431,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                 <div className="absolute top-0 left-0 w-24 h-24 bg-secondary/10 blur-3xl rounded-full -translate-x-1/2 -translate-y-1/2" />
                 <div className="relative z-10 space-y-3 text-center md:text-left">
                   <p className="text-xs sm:text-xs font-black text-stone-700 dark:text-lime-400 uppercase tracking-[0.2em] leading-none mb-1">সচল প্রজেক্ট ভলিউম</p>
-                  <p className="text-4xl font-black text-gray-900 dark:text-white tracking-tighter tabular-nums leading-none">
+                  <p style={{ color: "#111827" }} className="text-4xl font-black tracking-tighter tabular-nums leading-none">
                     {liveProfiles.length.toString().padStart(2, '০')} 
                     <span className="text-lg text-stone-700 ml-2">টা</span>
                   </p>
@@ -506,9 +489,9 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             </div>
 
             {/* System ROI Grid - Premium Enhanced */}
-            <div className="mt-6 sm:mt-12 pt-8 sm:pt-10 border-t border-border-subtle grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 overflow-visible">
+            <div className="mt-6 sm:mt-12 pt-8 sm:pt-10 border-t border-gray-200 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 overflow-visible">
                <div className="relative group/stat p-5 bg-emerald-500/[0.03] dark:bg-emerald-500/[0.05] rounded-[2rem] border border-emerald-500/10 hover:border-emerald-500/30 transition-all flex flex-col items-center text-center">
-                  <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
+                  <div className="absolute -top-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
                      <Clock className="w-5 h-5 text-emerald-500" />
                   </div>
                   <p className="text-xs font-black text-emerald-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (ঘণ্টা)</p>
@@ -516,7 +499,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                </div>
                
                <div className="relative group/stat p-5 bg-emerald-500/[0.03] dark:bg-emerald-500/[0.05] rounded-[2rem] border border-emerald-500/10 hover:border-emerald-500/30 transition-all flex flex-col items-center text-center">
-                  <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
+                  <div className="absolute -top-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
                      <TrendingUp className="w-5 h-5 text-emerald-500" />
                   </div>
                   <p className="text-xs font-black text-emerald-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (দিন)</p>
@@ -524,7 +507,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                </div>
                
                <div className="relative group/stat p-5 bg-amber-500/[0.03] dark:bg-amber-500/[0.05] rounded-[2rem] border border-amber-500/10 hover:border-amber-500/30 transition-all flex flex-col items-center text-center">
-                  <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-amber-100 group-hover/stat:rotate-12 transition-transform">
+                  <div className="absolute -top-4 w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg border border-amber-100 group-hover/stat:rotate-12 transition-transform">
                      <PieIcon className="w-5 h-5 text-amber-500" />
                   </div>
                   <p className="text-xs font-black text-amber-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">প্রাক্কলিত মুনাফা (মাস)</p>
@@ -544,7 +527,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             <div className="mt-6 sm:mt-12 group/stock relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-indigo-500/20 blur-xl opacity-0 group-hover/stock:opacity-100 transition-opacity rounded-[3rem]" />
               
-              <div className="relative p-4 sm:p-8 lg:p-10 bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-2xl sm:rounded-[3rem] border border-border-subtle shadow-premium overflow-hidden">
+              <div className="relative p-4 sm:p-8 lg:p-10 bg-white rounded-2xl sm:rounded-[3rem] border border-gray-200 shadow-sm overflow-hidden">
                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 sm:mb-10 gap-4 sm:gap-6">
                    <div className="flex items-center gap-4">
                       <div className="w-14 h-14 bg-emerald-600/10 text-emerald-600 rounded-2xl flex items-center justify-center shadow-inner">
@@ -593,7 +576,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                        </div>
                     </div>
 
-                    <div className="p-5 sm:p-8 bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] border-2 border-stone-200 dark:border-white/5 shadow-premium flex flex-col justify-center relative overflow-hidden group/card transition-all hover:scale-[1.02] min-h-0">
+                    <div className="p-5 sm:p-8 bg-white rounded-2xl sm:rounded-[2.5rem] border-2 border-stone-200 dark:border-white/5 shadow-premium flex flex-col justify-center relative overflow-hidden group/card transition-all hover:scale-[1.02] min-h-0">
                        <div className="absolute top-0 right-0 p-6 opacity-5 group-hover/card:opacity-10 transition-opacity">
                          <PieIcon className="w-24 h-24" />
                        </div>
@@ -622,7 +605,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          if (profileRemainingBags <= 0) return null;
 
                          return (
-                           <div key={p.id} className="p-5 bg-white dark:bg-card-bg rounded-3xl border border-border-subtle shadow-sm hover:shadow-active hover:-translate-y-1 transition-all group overflow-hidden relative">
+                           <div key={p.id} className="p-5 bg-white rounded-3xl border border-gray-200 shadow-sm hover:shadow-active hover:-translate-y-1 transition-all group overflow-hidden relative">
                              <div className="absolute -right-2 -bottom-2 w-16 h-16 bg-stone-50 rounded-full scale-0 group-hover:scale-100 transition-transform" />
                              
                              <div className="flex justify-between items-start mb-3">
@@ -697,7 +680,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
 
             <div
               onClick={onViewPlans}
-              className="p-5 sm:p-8 bg-white dark:bg-white/5 rounded-2xl sm:rounded-[3rem] shadow-premium border border-border-subtle relative overflow-hidden group cursor-pointer"
+              className="p-5 sm:p-8 bg-white dark:bg-white/5 rounded-2xl sm:rounded-[3rem] shadow-premium border border-gray-200 relative overflow-hidden group cursor-pointer"
             >
               <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:scale-110 transition-transform">
                 <Sparkles className="w-32 h-32 text-[#1e211f]" />
@@ -714,7 +697,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                 </div>
                 
                 {upcomingPlans.length > 0 ? (
-                  <div className="bg-bg-page dark:bg-black/20 rounded-3xl p-4 border border-border-subtle">
+                  <div className="bg-gray-50 dark:bg-black/20 rounded-3xl p-4 border border-gray-200">
                     <p className="text-xs font-black text-[#1e211f] uppercase tracking-[0.2em] mb-2 leading-none">সামনের পরিকল্পনা:</p>
                     <div className="flex items-center gap-2">
                       <div className="px-2 py-1 bg-primary text-white text-xs font-black rounded-lg">
@@ -810,14 +793,14 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             {profiles.length === 0 && view !== 'archived' && (
               <div 
                 onClick={onAddProfile} 
-                className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-700 hover:border-secondary hover:text-[#1e211f] transition-all cursor-pointer group"
+                className="md:col-span-3 h-64 border-4 border-dashed border-gray-200 rounded-[3rem] flex flex-col items-center justify-center text-stone-700 hover:border-secondary hover:text-[#1e211f] transition-all cursor-pointer group"
               >
                 <Plus className="w-12 h-12 mb-4 group-hover:scale-125 transition-transform" />
                 <p className="text-sm font-black uppercase tracking-[0.3em]">নতুন প্রজেক্ট যোগ করুন</p>
               </div>
             )}
             {profiles.length === 0 && view === 'archived' && (
-              <div className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-700">
+              <div className="md:col-span-3 h-64 border-4 border-dashed border-gray-200 rounded-[3rem] flex flex-col items-center justify-center text-stone-700">
                 <p className="text-sm font-black uppercase tracking-[0.3em]">কোনো আর্কাইভ প্রজেক্ট নেই</p>
               </div>
             )}
@@ -863,10 +846,10 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     <button
                       key={m}
                       onClick={() => setSelectedMonthIndex(isSelected ? null : i)}
-                      className={`min-w-[120px] sm:min-w-[160px] bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 border hover:border-primary transition-all flex flex-col items-center gap-4 sm:gap-6 ${isSelected ? 'border-primary ring-4 ring-primary/5 shadow-active' : 'border-border-subtle shadow-premium'} ${!hasInvestment && 'opacity-50'}`}
+                      className={`min-w-[120px] sm:min-w-[160px] bg-white rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 border hover:border-primary transition-all flex flex-col items-center gap-4 sm:gap-6 ${isSelected ? 'border-primary ring-4 ring-primary/5 shadow-active' : 'border-gray-200 shadow-premium'} ${!hasInvestment && 'opacity-50'}`}
                     >
                       <p className="text-sm font-black text-stone-900 dark:text-white uppercase tracking-widest">{m}</p>
-                      <div className="h-32 w-10 bg-bg-page/50 dark:bg-black/20 rounded-full flex items-end overflow-hidden p-1">
+                      <div className="h-32 w-10 bg-gray-50/50 dark:bg-black/20 rounded-full flex items-end overflow-hidden p-1">
                         <motion.div 
                           initial={{ height: 0 }}
                           animate={{ height: `${Math.min(100, (total / 20000) * 100)}%` }}
@@ -900,14 +883,14 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       exit={{ opacity: 0, scale: 0.95, y: 20 }}
                       className="bg-white rounded-2xl sm:rounded-[3.5rem] shadow-2xl w-full max-w-2xl relative z-10 overflow-hidden"
                     >
-                      <div className="p-5 sm:p-10 border-b border-border-subtle flex items-center justify-between bg-bg-page/20">
+                      <div className="p-5 sm:p-10 border-b border-gray-200 flex items-center justify-between bg-gray-50/20">
                         <div>
                           <h3 className="text-3xl font-black text-[#1e211f] leading-none">{months[selectedMonthIndex]} মাসের খরচ রিপোর্ট</h3>
                           <p className="text-xs font-bold text-stone-700 uppercase tracking-[0.2em] mt-3">Itemized Expense History</p>
                         </div>
                         <button 
                            onClick={() => setSelectedMonthIndex(null)}
-                           className="w-14 h-14 bg-white hover:bg-red-50 text-red-400 rounded-2xl shadow-sm border border-border-subtle transition-all flex items-center justify-center"
+                           className="w-14 h-14 bg-white hover:bg-red-50 text-red-400 rounded-2xl shadow-sm border border-gray-200 transition-all flex items-center justify-center"
                         >
                            <XIcon className="w-8 h-8" />
                         </button>
@@ -916,7 +899,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       <div className="p-4 sm:p-10 overflow-y-auto max-h-[60vh] space-y-3 sm:space-y-4 no-scrollbar">
                         {getMonthlyExpenses(selectedMonthIndex).length > 0 ? (
                           getMonthlyExpenses(selectedMonthIndex).map((item, idx) => (
-                            <div key={idx} className="flex items-center justify-between p-6 bg-white border border-border-subtle rounded-3xl hover:border-primary transition-all group">
+                            <div key={idx} className="flex items-center justify-between p-6 bg-white border border-gray-200 rounded-3xl hover:border-primary transition-all group">
                               <div className="flex items-center gap-6">
                                 <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-[#1e211f] group-hover:scale-110 transition-transform">
                                    <Zap className="w-5 h-5" />
@@ -965,13 +948,13 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     const topExpenses = getTopExpensesOverall();
                     if (topExpenses.length === 0) {
                       return (
-                        <div className="col-span-full bg-white rounded-3xl p-8 border border-dashed border-border-subtle text-center text-stone-700">
+                        <div className="col-span-full bg-white rounded-3xl p-8 border border-dashed border-gray-200 text-center text-stone-700">
                           <p className="text-xs sm:text-xs font-black uppercase tracking-widest">ব্যয় সংক্রান্ত কোনো তথ্য নেই</p>
                         </div>
                       );
                     }
                     return topExpenses.slice(0, 4).map((expense, idx) => (
-                      <div key={idx} className="bg-white p-5 rounded-2xl border border-border-subtle shadow-sm hover:border-primary transition-all group">
+                      <div key={idx} className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-primary transition-all group">
                         <div className="flex justify-between items-center mb-2">
                           <p className="text-xs sm:text-xs font-black text-stone-700 uppercase tracking-widest">{expense.label}</p>
                           <span className="text-xs sm:text-xs font-black text-[#1e211f]">{expense.percentage}%</span>
@@ -1062,7 +1045,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     const isProfit = profit >= 0;
 
                     return (
-                      <div key={p.id} className="bg-white rounded-[2rem] p-6 shadow-premium border border-border-subtle flex flex-col gap-4 relative overflow-hidden group">
+                      <div key={p.id} className="bg-white rounded-[2rem] p-6 shadow-premium border border-gray-200 flex flex-col gap-4 relative overflow-hidden group">
                          <div className="flex justify-between items-center relative z-10">
                             <div>
                                <h3 className="text-xl font-black text-[#1e211f]">{p.name}</h3>
@@ -1102,7 +1085,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
       </main>
 
       {/* Footer Branding */}
-      <footer className="pt-20 pb-10 flex flex-col md:flex-row items-center justify-center gap-6 border-t border-border-subtle opacity-40 dark:text-white/40">
+      <footer className="pt-20 pb-10 flex flex-col md:flex-row items-center justify-center gap-6 border-t border-gray-200 opacity-40 dark:text-white/40">
         <p className="text-xs sm:text-xs font-black uppercase tracking-widest">© 2026 Prime Agro Biotech • Professional Agriculture Management</p>
       </footer>
     </div>
