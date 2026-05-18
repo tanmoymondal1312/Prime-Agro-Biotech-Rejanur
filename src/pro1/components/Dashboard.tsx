@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  TrendingUp, 
+import {
+  TrendingUp,
   TrendingDown,
+  Clock,
   PieChart as PieIcon,
   Sprout,
   Plus,
