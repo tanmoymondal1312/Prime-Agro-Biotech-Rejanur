@@ -60,7 +60,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
   const yearName = activeMonth.toLocaleString('bn-BD', { year: 'numeric' });
 
   return (
-    <div className="flex-1 flex flex-col bg-bg-page overflow-y-auto">
+    <div className="flex-1 flex flex-col bg-gray-50 overflow-y-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
@@ -83,7 +83,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Entry Panel */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-8 bg-white dark:bg-white/5 rounded-[2.5rem] shadow-premium border border-border-subtle">
+          <div className="p-4 sm:p-6 bg-white rounded-2xl shadow-sm border border-gray-200">
             <h2 className="text-xl font-black mb-6 flex items-center gap-2">
               <Calendar className="w-5 h-5 text-[#1e211f]" />
               নতুন পরিকল্পনা যোগ করুন
@@ -97,7 +97,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle rounded-2xl px-6 py-4 font-black outline-none focus:border-primary transition-colors dark:text-white"
+                    className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-4 font-black outline-none focus:border-emerald-500 transition-colors" style={{ color:"#111827" }}
                   />
                 </div>
                 <div className="space-y-2">
@@ -106,7 +106,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle rounded-2xl px-6 py-4 font-black outline-none focus:border-primary transition-colors dark:text-white"
+                    className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-4 font-black outline-none focus:border-emerald-500 transition-colors" style={{ color:"#111827" }}
                   />
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                   value={activity}
                   onChange={(e) => setActivity(e.target.value)}
                   placeholder="যেমন: ধান রোপণ, ভুট্টা মাড়াই ইত্যাদি..."
-                  className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle rounded-2xl px-6 py-4 font-bold outline-none focus:border-primary transition-colors dark:text-white"
+                  className="w-full bg-white border border-gray-300 rounded-2xl px-6 py-4 font-bold outline-none focus:border-emerald-500 transition-colors" style={{ color:"#111827" }}
                 />
               </div>
 
@@ -239,7 +239,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
                             )}
                           </div>
                           <p className={`font-black text-lg transition-all ${
-                            plan.status === 'completed' ? 'line-through text-[#374151]' : 'dark:text-white'
+                            plan.status === 'completed' ? 'line-through' : ''
                           }`}>
                             {plan.activity}
                           </p>
