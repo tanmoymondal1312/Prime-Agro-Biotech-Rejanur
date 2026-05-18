@@ -49,7 +49,7 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, onClose }: Si
           </div>
           <div>
             <h1 className="font-display font-black text-2xl tracking-tighter text-secondary leading-none">Prime Agro</h1>
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] mt-2">Biotech Limited</p>
+            <p className="text-xs font-bold text-white/40 uppercase tracking-[0.2em] mt-2">Biotech Limited</p>
           </div>
         </div>
         <button onClick={onClose} className="lg:hidden p-3 bg-white/5 hover:bg-white/10 rounded-2xl transition-colors">

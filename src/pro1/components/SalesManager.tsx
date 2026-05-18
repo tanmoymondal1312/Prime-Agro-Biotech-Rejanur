@@ -137,23 +137,23 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                       <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-[1.5rem] flex items-center justify-center group-hover:scale-110 transition-transform">
                         <ShoppingCart className="w-7 h-7" />
                       </div>
-                      <div className="bg-secondary/20 text-secondary-dark px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+                      <div className="bg-secondary/20 text-secondary-dark px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
                         Live Now
                       </div>
                     </div>
                     
                     <h3 className="text-xl font-black text-primary mb-2 truncate">{profile.name}</h3>
-                    <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] mb-6">বীজ বপন: {new Date(profile.startDate).toLocaleDateString('bn-BD')}</p>
+                    <p className="text-xs font-black text-stone-700 uppercase tracking-[0.2em] mb-6">বীজ বপন: {new Date(profile.startDate).toLocaleDateString('bn-BD')}</p>
                     
                     <div className="space-y-4">
                       <div className="flex justify-between items-end">
-                        <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest">মোট বিক্রয়</p>
+                        <p className="text-xs font-black text-stone-700 uppercase tracking-widest">মোট বিক্রয়</p>
                         <p className="text-lg font-black text-emerald-600">{formatCurrency(totalIncome)}</p>
                       </div>
                       <div className="h-1.5 w-full bg-stone-50 rounded-full overflow-hidden">
                         <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${Math.min(100, (totalIncome / (totalExpenses || 1)) * 100)}%` }} />
                       </div>
-                      <p className="text-[10px] font-bold text-center text-stone-400 italic">Click to manage sales</p>
+                      <p className="text-xs font-bold text-center text-stone-700 italic">Click to manage sales</p>
                     </div>
                   </motion.button>
                 );
@@ -161,10 +161,10 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
             ) : (
               <div className="col-span-full py-32 text-center">
                  <div className="w-20 h-20 bg-stone-50 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
-                    <AlertCircle className="w-10 h-10 text-stone-400" />
+                    <AlertCircle className="w-10 h-10 text-stone-700" />
                  </div>
-                 <h2 className="text-xl font-black text-stone-500 mb-2">কোন সচল প্রজেক্ট নেই</h2>
-                 <p className="text-xs font-bold text-stone-400 uppercase tracking-widest">পণ্য বিক্রির জন্য প্রথমে একটি প্রজেক্ট শুরু করুন</p>
+                 <h2 className="text-xl font-black text-stone-700 mb-2">কোন সচল প্রজেক্ট নেই</h2>
+                 <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">পণ্য বিক্রির জন্য প্রথমে একটি প্রজেক্ট শুরু করুন</p>
               </div>
             )}
           </div>
@@ -177,7 +177,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                   setSelectedProfileId(null);
                   setIsAdding(false);
                 }}
-                className="flex items-center gap-3 text-stone-500 hover:text-primary transition-colors mb-4 group"
+                className="flex items-center gap-3 text-stone-700 hover:text-primary transition-colors mb-4 group"
               >
                 <ArrowRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-sm font-black uppercase tracking-widest">ফিরে যান</span>
@@ -186,24 +186,24 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
               <div className="bg-primary text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
                 <div className="relative z-10">
                   <h2 className="text-2xl font-black mb-2">{selectedProfile?.name}</h2>
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-8">আর্থিক স্থিতি বিশ্লেষণ</p>
+                  <p className="text-xs font-black text-white/40 uppercase tracking-widest mb-8">আর্থিক স্থিতি বিশ্লেষণ</p>
                   
                   <div className="space-y-6">
                     <div className="p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
-                      <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-2">মোট লগ্নী</p>
+                      <p className="text-xs font-black text-white/40 uppercase tracking-widest mb-2">মোট লগ্নী</p>
                       <p className="text-2xl font-black text-white">
                         {formatCurrency(selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0)}
                       </p>
                     </div>
                     <div className="p-6 bg-secondary/10 backdrop-blur-md rounded-2xl border border-secondary/20">
-                      <p className="text-[10px] font-black text-secondary/40 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
+                      <p className="text-xs font-black text-secondary/40 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
                       <p className="text-2xl font-black text-secondary">
                         {formatCurrency(selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0)}
                       </p>
                     </div>
 
                     <div className={`p-6 rounded-2xl border backdrop-blur-md ${((selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0) - (selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0)) >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
-                      <p className={`text-[10px] font-black uppercase tracking-widest mb-2 ${((selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0) - (selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0)) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>লাভ/ক্ষতি</p>
+                      <p className={`text-xs font-black uppercase tracking-widest mb-2 ${((selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0) - (selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0)) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>লাভ/ক্ষতি</p>
                       <p className={`text-2xl font-black ${((selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0) - (selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0)) >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
                         {formatCurrency((selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0) - (selectedProfile?.expenses.reduce((sum, e) => sum + e.amount, 0) || 0))}
                       </p>
@@ -237,7 +237,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
 
                   <div className="space-y-6">
                     <div>
-                      <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 block">পরিমাণ (Quantity)</label>
+                      <label className="text-xs font-black text-stone-700 uppercase tracking-widest mb-3 block">পরিমাণ (Quantity)</label>
                       <div className="flex gap-3">
                         <input 
                           type="number"
@@ -262,7 +262,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 block">একক দাম (Unit Price)</label>
+                        <label className="text-xs font-black text-stone-700 uppercase tracking-widest mb-3 block">একক দাম (Unit Price)</label>
                         <div className="relative">
                           <input 
                             type="number"
@@ -272,12 +272,12 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                             placeholder="0.00"
                             className="w-full bg-bg-page border border-border-subtle rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-lg pl-12"
                           />
-                          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-stone-500 font-black text-lg">৳</span>
+                          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-stone-700 font-black text-lg">৳</span>
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 block">সর্বমোট দাম (Total Price)</label>
+                        <label className="text-xs font-black text-stone-700 uppercase tracking-widest mb-3 block">সর্বমোট দাম (Total Price)</label>
                         <div className="relative">
                           <input 
                             type="number"
@@ -287,10 +287,10 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                             placeholder="0.00"
                             className="w-full bg-bg-page border border-border-subtle rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-lg pl-12 border-emerald-100"
                           />
-                          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-stone-500 font-black text-lg text-emerald-600">৳</span>
+                          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-stone-700 font-black text-lg text-emerald-600">৳</span>
                         </div>
                         {totalPrice && parseFloat(totalPrice) > 0 && (
-                          <p className="mt-2 text-[10px] font-bold text-emerald-600/60 px-2 italic">
+                          <p className="mt-2 text-xs font-bold text-emerald-600/60 px-2 italic">
                             কথায়: {numberToBanglaWords(totalPrice)}
                           </p>
                         )}
@@ -298,7 +298,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 block">বিক্রয়ের তারিখ (Sale Date)</label>
+                      <label className="text-xs font-black text-stone-700 uppercase tracking-widest mb-3 block">বিক্রয়ের তারিখ (Sale Date)</label>
                       <input 
                         type="date"
                         required
@@ -310,13 +310,13 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
 
                     {quantity && unitPrice && (
                       <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex justify-between items-center">
-                        <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">সর্বমোট</span>
+                        <span className="text-xs font-black text-emerald-600 uppercase tracking-widest">সর্বমোট</span>
                         <span className="text-xl font-black text-emerald-600">{formatCurrency(parseFloat(quantity) * parseFloat(unitPrice))}</span>
                       </div>
                     )}
 
                     <div>
-                      <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-3 block">টীকা (ঐচ্ছিক)</label>
+                      <label className="text-xs font-black text-stone-700 uppercase tracking-widest mb-3 block">টীকা (ঐচ্ছিক)</label>
                       <textarea 
                         value={note || ''}
                         onChange={(e) => setNote(e.target.value)}
@@ -347,8 +347,8 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                     <h3 className="text-2xl font-black text-primary leading-none tracking-tight">বিক্রয় ইতিহাস (Sales Log)</h3>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-4 h-4 text-stone-500" />
-                    <span className="text-[11px] font-black uppercase tracking-widest text-stone-500">{new Date().toLocaleDateString('bn-BD', { month: 'long', year: 'numeric' })}</span>
+                    <Calendar className="w-4 h-4 text-stone-700" />
+                    <span className="text-[11px] font-black uppercase tracking-widest text-stone-700">{new Date().toLocaleDateString('bn-BD', { month: 'long', year: 'numeric' })}</span>
                   </div>
                 </div>
 
@@ -363,15 +363,15 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                            <div>
                               <div className="flex items-center gap-3 mb-1">
                                 <p className="text-lg font-black text-primary leading-none">{sale.quantity} {sale.unit}</p>
-                                <span className="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">{formatCurrency(sale.unitPrice)} / {sale.unit}</span>
+                                <span className="bg-stone-50 text-stone-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest">{formatCurrency(sale.unitPrice)} / {sale.unit}</span>
                               </div>
-                              <p className="text-[10px] font-bold text-stone-500 uppercase tracking-widest">{new Date(sale.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}</p>
-                              {sale.note && <p className="text-[10px] text-stone-3000 mt-2 font-medium italic">"{sale.note}"</p>}
+                              <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">{new Date(sale.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}</p>
+                              {sale.note && <p className="text-xs text-stone-3000 mt-2 font-medium italic">"{sale.note}"</p>}
                            </div>
                         </div>
                         <div className="flex items-center gap-8">
                            <div className="text-right">
-                              <p className="text-[9px] font-black text-stone-400 uppercase tracking-widest leading-none mb-1">Total</p>
+                              <p className="text-xs font-black text-stone-700 uppercase tracking-widest leading-none mb-1">Total</p>
                               <p className="text-xl font-black text-emerald-600 leading-none">{formatCurrency(sale.totalAmount)}</p>
                            </div>
                            <button 
@@ -399,7 +399,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                 {selectedProfile?.sales && selectedProfile.sales.length > 0 && (
                   <div className="mt-12 pt-10 border-t border-stone-200 flex justify-between items-end">
                     <div>
-                      <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] mb-2 leading-none">মোট উৎপাদিত পণ্য</p>
+                      <p className="text-xs font-black text-stone-700 uppercase tracking-[0.2em] mb-2 leading-none">মোট উৎপাদিত পণ্য</p>
                       <h4 className="text-xl font-black text-primary leading-none">
                         {Array.from(new Set(selectedProfile.sales.map(s => s.unit))).map(unit => {
                           const qty = selectedProfile.sales?.filter(s => s.unit === unit).reduce((sum, s) => sum + s.quantity, 0);
@@ -409,7 +409,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                     </div>
                     <div className="text-right">
                        <div className="bg-emerald-500 text-white px-8 py-5 rounded-2xl shadow-xl">
-                          <p className="text-[10px] font-black text-white/50 uppercase tracking-[0.2em] mb-1 leading-none">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
+                          <p className="text-xs font-black text-white/50 uppercase tracking-[0.2em] mb-1 leading-none">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
                           <p className="text-3xl font-black">{formatCurrency(selectedProfile.sales.reduce((sum, s) => sum + s.totalAmount, 0))}</p>
                        </div>
                     </div>

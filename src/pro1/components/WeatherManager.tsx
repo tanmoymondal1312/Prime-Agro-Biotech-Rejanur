@@ -77,7 +77,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
               <Cloud className="w-5 h-5" />
               আবহাওয়া ও কৃষি দিনলিপি
             </h1>
-            <p className="text-stone-500 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
+            <p className="text-stone-700 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-stone-500 tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
+                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
                 <input 
                   type="date"
                   value={selectedDate}
@@ -103,7 +103,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-stone-500 tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
+                <label className="text-xs font-black uppercase text-stone-700 tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
                 <textarea 
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -155,7 +155,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   {lastYearSameMonthLogs.length > 0 ? (
                     lastYearSameMonthLogs.map((log) => (
                       <div key={log.id} className="p-3 bg-white dark:bg-white/5 rounded-xl border border-emerald-500/10 flex items-start gap-3">
-                        <div className="shrink-0 px-2 py-0.5 bg-emerald-500/20 rounded-md text-[10px] font-black text-emerald-600">
+                        <div className="shrink-0 px-2 py-0.5 bg-emerald-500/20 rounded-md text-xs font-black text-emerald-600">
                           {new Date(log.date).getDate().toLocaleString('bn-BD')}
                         </div>
                         <p className="text-xs font-bold text-emerald-800 dark:text-emerald-200">{log.comment}</p>
@@ -182,7 +182,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   {twoYearsAgoSameMonthLogs.length > 0 ? (
                     twoYearsAgoSameMonthLogs.map((log) => (
                       <div key={log.id} className="p-3 bg-white dark:bg-white/5 rounded-xl border border-indigo-500/10 flex items-start gap-3">
-                        <div className="shrink-0 px-2 py-0.5 bg-indigo-500/20 rounded-md text-[10px] font-black text-indigo-600">
+                        <div className="shrink-0 px-2 py-0.5 bg-indigo-500/20 rounded-md text-xs font-black text-indigo-600">
                           {new Date(log.date).getDate().toLocaleString('bn-BD')}
                         </div>
                         <p className="text-xs font-bold text-indigo-800 dark:text-indigo-200">{log.comment}</p>
@@ -230,7 +230,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="py-12 text-center text-stone-400"
+                    className="py-12 text-center text-stone-700"
                   >
                     <Cloud className="w-12 h-12 mx-auto mb-4" />
                     <p className="font-black">এই মাসে কোন রেকর্ড নেই</p>
@@ -247,12 +247,12 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                     >
                       <div className="flex items-start gap-4">
                         <div className="flex flex-col items-center px-4 py-2 bg-white dark:bg-white/5 rounded-2xl shadow-sm min-w-[70px]">
-                          <span className="text-[10px] font-black text-primary uppercase">{new Date(log.date).toLocaleString('bn-BD', { month: 'short' })}</span>
+                          <span className="text-xs font-black text-primary uppercase">{new Date(log.date).toLocaleString('bn-BD', { month: 'short' })}</span>
                           <span className="text-xl font-black text-primary">{new Date(log.date).toLocaleString('bn-BD', { day: '2-digit' })}</span>
                         </div>
                         <div>
                           <p className="font-bold text-lg dark:text-white">{log.comment}</p>
-                          <span className="text-[10px] font-black text-stone-500 uppercase tracking-widest block mt-2">
+                          <span className="text-xs font-black text-stone-700 uppercase tracking-widest block mt-2">
                             {new Date(log.date).getFullYear().toLocaleString('bn-BD', { useGrouping: false })} সাল
                           </span>
                         </div>

@@ -209,7 +209,7 @@ export default function StockManager({
                <img src="/portal-logo.png" alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-stone-900 dark:text-white font-display tracking-tight leading-none">পণ্য স্টক (Stock Product)</h1>
+              <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight leading-none">পণ্য স্টক (Stock Product)</h1>
               <p className="text-sm font-bold text-secondary-dark uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Warehouse & Inventory Management</p>
             </div>
           </div>
@@ -257,7 +257,7 @@ export default function StockManager({
                             <p className="text-xs font-black text-stone-900 dark:text-white truncate max-w-[120px]">{s.profileName}</p>
                             <div className="flex items-center gap-1.5 mt-1">
                               <Calendar className="w-3 h-3 opacity-30" />
-                              <p className="text-[10px] font-bold text-stone-500 dark:text-white/30 uppercase">{calculateDaysHeld(s.date)} দিন ধরে আছে</p>
+                              <p className="text-xs font-bold text-stone-700 dark:text-white/30 uppercase">{calculateDaysHeld(s.date)} দিন ধরে আছে</p>
                             </div>
                           </div>
                           <div className="text-right">
@@ -266,22 +266,22 @@ export default function StockManager({
                                locKey === 'home' ? 'text-amber-600 dark:text-amber-400' : 
                                'text-emerald-600 dark:text-emerald-400'
                             }`}>{s.remaining.bags} বস্তা</p>
-                            <p className="text-[9px] font-bold opacity-40 uppercase dark:text-white/40">{s.remaining.quantity} {s.unit}</p>
+                            <p className="text-xs font-bold opacity-40 uppercase dark:text-white/40">{s.remaining.quantity} {s.unit}</p>
                           </div>
                         </div>
                       ))
                     ) : (
                       <div className="py-10 text-center opacity-20 flex flex-col items-center gap-2">
                         <Package className="w-8 h-8" />
-                        <p className="text-[10px] font-bold uppercase tracking-widest">কোন স্টক নেই</p>
+                        <p className="text-xs font-bold uppercase tracking-widest">কোন স্টক নেই</p>
                       </div>
                     )}
                   </div>
 
                   {totalLocBags > 0 && (
                     <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex justify-between items-end">
-                      <p className="text-[10px] font-black opacity-40 uppercase dark:text-white/40">মোট বস্তা সংখ্যা</p>
-                      <p className="text-3xl font-black text-stone-900 dark:text-white tracking-tighter">{totalLocBags}</p>
+                      <p className="text-xs font-black opacity-40 uppercase dark:text-white/40">মোট বস্তা সংখ্যা</p>
+                      <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">{totalLocBags}</p>
                     </div>
                   )}
                 </div>
@@ -298,7 +298,7 @@ export default function StockManager({
                 <h2 className="text-xl font-black text-primary">সচল প্রজেক্ট (নতুন স্টক যোগ করতে সিলেক্ট করুন)</h2>
                 <button 
                   onClick={() => onAddProfile?.()}
-                  className="px-6 py-3 bg-primary text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg hover:bg-black transition-all flex items-center gap-2"
+                  className="px-6 py-3 bg-primary text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-black transition-all flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" /> নতুন প্রোডাক্ট/প্রজেক্ট
                 </button>
@@ -319,23 +319,23 @@ export default function StockManager({
                         <div className="w-12 h-12 bg-stone-50 text-primary rounded-2xl flex items-center justify-center">
                           <Warehouse className="w-6 h-6" />
                         </div>
-                        <span className="bg-stone-50 text-stone-500 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
+                        <span className="bg-stone-50 text-stone-700 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
                           {profile.type === 'stock' ? 'Inventory' : 'Cultivation'}
                         </span>
                       </div>
                       <h3 className="text-lg font-black text-stone-900 dark:text-white truncate">{profile.name}</h3>
-                      <p className="text-[10px] font-bold text-stone-500 uppercase mt-1">{profile.landSize || 'Stock Unit'}</p>
+                      <p className="text-xs font-bold text-stone-700 uppercase mt-1">{profile.landSize || 'Stock Unit'}</p>
                       
                       {/* Show stock summary if it's a stock type profile */}
                       {profile.type === 'stock' && (profile.stocks || []).length > 0 && (
                         <div className="mt-4 pt-4 border-t border-black/5 flex flex-col gap-2">
                           <div className="flex justify-between items-end">
                             <div>
-                               <p className="text-[8px] font-black text-stone-500 uppercase tracking-widest mb-0.5">মোট স্টক</p>
+                               <p className="text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">মোট স্টক</p>
                                <p className="text-sm font-black text-primary">{(profile.stocks || []).reduce((sum, s) => sum + (getRemainingStock(s, profile).bags), 0)} বস্তা</p>
                             </div>
                             <div className="text-right">
-                               <p className="text-[8px] font-black text-stone-500 uppercase tracking-widest mb-0.5">গড় ক্রয়মূল্য</p>
+                               <p className="text-[8px] font-black text-stone-700 uppercase tracking-widest mb-0.5">গড় ক্রয়মূল্য</p>
                                <p className="text-sm font-black text-indigo-600">
                                  {formatCurrency((profile.stocks || []).reduce((sum, s) => sum + (s.purchasePrice || 0), 0) / ((profile.stocks || []).length || 1))}
                                </p>
@@ -392,12 +392,12 @@ export default function StockManager({
                           {isLive && allStocksWithMeta.length === 0 && (
                             <div className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-900/20 flex flex-col items-center gap-2">
                                <Sprout className="w-6 h-6 text-emerald-500" />
-                               <p className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">লাইভ প্রজেক্ট (চলমান)</p>
+                               <p className="text-xs font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest">লাইভ প্রজেক্ট (চলমান)</p>
                             </div>
                           )}
                           {allStocksWithMeta.slice(0, 3).map(s => (
                             <div key={s.id} className="p-3 bg-indigo-50/30 dark:bg-indigo-900/10 rounded-2xl flex justify-between items-center border border-indigo-100 dark:border-indigo-900/20">
-                              <p className="text-[10px] font-black text-indigo-700 dark:text-indigo-400">{s.remaining.bags} বস্তা ({LOCATION_LABELS[s.location].split(' ')[0]})</p>
+                              <p className="text-xs font-black text-indigo-700 dark:text-indigo-400">{s.remaining.bags} বস্তা ({LOCATION_LABELS[s.location].split(' ')[0]})</p>
                               <ArrowRight className="w-3 h-3 text-indigo-400" />
                             </div>
                           ))}
@@ -430,7 +430,7 @@ export default function StockManager({
                   setSelectedProfileId(null);
                   setActiveTab('view');
                 }}
-                className="flex items-center gap-3 text-stone-500 hover:text-primary transition-colors group"
+                className="flex items-center gap-3 text-stone-700 hover:text-primary transition-colors group"
               >
                 <ArrowRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-sm font-black uppercase tracking-widest">প্রজেক্ট তালিকায় ফিরুন</span>
@@ -439,13 +439,13 @@ export default function StockManager({
               <div className="flex bg-white dark:bg-card-bg p-1.5 rounded-[1.5rem] border border-border-subtle shadow-sm">
                 <button 
                   onClick={() => setActiveTab('view')}
-                  className={`px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'view' ? 'bg-primary text-white shadow-lg' : 'text-stone-500 hover:bg-bg-page'}`}
+                  className={`px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'view' ? 'bg-primary text-white shadow-lg' : 'text-stone-700 hover:bg-bg-page'}`}
                 >
                   স্টক লিস্ট
                 </button>
                 <button 
                   onClick={() => setActiveTab('add_stock')}
-                  className={`px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'add_stock' ? 'bg-primary text-white shadow-lg' : 'text-stone-500 hover:bg-bg-page'}`}
+                  className={`px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'add_stock' ? 'bg-primary text-white shadow-lg' : 'text-stone-700 hover:bg-bg-page'}`}
                 >
                   নতুন স্টক
                 </button>
@@ -480,8 +480,8 @@ export default function StockManager({
                                 )}
                                 <div className="flex items-center gap-2">
                                    <div className="text-right mr-2">
-                                      <p className="text-[8px] font-black text-stone-500 uppercase tracking-widest">সময়কাল</p>
-                                      <p className="text-[10px] font-bold text-primary/60">{calculateDaysHeld(stock.date)} দিন</p>
+                                      <p className="text-[8px] font-black text-stone-700 uppercase tracking-widest">সময়কাল</p>
+                                      <p className="text-xs font-bold text-stone-700">{calculateDaysHeld(stock.date)} দিন</p>
                                    </div>
                                    <button 
                                      type="button"
@@ -501,7 +501,7 @@ export default function StockManager({
                               </div>
                               
                               <div className="mb-6">
-                                <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1">{LOCATION_LABELS[stock.location]}</p>
+                                <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">{LOCATION_LABELS[stock.location]}</p>
                                 <h4 className="text-xl font-black text-stone-900 dark:text-white">
                                   {remaining.bags} / {stock.bags} <span className="text-sm font-bold opacity-30">বস্তা অবশিষ্ট</span>
                                 </h4>
@@ -515,7 +515,7 @@ export default function StockManager({
                                     className="h-full bg-primary rounded-full"
                                   />
                                 </div>
-                                <div className="flex justify-between text-[10px] font-black text-stone-500 uppercase tracking-widest">
+                                <div className="flex justify-between text-xs font-black text-stone-700 uppercase tracking-widest">
                                   <span>{remaining.quantity} {stock.unit}</span>
                                   <span>{new Date(stock.date).toLocaleDateString('bn-BD')}</span>
                                 </div>
@@ -527,7 +527,7 @@ export default function StockManager({
                                   setActiveTab('sell_stock');
                                 }}
                                 disabled={remaining.quantity <= 0 && remaining.bags <= 0}
-                                className="w-full mt-8 py-4 bg-secondary text-primary font-black rounded-2xl text-[10px] uppercase tracking-widest shadow-sm hover:shadow-lg active:scale-95 transition-all disabled:opacity-30 flex items-center justify-center gap-2"
+                                className="w-full mt-8 py-4 bg-secondary text-primary font-black rounded-2xl text-xs uppercase tracking-widest shadow-sm hover:shadow-lg active:scale-95 transition-all disabled:opacity-30 flex items-center justify-center gap-2"
                               >
                                 <ShoppingCart className="w-4 h-4" />
                                 এই স্টক থেকে বিক্রি করুন
@@ -537,7 +537,7 @@ export default function StockManager({
                         })
                       ) : (
                         <div className="col-span-full py-20 text-center bg-white/50 dark:bg-black/10 rounded-[3rem] border border-dashed border-border-subtle">
-                           <p className="text-xs font-bold text-stone-400 uppercase tracking-widest">No active stock entries</p>
+                           <p className="text-xs font-bold text-stone-700 uppercase tracking-widest">No active stock entries</p>
                         </div>
                       )}
                     </div>
@@ -554,7 +554,7 @@ export default function StockManager({
                                        <p className="text-sm font-black">
                                           {sale.bags > 0 ? `${sale.bags} বস্তা` : `${sale.quantity} ${sale.unit}`} বিক্রি
                                        </p>
-                                       <p className="text-[9px] font-bold text-white/30 uppercase">{new Date(sale.date).toLocaleDateString('bn-BD')}</p>
+                                       <p className="text-xs font-bold text-white/30 uppercase">{new Date(sale.date).toLocaleDateString('bn-BD')}</p>
                                     </div>
                                     <div className="flex items-center gap-4">
                                        <p className="text-sm font-black text-secondary">{formatCurrency(sale.totalAmount)}</p>
@@ -575,7 +575,7 @@ export default function StockManager({
                                  </div>
                               ))}
                               {(selectedProfile?.stockSales || []).length === 0 && (
-                                 <p className="text-[10px] font-bold text-white/20 uppercase text-center py-10">No stock sales yet</p>
+                                 <p className="text-xs font-bold text-white/20 uppercase text-center py-10">No stock sales yet</p>
                               )}
                            </div>
 
@@ -584,15 +584,15 @@ export default function StockManager({
                               <div className="mt-8 p-6 bg-primary dark:bg-white/5 rounded-[2.5rem] border border-border-subtle shadow-xl">
                                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="border-b md:border-b-0 md:border-r border-white/5 pb-4 md:pb-0">
-                                       <p className="text-[9px] font-black text-white/40 uppercase tracking-widest mb-1">মোট টাকা (Total Sales)</p>
+                                       <p className="text-xs font-black text-white/40 uppercase tracking-widest mb-1">মোট টাকা (Total Sales)</p>
                                        <p className="text-2xl font-black text-white">{formatCurrency(totalSalesStats.totalAmount)}</p>
                                     </div>
                                     <div className="border-b md:border-b-0 md:border-r border-white/5 pb-4 md:pb-0">
-                                       <p className="text-[9px] font-black text-white/40 uppercase tracking-widest mb-1">মোট বস্তা (Total Bags)</p>
+                                       <p className="text-xs font-black text-white/40 uppercase tracking-widest mb-1">মোট বস্তা (Total Bags)</p>
                                        <p className="text-2xl font-black text-white">{totalSalesStats.totalBags} বস্তা</p>
                                     </div>
                                     <div>
-                                       <p className="text-[9px] font-black text-white/40 uppercase tracking-widest mb-1">মোট পরিমাণ (Total Qty)</p>
+                                       <p className="text-xs font-black text-white/40 uppercase tracking-widest mb-1">মোট পরিমাণ (Total Qty)</p>
                                        <p className="text-2xl font-black text-white">
                                           {totalSalesStats.totalQty} {selectedProfile.stockSales?.[0]?.unit || selectedProfile.stocks?.[0]?.unit || 'কেজি'}
                                        </p>
@@ -624,7 +624,7 @@ export default function StockManager({
                        <button 
                           type="button"
                           onClick={() => onAddProfile?.()}
-                          className="px-6 py-3 bg-indigo-500 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all flex items-center gap-2"
+                          className="px-6 py-3 bg-indigo-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all flex items-center gap-2"
                         >
                           <Plus className="w-4 h-4" /> নতুন প্রোডাক্ট/প্রজেক্ট খুলুন
                         </button>
@@ -632,19 +632,19 @@ export default function StockManager({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">মালের উৎস (Source)</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">মালের উৎস (Source)</label>
                         <div className="grid grid-cols-2 gap-4">
                            <button 
                               type="button"
                               onClick={() => setSource('internal')}
-                              className={`py-4 rounded-2xl font-black text-xs uppercase tracking-widest border transition-all ${source === 'internal' ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white dark:bg-black/20 text-stone-500 border-border-subtle'}`}
+                              className={`py-4 rounded-2xl font-black text-xs uppercase tracking-widest border transition-all ${source === 'internal' ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white dark:bg-black/20 text-stone-700 border-border-subtle'}`}
                            >
                               নিজস্ব ফসল
                            </button>
                            <button 
                               type="button"
                               onClick={() => setSource('external')}
-                              className={`py-4 rounded-2xl font-black text-xs uppercase tracking-widest border transition-all ${source === 'external' ? 'bg-indigo-500 text-white border-indigo-500 shadow-lg' : 'bg-white dark:bg-black/20 text-stone-500 border-border-subtle'}`}
+                              className={`py-4 rounded-2xl font-black text-xs uppercase tracking-widest border transition-all ${source === 'external' ? 'bg-indigo-500 text-white border-indigo-500 shadow-lg' : 'bg-white dark:bg-black/20 text-stone-700 border-border-subtle'}`}
                            >
                               বাইরে থেকে কেনা
                            </button>
@@ -653,7 +653,7 @@ export default function StockManager({
 
                       {source === 'external' ? (
                          <div className="space-y-4">
-                            <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">ক্রয়মূল্য (ঐচ্ছিক)</label>
+                            <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">ক্রয়মূল্য (ঐচ্ছিক)</label>
                             <input 
                                type="number"
                                value={purchasePrice || ''}
@@ -662,14 +662,14 @@ export default function StockManager({
                                className="w-full bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-900/20 rounded-2xl px-6 py-4 font-black transition-all focus:border-indigo-500 outline-none text-2xl dark:text-white"
                             />
                             {purchasePrice && parseFloat(purchasePrice) > 0 && (
-                              <p className="mt-2 text-[10px] font-bold text-indigo-500/60 px-2 italic">
+                              <p className="mt-2 text-xs font-bold text-indigo-500/60 px-2 italic">
                                 কথায়: {numberToBanglaWords(purchasePrice)}
                               </p>
                             )}
                          </div>
                       ) : (
                         <div className="space-y-4">
-                           <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">উৎপাদন খরচ (ক্রয়মূল্য হিসেবে)</label>
+                           <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">উৎপাদন খরচ (ক্রয়মূল্য হিসেবে)</label>
                            <input 
                               type="number"
                               readOnly
@@ -677,14 +677,14 @@ export default function StockManager({
                               placeholder="Calculated Cost"
                               className="w-full bg-secondary/10 border border-secondary/20 rounded-2xl px-6 py-4 font-black outline-none text-2xl text-primary"
                            />
-                           <p className="text-[9px] font-bold text-secondary-dark/60 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
+                           <p className="text-xs font-bold text-secondary-dark/60 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
                         </div>
                       )}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">স্টক লোকেশন</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">স্টক লোকেশন</label>
                         <select 
                           value={location}
                           onChange={(e) => setLocation(e.target.value as any)}
@@ -697,7 +697,7 @@ export default function StockManager({
                       </div>
 
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">স্টকের তারিখ</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">স্টকের তারিখ</label>
                         <input 
                           type="date"
                           required
@@ -710,7 +710,7 @@ export default function StockManager({
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">বস্তার সংখ্যা</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">বস্তার সংখ্যা</label>
                         <input 
                           type="number"
                           value={bags || ''}
@@ -721,7 +721,7 @@ export default function StockManager({
                       </div>
 
                       <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">মোট পরিমাণ ({unit})</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">মোট পরিমাণ ({unit})</label>
                         <div className="flex gap-3">
                           <input 
                             type="number"
@@ -733,7 +733,7 @@ export default function StockManager({
                           <select 
                             value={unit}
                             onChange={(e) => setUnit(e.target.value)}
-                            className="w-24 bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-2 font-black text-[10px] uppercase"
+                            className="w-24 bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-2 font-black text-xs uppercase"
                           >
                             <option value="কেজি">কেজি</option>
                             <option value="মন">মন</option>
@@ -743,7 +743,7 @@ export default function StockManager({
                     </div>
 
                     <div className="space-y-4">
-                      <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">টীকা (ঐচ্ছিক)</label>
+                      <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">টীকা (ঐচ্ছিক)</label>
                       <textarea 
                         value={note || ''}
                         onChange={(e) => setNote(e.target.value)}
@@ -777,7 +777,7 @@ export default function StockManager({
                            </div>
                            <div>
                               <h3 className="text-2xl font-black text-stone-900 dark:text-white">স্টক থেকে বিক্রয়</h3>
-                              <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest">{LOCATION_LABELS[selectedStock.location]}</p>
+                              <p className="text-xs font-black text-stone-700 uppercase tracking-widest">{LOCATION_LABELS[selectedStock.location]}</p>
                            </div>
                         </div>
                         <button type="button" onClick={() => setActiveTab('view')} className="p-2 bg-slate-100 dark:bg-white/5 text-slate-400 hover:text-red-500 rounded-xl transition-all">
@@ -787,15 +787,15 @@ export default function StockManager({
 
                      <div className="p-6 bg-secondary/10 rounded-3xl border-2 border-secondary/20 flex justify-between items-center">
                         <div>
-                           <p className="text-[9px] font-black text-secondary-dark uppercase tracking-widest mb-1">Available for Sale</p>
+                           <p className="text-xs font-black text-secondary-dark uppercase tracking-widest mb-1">Available for Sale</p>
                            <p className="text-2xl font-black text-stone-900 dark:text-white">
                               {getRemainingStock(selectedStock, selectedProfile!).bags} বস্তা / {getRemainingStock(selectedStock, selectedProfile!).quantity} {selectedStock.unit}
                            </p>
                         </div>
                         {selectedStock.purchasePrice && (
                            <div className="text-right">
-                              <p className="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Purchase Price</p>
-                              <p className="text-lg font-black text-primary/60 dark:text-white/60">
+                              <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">Purchase Price</p>
+                              <p className="text-lg font-black text-stone-700 dark:text-white/60">
                                  {formatCurrency(selectedStock.purchasePrice)}
                               </p>
                            </div>
@@ -806,7 +806,7 @@ export default function StockManager({
                      {selectedStock.purchasePrice && totalPrice && (
                         <div className="p-6 bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl border-2 border-emerald-100 dark:border-emerald-900/20 flex justify-between items-center">
                            <div>
-                              <p className="text-[9px] font-black text-emerald-600 uppercase tracking-widest mb-1">Estimated Profit</p>
+                              <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-1">Estimated Profit</p>
                               <p className="text-2xl font-black text-emerald-600">
                                  {formatCurrency(parseFloat(totalPrice) - (selectedStock.purchasePrice * (parseFloat(saleQuantity) || parseFloat(saleBags) || 0) / (selectedStock.quantity || selectedStock.bags || 1)))}
                               </p>
@@ -817,7 +817,7 @@ export default function StockManager({
 
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-4">
-                           <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">কয় বস্তা বিক্রি?</label>
+                           <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">কয় বস্তা বিক্রি?</label>
                            <input 
                               type="number"
                               value={saleBags || ''}
@@ -832,7 +832,7 @@ export default function StockManager({
                            />
                         </div>
                         <div className="space-y-4">
-                           <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">বিক্রয় পরিমাণ ({selectedStock.unit})</label>
+                           <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">বিক্রয় পরিমাণ ({selectedStock.unit})</label>
                            <input 
                               type="number"
                               value={saleQuantity || ''}
@@ -850,7 +850,7 @@ export default function StockManager({
 
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-4">
-                           <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">একক দাম (Unit Price)</label>
+                           <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">একক দাম (Unit Price)</label>
                            <input 
                               type="number"
                               required
@@ -869,7 +869,7 @@ export default function StockManager({
                            />
                         </div>
                         <div className="space-y-4">
-                           <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">মোট বিক্রয়মূল্য (Total Price)</label>
+                           <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">মোট বিক্রয়মূল্য (Total Price)</label>
                            <input 
                               type="number"
                               required
@@ -888,14 +888,14 @@ export default function StockManager({
                            />
                         </div>
                         {totalPrice && parseFloat(totalPrice) > 0 && (
-                          <p className="mt-2 text-[10px] font-bold text-secondary-dark/60 px-2 italic">
+                          <p className="mt-2 text-xs font-bold text-secondary-dark/60 px-2 italic">
                             কথায়: {numberToBanglaWords(totalPrice)}
                           </p>
                         )}
                      </div>
 
                      <div className="space-y-4">
-                        <label className="text-[10px] font-black text-stone-500 dark:text-white/40 uppercase tracking-widest pl-2">বিক্রয়ের তারিখ</label>
+                        <label className="text-xs font-black text-stone-700 dark:text-white/40 uppercase tracking-widest pl-2">বিক্রয়ের তারিখ</label>
                         <input 
                            type="date"
                            required
