@@ -73,11 +73,11 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             <Plus className="w-5 h-5 rotate-45" />
           </button>
           <div>
-            <h1 className="text-lg sm:text-2xl font-black text-primary dark:text-white flex items-center gap-2">
+            <h1 className="text-lg sm:text-2xl font-black text-stone-900 dark:text-white flex items-center gap-2">
               <Cloud className="w-5 h-5" />
               আবহাওয়া ও কৃষি দিনলিপি
             </h1>
-            <p className="text-text-main/40 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
+            <p className="text-stone-500 font-bold mt-1">আপনার খামারের আবহাওয়া ও বিশেষ মুহূর্তের আপডেট রাখুন</p>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-primary/40 tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
+                <label className="text-[10px] font-black uppercase text-stone-500 tracking-[0.2em] ml-4">তারিখ নির্বাচন করুন</label>
                 <input 
                   type="date"
                   value={selectedDate}
@@ -103,7 +103,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-primary/40 tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
+                <label className="text-[10px] font-black uppercase text-stone-500 tracking-[0.2em] ml-4">আপনার মন্তব্য</label>
                 <textarea 
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -162,7 +162,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                       </div>
                     ))
                   ) : (
-                    <p className="text-xs font-bold text-emerald-600/40 text-center py-4">কোন রেকর্ড নেই</p>
+                    <p className="text-xs font-bold text-emerald-700 text-center py-4">কোন রেকর্ড নেই</p>
                   )}
                 </div>
               </motion.div>
@@ -189,7 +189,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                       </div>
                     ))
                   ) : (
-                    <p className="text-xs font-bold text-indigo-600/40 text-center py-4">কোন রেকর্ড নেই</p>
+                    <p className="text-xs font-bold text-indigo-700 text-center py-4">কোন রেকর্ড নেই</p>
                   )}
                 </div>
               </motion.div>
@@ -230,7 +230,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="py-12 text-center text-text-main/20"
+                    className="py-12 text-center text-stone-400"
                   >
                     <Cloud className="w-12 h-12 mx-auto mb-4" />
                     <p className="font-black">এই মাসে কোন রেকর্ড নেই</p>
@@ -252,7 +252,7 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
                         </div>
                         <div>
                           <p className="font-bold text-lg dark:text-white">{log.comment}</p>
-                          <span className="text-[10px] font-black text-primary/40 uppercase tracking-widest block mt-2">
+                          <span className="text-[10px] font-black text-stone-500 uppercase tracking-widest block mt-2">
                             {new Date(log.date).getFullYear().toLocaleString('bn-BD', { useGrouping: false })} সাল
                           </span>
                         </div>

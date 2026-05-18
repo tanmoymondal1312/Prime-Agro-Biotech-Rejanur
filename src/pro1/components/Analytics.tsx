@@ -241,7 +241,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         </div>
         <button
           onClick={() => { window.location.href = '/home'; }}
-          className="ml-auto shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle text-primary/50 hover:text-primary"
+          className="ml-auto shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle text-stone-3000 hover:text-primary"
           title="হোম"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,17 +254,17 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         {/* Top Stats - High Impact Bento Style */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
-            <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট বিনিয়োগ (সচল)</p>
+            <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em] mb-4">মোট বিনিয়োগ (সচল)</p>
             <h3 className="text-3xl font-black text-primary tracking-tighter tabular-nums leading-none">{formatCurrency(totalActiveExpenses)}</h3>
-            <p className="text-[10px] font-bold text-primary/20 mt-1 italic">{numberToBanglaWords(totalActiveExpenses)}</p>
+            <p className="text-[10px] font-bold text-stone-400 mt-1 italic">{numberToBanglaWords(totalActiveExpenses)}</p>
             <div className="flex items-center gap-1 mt-4">
-               <Briefcase className="w-3 h-3 text-primary/20" />
-               <span className="text-[10px] font-black text-primary/40 uppercase tracking-widest">{profiles.filter(p => (p.status || 'live') === 'live').length} টি সচল প্রজেক্ট</span>
+               <Briefcase className="w-3 h-3 text-stone-400" />
+               <span className="text-[10px] font-black text-stone-500 uppercase tracking-widest">{profiles.filter(p => (p.status || 'live') === 'live').length} টি সচল প্রজেক্ট</span>
             </div>
           </div>
 
           <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
-            <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট বিক্রয় (সচল)</p>
+            <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em] mb-4">মোট বিক্রয় (সচল)</p>
             <h3 className="text-3xl font-black text-emerald-600 tracking-tighter tabular-nums leading-none">{formatCurrency(totalActiveSales)}</h3>
             <p className="text-[10px] font-bold text-emerald-600/30 mt-1 italic">{numberToBanglaWords(totalActiveSales)}</p>
             <div className="flex items-center gap-1 mt-4">
@@ -274,7 +274,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
           </div>
 
           <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
-            <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.25em] mb-4">মোট লাভ/ক্ষতি (সচল)</p>
+            <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em] mb-4">মোট লাভ/ক্ষতি (সচল)</p>
             <h3 className={`text-3xl font-black tracking-tighter tabular-nums leading-none ${totalActiveProfit >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                {formatCurrency(Math.abs(totalActiveProfit))}
             </h3>
@@ -306,32 +306,32 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         <div className="bg-white rounded-[2rem] sm:rounded-[3.5rem] p-5 sm:p-8 lg:p-12 shadow-premium border border-border-subtle grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 items-center">
            <div className="md:col-span-1 border-r border-border-subtle pr-8 flex flex-col gap-3">
               <h3 className="text-2xl font-black text-primary leading-none tracking-tight">স্টক বিশ্লেষণ</h3>
-              <p className="text-[10px] font-black text-primary/30 uppercase tracking-[0.2em]">Detailed Inventory Analysis</p>
+              <p className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">Detailed Inventory Analysis</p>
               <div className="mt-4 p-4 bg-bg-page rounded-2xl flex items-center gap-3">
                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
                     <Clock className="w-5 h-5" />
                  </div>
                  <div>
-                    <p className="text-[9px] font-black text-primary/40 uppercase tracking-widest leading-none mb-1">Aging Warning</p>
+                    <p className="text-[9px] font-black text-stone-500 uppercase tracking-widest leading-none mb-1">Aging Warning</p>
                     <p className="text-xs font-bold text-primary leading-none">৯০ দিনের বেশি স্টক চেক করুন</p>
                  </div>
               </div>
            </div>
            <div className="md:col-span-1 space-y-4">
-              <p className="text-[10px] font-black text-primary/30 uppercase tracking-widest">নিজস্ব আবাদ স্টক</p>
+              <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest">নিজস্ব আবাদ স্টক</p>
               <div className="flex items-baseline gap-2">
                  <span className="text-4xl font-black text-primary">{(stockStats.cultivatedBags).toLocaleString('bn-BD')}</span>
-                 <span className="text-xs font-bold text-primary/40">বস্তা</span>
+                 <span className="text-xs font-bold text-stone-500">বস্তা</span>
               </div>
               <div className="h-1.5 w-full bg-bg-page rounded-full overflow-hidden">
                  <div className="h-full bg-primary rounded-full" style={{ width: `${(stockStats.cultivatedBags / (stockStats.totalBags || 1)) * 100}%` }} />
               </div>
            </div>
            <div className="md:col-span-1 space-y-4">
-              <p className="text-[10px] font-black text-primary/30 uppercase tracking-widest text-indigo-500">বাইরে থেকে কেনা স্টক</p>
+              <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest text-indigo-500">বাইরে থেকে কেনা স্টক</p>
               <div className="flex items-baseline gap-2">
                  <span className="text-4xl font-black text-indigo-500">{(stockStats.externalBags).toLocaleString('bn-BD')}</span>
-                 <span className="text-xs font-bold text-primary/40">বস্তা</span>
+                 <span className="text-xs font-bold text-stone-500">বস্তা</span>
               </div>
               <p className="text-[10px] font-bold text-indigo-400 mt-1">ক্রয় বিনিয়োগ: {formatCurrency(stockStats.externalCost)}</p>
               <div className="h-1.5 w-full bg-bg-page rounded-full overflow-hidden">
@@ -339,10 +339,10 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
               </div>
            </div>
            <div className="md:col-span-1 text-right flex flex-col items-end">
-              <p className="text-[10px] font-black text-primary/30 uppercase tracking-widest">মোট স্টক (বস্তা)</p>
+              <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest">মোট স্টক (বস্তা)</p>
               <div className="flex items-baseline justify-end gap-2 my-2">
                  <span className="text-6xl font-black text-secondary-dark tracking-tighter">{(stockStats.totalBags).toLocaleString('bn-BD')}</span>
-                 <span className="text-lg font-bold text-primary/40">টি</span>
+                 <span className="text-lg font-bold text-stone-500">টি</span>
               </div>
               <p className="text-[9px] font-black text-secondary-dark/40 uppercase tracking-widest">Total Inventory Bags</p>
            </div>
@@ -354,20 +354,20 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
               <div className="space-y-8">
                  <div>
                     <h2 className="text-4xl font-black mb-4 leading-tight tracking-tighter text-primary">সার্বিক সময় ভিত্তিক <br /><span className="text-emerald-500">মুনাফার গড় চিত্র</span></h2>
-                    <p className="text-primary/40 text-sm leading-relaxed max-w-md font-bold">
+                    <p className="text-stone-500 text-sm leading-relaxed max-w-md font-bold">
                        সকল প্রজেক্টের লাইভ দিনসমূহের গড় হিসাবে ঘণ্টা, দিন এবং মাস অনুযায়ী সিস্টেমের আর্থিক সক্ষমতা।
                     </p>
                  </div>
                  
                  <div className="grid grid-cols-2 gap-6">
                     <div className="p-6 bg-bg-page/50 rounded-[2rem] border border-border-subtle">
-                       <p className="text-[10px] font-black text-primary/30 uppercase tracking-widest mb-2">প্রতি ঘণ্টা মুনাফা</p>
+                       <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-2">প্রতি ঘণ্টা মুনাফা</p>
                        <p className={`text-2xl font-black ${globalRates.perHour >= 0 ? 'text-primary' : 'text-red-500'}`}>
                           {formatCurrency(globalRates.perHour)}
                        </p>
                     </div>
                     <div className="p-6 bg-bg-page/50 rounded-[2rem] border border-border-subtle text-center flex flex-col justify-center">
-                       <p className="text-[10px] font-black text-primary/30 uppercase tracking-widest mb-1">প্রতি দিন মুনাফা</p>
+                       <p className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-1">প্রতি দিন মুনাফা</p>
                        <p className={`text-2xl font-black ${globalRates.perDay >= 0 ? 'text-primary' : 'text-red-500'}`}>
                           {formatCurrency(globalRates.perDay)}
                        </p>
@@ -407,7 +407,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
               <div className="flex items-center justify-between mb-12">
                  <div>
                     <h3 className="text-2xl font-black text-primary leading-none tracking-tight">মাসিক মুনাফার গ্রাফ</h3>
-                    <p className="text-xs font-bold text-primary/20 uppercase tracking-widest mt-2">Monthly Profit/Loss Overlap</p>
+                    <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mt-2">Monthly Profit/Loss Overlap</p>
                  </div>
                  <div className="w-12 h-12 bg-secondary/20 rounded-2xl flex items-center justify-center text-secondary-dark">
                     <TrendingUp className="w-6 h-6" />
@@ -438,9 +438,9 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
               <div className="flex items-center justify-between mb-12">
                  <div>
                     <h3 className="text-2xl font-black text-primary leading-none tracking-tight">ব্যয় বন্টন (Allocation)</h3>
-                    <p className="text-xs font-bold text-primary/20 uppercase tracking-widest mt-2">Resources consumption breakdown</p>
+                    <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mt-2">Resources consumption breakdown</p>
                  </div>
-                 <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
+                 <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-primary">
                     <PieChartIcon className="w-6 h-6" />
                  </div>
               </div>
@@ -469,7 +469,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
               </div>
               <div className="hidden lg:flex items-center gap-4 bg-white px-8 py-4 rounded-3xl border border-border-subtle shadow-sm">
                  <Zap className="w-5 h-5 text-secondary-dark" />
-                 <span className="text-xs font-black uppercase tracking-widest text-primary/40">{liveProjects.length}টি সচল প্রজেক্ট</span>
+                 <span className="text-xs font-black uppercase tracking-widest text-stone-500">{liveProjects.length}টি সচল প্রজেক্ট</span>
               </div>
            </div>
 
@@ -493,7 +493,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
                                    <span className="text-[10px] font-black uppercase tracking-widest text-primary/60">সক্রিয় প্রজেক্ট</span>
                                 </div>
                                 <h3 className="text-4xl font-black text-primary mb-3 leading-tight uppercase tracking-tighter">{p.name}</h3>
-                                <div className="flex items-center gap-3 text-primary/50 font-black text-xs uppercase tracking-[0.1em]">
+                                <div className="flex items-center gap-3 text-stone-3000 font-black text-xs uppercase tracking-[0.1em]">
                                    <Clock className="w-4 h-4" />
                                    বয়স: {p.days} দিন
                                 </div>
@@ -501,17 +501,17 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
                               <div className="mt-12 space-y-4">
                                  <div className="p-6 rounded-[2rem] bg-white shadow-sm border border-border-subtle">
-                                    <p className="text-[9px] font-black text-primary/30 uppercase tracking-[0.2em] mb-1">মোট বিনিয়োগ</p>
+                                    <p className="text-[9px] font-black text-stone-500 uppercase tracking-[0.2em] mb-1">মোট বিনিয়োগ</p>
                                     <p className="text-2xl font-black text-primary">{formatCurrency(p.expenses)}</p>
-                                    <p className="text-[8px] font-bold text-primary/30 mt-1 italic leading-none">{numberToBanglaWords(p.expenses)}</p>
+                                    <p className="text-[8px] font-bold text-stone-500 mt-1 italic leading-none">{numberToBanglaWords(p.expenses)}</p>
                                  </div>
                                  <div className="p-6 rounded-[2rem] bg-white shadow-sm border border-border-subtle relative overflow-hidden">
-                                    <p className="text-[9px] font-black text-primary/30 uppercase tracking-[0.2em] mb-1">প্রত্যাশিত/প্রকৃত বিক্রয়</p>
+                                    <p className="text-[9px] font-black text-stone-500 uppercase tracking-[0.2em] mb-1">প্রত্যাশিত/প্রকৃত বিক্রয়</p>
                                     <p className="text-2xl font-black text-emerald-600">{formatCurrency(p.income)}</p>
                                     <p className="text-[8px] font-bold text-emerald-600/30 mt-1 italic leading-none">{numberToBanglaWords(p.income)}</p>
                                     
                                     <div className="mt-4 pt-4 border-t border-dashed border-emerald-100 flex items-center justify-between">
-                                       <p className="text-[8px] font-black uppercase tracking-widest text-emerald-600/50">প্রকৃত লাভ/ক্ষতি</p>
+                                       <p className="text-[8px] font-black uppercase tracking-widest text-emerald-600">প্রকৃত লাভ/ক্ষতি</p>
                                        <p className={`text-base font-black ${isPProfit ? 'text-emerald-600' : 'text-red-500'}`}>{formatCurrency(p.profit)}</p>
                                     </div>
                                  </div>
@@ -521,24 +521,24 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
                           <div className="lg:col-span-5 p-12 bg-white">
                              <div className="flex items-center gap-3 mb-10">
                                 <TrendingUp className="w-5 h-5 text-secondary-dark" />
-                                <h4 className="text-[11px] font-black text-primary/40 uppercase tracking-[0.3em]">রিয়েল-টাইম রিটার্ন বিশ্লেষণ</h4>
+                                <h4 className="text-[11px] font-black text-stone-500 uppercase tracking-[0.3em]">রিয়েল-টাইম রিটার্ন বিশ্লেষণ</h4>
                              </div>
 
                              <div className="grid grid-cols-2 gap-x-12 gap-y-12">
                                 <div>
-                                   <p className="text-[10px] font-black text-primary/20 uppercase tracking-widest mb-3">ঘণ্টায় লাভ</p>
+                                   <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-3">ঘণ্টায় লাভ</p>
                                    <p className={`text-2xl font-black ${isPProfit ? 'text-primary' : 'text-red-500'}`}>{formatCurrency(p.rates.perHour)}</p>
                                 </div>
                                 <div>
-                                   <p className="text-[10px] font-black text-primary/20 uppercase tracking-widest mb-3">দৈনিক লাভ</p>
+                                   <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-3">দৈনিক লাভ</p>
                                    <p className={`text-2xl font-black ${isPProfit ? 'text-primary' : 'text-red-500'}`}>{formatCurrency(p.rates.perDay)}</p>
                                 </div>
                                 <div>
-                                   <p className="text-[10px] font-black text-primary/20 uppercase tracking-widest mb-3">মাসিক লাভ</p>
+                                   <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-3">মাসিক লাভ</p>
                                    <p className={`text-2xl font-black ${isPProfit ? 'text-primary' : 'text-red-500'}`}>{formatCurrency(p.rates.perMonth)}</p>
                                 </div>
                                 <div>
-                                   <p className="text-[10px] font-black text-primary/20 uppercase tracking-widest mb-3">বার্ষিক লাভ</p>
+                                   <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-3">বার্ষিক লাভ</p>
                                    <p className={`text-2xl font-black ${isPProfit ? 'text-emerald-500' : 'text-red-500'}`}>{formatCurrency(p.rates.perYear)}</p>
                                 </div>
                              </div>
@@ -563,7 +563,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
                 })
               ) : (
                 <div className="p-20 text-center bg-white rounded-[3rem] border border-dashed border-border-subtle">
-                   <p className="text-primary/30 font-black uppercase tracking-widest">বর্তমানে কোনো লাইভ প্রজেক্ট নেই</p>
+                   <p className="text-stone-500 font-black uppercase tracking-widest">বর্তমানে কোনো লাইভ প্রজেক্ট নেই</p>
                 </div>
               )}
            </div>
@@ -573,8 +573,8 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         {archivedProjects.length > 0 && (
           <section className="space-y-8 pt-12 border-t border-border-subtle">
             <div className="flex items-center gap-3 px-4">
-               <Clock className="w-5 h-5 text-primary/30" />
-               <h2 className="text-2xl font-black text-primary/40 uppercase tracking-widest">আর্কাইভ রিপোর্টস (Past Performance)</h2>
+               <Clock className="w-5 h-5 text-stone-500" />
+               <h2 className="text-2xl font-black text-stone-500 uppercase tracking-widest">আর্কাইভ রিপোর্টস (Past Performance)</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -584,13 +584,13 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
                     <div key={p.id} className="bg-white p-8 rounded-[2.5rem] border border-border-subtle hover:border-primary/20 transition-all flex items-center justify-between group">
                        <div className="space-y-2">
                           <h4 className="text-xl font-black text-primary group-hover:text-emerald-600 transition-colors">{p.name}</h4>
-                          <p className="text-[10px] font-bold text-primary/30 uppercase tracking-widest">সময়কাল: {p.days} দিন | শেষ হয়েছে</p>
+                          <p className="text-[10px] font-bold text-stone-500 uppercase tracking-widest">সময়কাল: {p.days} দিন | শেষ হয়েছে</p>
                        </div>
                        <div className="text-right">
                           <p className={`text-xl font-black ${isPProfit ? 'text-emerald-600' : 'text-red-500'}`}>
                              {formatCurrency(p.profit)}
                           </p>
-                          <p className="text-[10px] font-black text-primary/20 uppercase tracking-widest">চুড়ান্ত মুনাফা</p>
+                          <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">চুড়ান্ত মুনাফা</p>
                        </div>
                     </div>
                   );

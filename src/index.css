@@ -52,6 +52,19 @@
   }
 }
 
+/* ─── Explicit :root fallbacks for mobile browser compatibility ─────────── */
+/* Tailwind v4 @theme tokens may not resolve on all mobile browsers without this */
+:root {
+  --color-primary:       #1e211f;
+  --color-secondary:     #d9f35c;
+  --color-secondary-dark:#a9c612;
+  --color-accent:        #2e312f;
+  --color-bg-page:       #fdfefa;
+  --color-card-bg:       #ffffff;
+  --color-text-main:     #1a1a1a;
+  --color-border-subtle: #eeeeee;
+}
+
 /* ─── Base body (neutral — each app wrapper overrides) ─────────────────── */
 @layer base {
   body {

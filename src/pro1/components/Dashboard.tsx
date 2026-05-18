@@ -385,7 +385,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
   return (
     <div className="flex flex-col min-h-screen bg-bg-page p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden transition-colors duration-500">
       {/* Header */}
-      <header className="flex items-center justify-between gap-3 bg-white/60 dark:bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-[2.5rem] px-4 py-3 sm:p-6 lg:p-8 border border-white/20 shadow-premium relative overflow-hidden">
+      <header className="flex items-center justify-between gap-3 bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] px-4 py-3 sm:p-6 lg:p-8 border border-white/20 shadow-premium relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/5 via-transparent to-primary/5 opacity-50" />
 
         {/* Left: Menu + Title */}
@@ -394,12 +394,12 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             <Menu className="w-5 h-5 dark:text-white" />
           </button>
           <div className="min-w-0">
-            <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-primary dark:text-white font-display tracking-tight leading-none truncate">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-stone-900 dark:text-white font-display tracking-tight leading-none truncate">
               {getTitle()}
             </h1>
             <div className="flex items-center gap-2 mt-0.5">
               <div className="w-4 h-0.5 bg-secondary rounded-full" />
-              <p className="text-[10px] sm:text-[9px] font-black text-primary/50 uppercase tracking-[0.2em] opacity-80 hidden sm:block">
+              <p className="text-[10px] sm:text-[9px] font-black text-stone-3000 uppercase tracking-[0.2em] opacity-80 hidden sm:block">
                 Prime Agro Biotech
               </p>
             </div>
@@ -419,7 +419,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
 
         {/* Right: Time */}
         <div className="flex items-center gap-2 relative z-10 shrink-0">
-          <div className="flex items-center gap-2 text-primary dark:text-white font-black bg-white/60 dark:bg-white/10 px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl border border-white dark:border-white/10 shadow-premium backdrop-blur-md">
+          <div className="flex items-center gap-2 text-stone-900 dark:text-white font-black bg-white/60 dark:bg-white/10 px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl border border-white dark:border-white/10 shadow-premium backdrop-blur-md">
             <div className="w-6 h-6 sm:w-8 sm:h-8 bg-secondary/10 rounded-lg flex items-center justify-center shrink-0">
               <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700 dark:text-secondary-dark" />
             </div>
@@ -440,17 +440,17 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             
             <div className="flex items-center gap-4 mb-10">
                <div className="w-1 h-8 bg-gradient-to-b from-secondary to-secondary-dark rounded-full shadow-glow" />
-               <h2 className="text-lg sm:text-2xl font-black text-primary dark:text-white tracking-tight uppercase">ব্যবসার সার্বিক চিত্র (Overview)</h2>
+               <h2 className="text-lg sm:text-2xl font-black text-stone-900 dark:text-white tracking-tight uppercase">ব্যবসার সার্বিক চিত্র (Overview)</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 items-center">
-              <div className="flex flex-col md:flex-row items-center gap-10 bg-primary/5 dark:bg-white/5 p-6 rounded-[2rem] border border-primary/5 relative overflow-hidden group/live">
+              <div className="flex flex-col md:flex-row items-center gap-10 bg-stone-50 dark:bg-white/5 p-6 rounded-[2rem] border border-stone-200 relative overflow-hidden group/live">
                 <div className="absolute top-0 left-0 w-24 h-24 bg-secondary/10 blur-3xl rounded-full -translate-x-1/2 -translate-y-1/2" />
                 <div className="relative z-10 space-y-3 text-center md:text-left">
-                  <p className="text-xs sm:text-[10px] font-black text-primary/40 dark:text-secondary/40 uppercase tracking-[0.2em] leading-none mb-1">সচল প্রজেক্ট ভলিউম</p>
-                  <p className="text-4xl font-black text-primary dark:text-white tracking-tighter tabular-nums leading-none">
+                  <p className="text-xs sm:text-[10px] font-black text-stone-500 dark:text-secondary/40 uppercase tracking-[0.2em] leading-none mb-1">সচল প্রজেক্ট ভলিউম</p>
+                  <p className="text-4xl font-black text-stone-900 dark:text-white tracking-tighter tabular-nums leading-none">
                     {liveProfiles.length.toString().padStart(2, '০')} 
-                    <span className="text-lg text-primary/20 ml-2">টা</span>
+                    <span className="text-lg text-stone-400 ml-2">টা</span>
                   </p>
                 </div>
                 {liveProfiles.length > 0 && (
@@ -493,14 +493,14 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                    <div className="w-8 h-8 bg-indigo-500/10 text-indigo-600 rounded-lg flex items-center justify-center">
                       <Banknote className="w-5 h-5" />
                    </div>
-                   <p className="text-xs font-black text-primary/40 uppercase tracking-[0.2em] leading-none">চলমান সর্বমোট ইনভেষ্ট</p>
+                   <p className="text-xs font-black text-stone-500 uppercase tracking-[0.2em] leading-none">চলমান সর্বমোট ইনভেষ্ট</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-4xl font-black text-indigo-600 dark:text-indigo-400 tracking-tighter tabular-nums leading-none">
                      {(totalInvestment).toLocaleString('bn-BD')} 
-                     <span className="text-xl text-primary/20 ml-2">টাকা</span>
+                     <span className="text-xl text-stone-400 ml-2">টাকা</span>
                   </p>
-                  <p className="text-[10px] sm:text-[9px] font-bold text-indigo-600/40 mt-2 italic bg-indigo-50 dark:bg-indigo-900/10 px-3 py-1.5 rounded-lg border border-indigo-100 dark:border-indigo-900/20 w-fit">কথায়: {numberToBanglaWords(totalInvestment)}</p>
+                  <p className="text-[10px] sm:text-[9px] font-bold text-indigo-700 mt-2 italic bg-indigo-50 dark:bg-indigo-900/10 px-3 py-1.5 rounded-lg border border-indigo-100 dark:border-indigo-900/20 w-fit">কথায়: {numberToBanglaWords(totalInvestment)}</p>
                 </div>
               </div>
             </div>
@@ -511,7 +511,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                   <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
                      <Clock className="w-5 h-5 text-emerald-500" />
                   </div>
-                  <p className="text-[10px] sm:text-[9px] font-black text-emerald-600/50 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (ঘণ্টা)</p>
+                  <p className="text-[10px] sm:text-[9px] font-black text-emerald-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (ঘণ্টা)</p>
                   <p className={`text-xl font-black ${aggregateStats.perHour >= 0 ? 'text-emerald-600' : 'text-red-500'} tracking-tight`}>{formatCurrency(aggregateStats.perHour)}</p>
                </div>
                
@@ -519,7 +519,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                   <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-emerald-100 group-hover/stat:rotate-12 transition-transform">
                      <TrendingUp className="w-5 h-5 text-emerald-500" />
                   </div>
-                  <p className="text-[10px] sm:text-[9px] font-black text-emerald-600/50 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (দিন)</p>
+                  <p className="text-[10px] sm:text-[9px] font-black text-emerald-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">গড় মুনাফা (দিন)</p>
                   <p className={`text-xl font-black ${aggregateStats.perDay >= 0 ? 'text-emerald-600' : 'text-red-500'} tracking-tight`}>{formatCurrency(aggregateStats.perDay)}</p>
                </div>
                
@@ -527,7 +527,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                   <div className="absolute -top-4 w-10 h-10 bg-white dark:bg-card-bg rounded-xl flex items-center justify-center shadow-lg border border-amber-100 group-hover/stat:rotate-12 transition-transform">
                      <PieIcon className="w-5 h-5 text-amber-500" />
                   </div>
-                  <p className="text-[10px] sm:text-[9px] font-black text-amber-600/50 uppercase tracking-[0.1em] mb-2 leading-none mt-4">প্রাক্কলিত মুনাফা (মাস)</p>
+                  <p className="text-[10px] sm:text-[9px] font-black text-amber-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">প্রাক্কলিত মুনাফা (মাস)</p>
                   <p className={`text-xl font-black ${aggregateStats.perMonth >= 0 ? 'text-amber-600' : 'text-red-500'} tracking-tight`}>{formatCurrency(aggregateStats.perMonth)}</p>
                </div>
                
@@ -535,7 +535,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                   <div className="absolute -top-4 w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg group-hover/stat:scale-110 transition-transform">
                      <Zap className="w-5 h-5" />
                   </div>
-                  <p className="text-[10px] sm:text-[9px] font-black text-indigo-600/50 uppercase tracking-[0.1em] mb-2 leading-none mt-4">কেনা পণ্য স্টক লাভ</p>
+                  <p className="text-[10px] sm:text-[9px] font-black text-indigo-600 uppercase tracking-[0.1em] mb-2 leading-none mt-4">কেনা পণ্য স্টক লাভ</p>
                   <p className={`text-2xl font-black ${totalStockProfit >= 0 ? 'text-indigo-600' : 'text-red-500'} tracking-tight`}>{formatCurrency(totalStockProfit)}</p>
                </div>
             </div>
@@ -551,8 +551,8 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                         <BarChart3 className="w-7 h-7" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-black text-primary dark:text-white uppercase tracking-tight leading-none">স্টক ইনভেন্টরি মাস্টার রিপোর্ট</h3>
-                        <p className="text-xs sm:text-[10px] font-bold text-primary/40 uppercase tracking-[0.2em] mt-1.5">Real-time Stock Valuation & Storage Tracking</p>
+                        <h3 className="text-xl font-black text-stone-900 dark:text-white uppercase tracking-tight leading-none">স্টক ইনভেন্টরি মাস্টার রিপোর্ট</h3>
+                        <p className="text-xs sm:text-[10px] font-bold text-stone-500 uppercase tracking-[0.2em] mt-1.5">Real-time Stock Valuation & Storage Tracking</p>
                       </div>
                    </div>
                    
@@ -593,14 +593,14 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                        </div>
                     </div>
 
-                    <div className="p-5 sm:p-8 bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] border-2 border-primary/10 dark:border-white/5 shadow-premium flex flex-col justify-center relative overflow-hidden group/card transition-all hover:scale-[1.02] min-h-0">
+                    <div className="p-5 sm:p-8 bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] border-2 border-stone-200 dark:border-white/5 shadow-premium flex flex-col justify-center relative overflow-hidden group/card transition-all hover:scale-[1.02] min-h-0">
                        <div className="absolute top-0 right-0 p-6 opacity-5 group-hover/card:opacity-10 transition-opacity">
                          <PieIcon className="w-24 h-24" />
                        </div>
-                       <p className="text-xs sm:text-[10px] font-black text-primary/40 uppercase tracking-[0.3em] mb-2">সর্বমোট মজুদ (Total)</p>
+                       <p className="text-xs sm:text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-2">সর্বমোট মজুদ (Total)</p>
                        <div className="flex items-baseline gap-3">
-                         <span className="text-4xl sm:text-6xl font-black text-primary dark:text-white">{(stockStats.totalBags).toLocaleString('bn-BD')}</span>
-                         <span className="text-xl font-bold text-primary/30">বস্তা/টি</span>
+                         <span className="text-4xl sm:text-6xl font-black text-stone-900 dark:text-white">{(stockStats.totalBags).toLocaleString('bn-BD')}</span>
+                         <span className="text-xl font-bold text-stone-500">বস্তা/টি</span>
                        </div>
                     </div>
                  </div>
@@ -608,8 +608,8 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                  {/* Product break-down in stock */}
                  <div className="space-y-4">
                     <div className="flex items-center gap-3 px-4">
-                       <h4 className="text-xs sm:text-[10px] font-black text-primary/30 uppercase tracking-[0.4em]">পণ্য ভিত্তিক মজুদের তালিকা (Breakdown)</h4>
-                       <div className="flex-1 h-px bg-primary/5" />
+                       <h4 className="text-xs sm:text-[10px] font-black text-stone-500 uppercase tracking-[0.4em]">পণ্য ভিত্তিক মজুদের তালিকা (Breakdown)</h4>
+                       <div className="flex-1 h-px bg-stone-50" />
                     </div>
                     
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -623,24 +623,24 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
 
                          return (
                            <div key={p.id} className="p-5 bg-white dark:bg-card-bg rounded-3xl border border-border-subtle shadow-sm hover:shadow-active hover:-translate-y-1 transition-all group overflow-hidden relative">
-                             <div className="absolute -right-2 -bottom-2 w-16 h-16 bg-primary/5 rounded-full scale-0 group-hover:scale-100 transition-transform" />
+                             <div className="absolute -right-2 -bottom-2 w-16 h-16 bg-stone-50 rounded-full scale-0 group-hover:scale-100 transition-transform" />
                              
                              <div className="flex justify-between items-start mb-3">
-                                <div className="w-8 h-8 bg-primary/5 rounded-xl flex items-center justify-center text-primary/40 group-hover:text-primary transition-colors">
+                                <div className="w-8 h-8 bg-stone-50 rounded-xl flex items-center justify-center text-stone-500 group-hover:text-primary transition-colors">
                                    <Zap className="w-4 h-4" />
                                 </div>
-                                <ArrowUpRight className="w-4 h-4 text-primary/20 group-hover:text-primary transition-colors hover:rotate-45" />
+                                <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-primary transition-colors hover:rotate-45" />
                              </div>
                              
-                             <p className="text-[10px] sm:text-[9px] font-black text-primary/40 uppercase tracking-widest group-hover:text-primary/60 transition-colors">{p.name}</p>
+                             <p className="text-[10px] sm:text-[9px] font-black text-stone-500 uppercase tracking-widest group-hover:text-primary/60 transition-colors">{p.name}</p>
                              <div className="flex items-baseline gap-1.5 mt-1">
-                                <p className="text-xl font-black text-primary dark:text-white leading-none">
+                                <p className="text-xl font-black text-stone-900 dark:text-white leading-none">
                                    {profileRemainingBags.toLocaleString('bn-BD')}
                                 </p>
-                                <span className="text-xs sm:text-[10px] font-bold text-primary/30">বস্তা</span>
+                                <span className="text-xs sm:text-[10px] font-bold text-stone-500">বস্তা</span>
                              </div>
                              
-                             <div className="mt-4 h-1.5 w-full bg-primary/5 rounded-full overflow-hidden">
+                             <div className="mt-4 h-1.5 w-full bg-stone-50 rounded-full overflow-hidden">
                                 <motion.div 
                                   initial={{ width: 0 }}
                                   animate={{ width: '70%' }}
@@ -704,11 +704,11 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               </div>
               <div className="relative z-10 flex flex-col justify-between h-full gap-8">
                 <div className="space-y-2">
-                  <h2 className="text-2xl font-black text-primary dark:text-white flex items-center gap-3">
+                  <h2 className="text-2xl font-black text-stone-900 dark:text-white flex items-center gap-3">
                     <Sparkles className="w-6 h-6 text-emerald-600 dark:text-secondary" />
                     চাষাবাদ পরিকল্পনা
                   </h2>
-                  <p className="text-text-main/40 font-bold">
+                  <p className="text-stone-500 font-bold">
                     আপনার ভবিষ্যৎ চাষাবাদ ও কার্যক্রমের তালিকা করুন।
                   </p>
                 </div>
@@ -724,7 +724,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     </div>
                   </div>
                 ) : (
-                  <div className="text-[10px] font-black text-primary/30 uppercase tracking-[0.2em]">নতুন পরিকল্পনা যুক্ত করুন</div>
+                  <div className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">নতুন পরিকল্পনা যুক্ত করুন</div>
                 )}
               </div>
             </div>
@@ -810,14 +810,14 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
             {profiles.length === 0 && view !== 'archived' && (
               <div 
                 onClick={onAddProfile} 
-                className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-text-main/20 hover:border-secondary hover:text-primary transition-all cursor-pointer group"
+                className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-400 hover:border-secondary hover:text-primary transition-all cursor-pointer group"
               >
                 <Plus className="w-12 h-12 mb-4 group-hover:scale-125 transition-transform" />
                 <p className="text-sm font-black uppercase tracking-[0.3em]">নতুন প্রজেক্ট যোগ করুন</p>
               </div>
             )}
             {profiles.length === 0 && view === 'archived' && (
-              <div className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-text-main/20">
+              <div className="md:col-span-3 h-64 border-4 border-dashed border-border-subtle rounded-[3rem] flex flex-col items-center justify-center text-stone-400">
                 <p className="text-sm font-black uppercase tracking-[0.3em]">কোনো আর্কাইভ প্রজেক্ট নেই</p>
               </div>
             )}
@@ -829,7 +829,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
           <>
             <section className="space-y-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 px-2">
-                <h2 className="text-2xl font-black text-primary dark:text-white">মাস ভিত্তিক রিপোর্ট:</h2>
+                <h2 className="text-2xl font-black text-stone-900 dark:text-white">মাস ভিত্তিক রিপোর্ট:</h2>
                 {/* Advice Section */}
                 <div className="flex-1 max-w-2xl w-full">
                   <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 p-4 rounded-2xl flex items-center gap-4 shadow-sm">
@@ -865,7 +865,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       onClick={() => setSelectedMonthIndex(isSelected ? null : i)}
                       className={`min-w-[120px] sm:min-w-[160px] bg-white dark:bg-card-bg rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 border hover:border-primary transition-all flex flex-col items-center gap-4 sm:gap-6 ${isSelected ? 'border-primary ring-4 ring-primary/5 shadow-active' : 'border-border-subtle shadow-premium'} ${!hasInvestment && 'opacity-50'}`}
                     >
-                      <p className="text-sm font-black text-primary dark:text-white uppercase tracking-widest">{m}</p>
+                      <p className="text-sm font-black text-stone-900 dark:text-white uppercase tracking-widest">{m}</p>
                       <div className="h-32 w-10 bg-bg-page/50 dark:bg-black/20 rounded-full flex items-end overflow-hidden p-1">
                         <motion.div 
                           initial={{ height: 0 }}
@@ -875,7 +875,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                         />
                       </div>
                       <div className="text-center">
-                        <p className="text-[10px] sm:text-[9px] font-black text-text-main/30 dark:text-white/30 uppercase tracking-[0.2em] mb-1">Total invest</p>
+                        <p className="text-[10px] sm:text-[9px] font-black text-stone-500 dark:text-white/30 uppercase tracking-[0.2em] mb-1">Total invest</p>
                         <p className="text-xl font-black text-primary dark:text-secondary">{formatCurrency(total)}</p>
                       </div>
                     </button>
@@ -903,7 +903,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       <div className="p-5 sm:p-10 border-b border-border-subtle flex items-center justify-between bg-bg-page/20">
                         <div>
                           <h3 className="text-3xl font-black text-primary leading-none">{months[selectedMonthIndex]} মাসের খরচ রিপোর্ট</h3>
-                          <p className="text-xs font-bold text-primary/30 uppercase tracking-[0.2em] mt-3">Itemized Expense History</p>
+                          <p className="text-xs font-bold text-stone-500 uppercase tracking-[0.2em] mt-3">Itemized Expense History</p>
                         </div>
                         <button 
                            onClick={() => setSelectedMonthIndex(null)}
@@ -918,7 +918,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                           getMonthlyExpenses(selectedMonthIndex).map((item, idx) => (
                             <div key={idx} className="flex items-center justify-between p-6 bg-white border border-border-subtle rounded-3xl hover:border-primary transition-all group">
                               <div className="flex items-center gap-6">
-                                <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <div className="w-12 h-12 bg-stone-50 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                    <Zap className="w-5 h-5" />
                                 </div>
                                 <div>
@@ -926,7 +926,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                                     <p className="font-black text-primary text-lg">{item.expense.description}</p>
                                     <span className="text-[10px] sm:text-[9px] font-black text-white bg-primary/30 px-2.5 py-1 rounded-full uppercase tracking-widest">{item.profileName}</span>
                                   </div>
-                                  <p className="text-xs sm:text-[10px] font-bold text-primary/30 uppercase tracking-[0.2em] mt-1">
+                                  <p className="text-xs sm:text-[10px] font-bold text-stone-500 uppercase tracking-[0.2em] mt-1">
                                      {new Date(item.expense.date).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' })}
                                   </p>
                                 </div>
@@ -965,7 +965,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     const topExpenses = getTopExpensesOverall();
                     if (topExpenses.length === 0) {
                       return (
-                        <div className="col-span-full bg-white rounded-3xl p-8 border border-dashed border-border-subtle text-center text-text-main/20">
+                        <div className="col-span-full bg-white rounded-3xl p-8 border border-dashed border-border-subtle text-center text-stone-400">
                           <p className="text-xs sm:text-[10px] font-black uppercase tracking-widest">ব্যয় সংক্রান্ত কোনো তথ্য নেই</p>
                         </div>
                       );
@@ -973,11 +973,11 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                     return topExpenses.slice(0, 4).map((expense, idx) => (
                       <div key={idx} className="bg-white p-5 rounded-2xl border border-border-subtle shadow-sm hover:border-primary transition-all group">
                         <div className="flex justify-between items-center mb-2">
-                          <p className="text-xs sm:text-[10px] font-black text-primary/40 uppercase tracking-widest">{expense.label}</p>
+                          <p className="text-xs sm:text-[10px] font-black text-stone-500 uppercase tracking-widest">{expense.label}</p>
                           <span className="text-xs sm:text-[10px] font-black text-primary">{expense.percentage}%</span>
                         </div>
                         <p className="text-lg font-black text-primary leading-none">{formatCurrency(expense.amount)}</p>
-                        <div className="mt-3 w-full h-1 bg-primary/5 rounded-full overflow-hidden">
+                        <div className="mt-3 w-full h-1 bg-stone-50 rounded-full overflow-hidden">
                           <motion.div 
                             initial={{ width: 0 }}
                             animate={{ width: `${expense.percentage}%` }}
@@ -1037,9 +1037,9 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto">
                              <div className="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-white shadow-premium flex flex-col items-center justify-center min-w-[160px] group/item hover:-translate-y-1 transition-all">
-                                <p className="text-[10px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-primary/30 mb-2">মোট বিনিয়োগ</p>
+                                <p className="text-[10px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-stone-500 mb-2">মোট বিনিয়োগ</p>
                                 <p className="text-xl font-black text-primary leading-none">{formatCurrency(totalInvested)}</p>
-                                <div className="mt-3 w-full h-1 bg-primary/5 rounded-full" />
+                                <div className="mt-3 w-full h-1 bg-stone-50 rounded-full" />
                              </div>
                              <div className="bg-white/90 backdrop-blur-md p-6 rounded-[2rem] border border-white shadow-premium flex flex-col items-center justify-center min-w-[160px] group/item hover:-translate-y-1 transition-all">
                                 <p className="text-[10px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-emerald-600/30 mb-2">মোট বিক্রয়</p>
@@ -1066,7 +1066,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          <div className="flex justify-between items-center relative z-10">
                             <div>
                                <h3 className="text-xl font-black text-primary">{p.name}</h3>
-                               <p className="text-[10px] sm:text-[9px] font-bold text-text-main/30 uppercase tracking-widest mt-1">Status: {p.type}</p>
+                               <p className="text-[10px] sm:text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-1">Status: {p.type}</p>
                             </div>
                             <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl font-black text-[10px] sm:text-[9px] uppercase tracking-widest ${isProfit ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}>
                                {isProfit ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
@@ -1076,11 +1076,11 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          
                          <div className="grid grid-cols-2 gap-6 relative z-10">
                             <div>
-                               <p className="text-[10px] sm:text-[9px] font-black text-text-main/40 uppercase tracking-widest mb-1">Invest</p>
+                               <p className="text-[10px] sm:text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Invest</p>
                                <p className="text-lg font-bold text-primary leading-none">{formatCurrency(invest)}</p>
                             </div>
                             <div>
-                               <p className="text-[10px] sm:text-[9px] font-black text-text-main/40 uppercase tracking-widest mb-1">Sales</p>
+                               <p className="text-[10px] sm:text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Sales</p>
                                <p className="text-lg font-bold text-emerald-600 leading-none">{formatCurrency(saleTotal)}</p>
                             </div>
                          </div>

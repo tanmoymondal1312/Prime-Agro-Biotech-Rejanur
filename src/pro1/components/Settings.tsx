@@ -68,7 +68,7 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
         <div className="flex items-center gap-6">
           <button 
             onClick={onOpenSidebar}
-            className="w-12 h-12 bg-white dark:bg-card-bg rounded-2xl shadow-sm border border-border-subtle flex items-center justify-center text-primary dark:text-white lg:hidden"
+            className="w-12 h-12 bg-white dark:bg-card-bg rounded-2xl shadow-sm border border-border-subtle flex items-center justify-center text-stone-900 dark:text-white lg:hidden"
           >
             <LayoutDashboard className="w-6 h-6" />
           </button>
@@ -77,8 +77,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                <img src="/portal-logo.png" alt="Prime Agro Biotech" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-primary dark:text-white font-display tracking-tight leading-none">সেটিংস (Settings)</h1>
-              <p className="text-sm font-bold text-primary/30 dark:text-white/30 uppercase tracking-[0.2em] mt-2 pl-1">Personalize your workspace</p>
+              <h1 className="text-3xl font-black text-stone-900 dark:text-white font-display tracking-tight leading-none">সেটিংস (Settings)</h1>
+              <p className="text-sm font-bold text-stone-500 dark:text-white/30 uppercase tracking-[0.2em] mt-2 pl-1">Personalize your workspace</p>
             </div>
           </div>
         </div>
@@ -92,8 +92,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                   <ImageIcon className="w-6 h-6" />
                </div>
                <div>
-                  <h3 className="text-xl font-black text-primary dark:text-white">অফিশিয়াল লোগো</h3>
-                  <p className="text-xs font-bold text-primary/20 dark:text-white/20 uppercase tracking-widest mt-1">Prime Agro Biotech Limited</p>
+                  <h3 className="text-xl font-black text-stone-900 dark:text-white">অফিশিয়াল লোগো</h3>
+                  <p className="text-xs font-bold text-stone-400 dark:text-white/20 uppercase tracking-widest mt-1">Prime Agro Biotech Limited</p>
                </div>
             </div>
             <div className="flex items-center gap-8">
@@ -101,8 +101,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                   <img src="/portal-logo.png" alt="Prime Agro Biotech" className="w-full h-full object-cover" />
                </div>
                <div className="p-6 bg-bg-page/50 dark:bg-black/10 rounded-2xl border border-border-subtle flex-1">
-                  <p className="text-sm font-black text-primary dark:text-white mb-1">Prime Agro Biotech Limited</p>
-                  <p className="text-[10px] font-bold text-primary/40 dark:text-white/40 uppercase tracking-widest leading-relaxed">
+                  <p className="text-sm font-black text-stone-900 dark:text-white mb-1">Prime Agro Biotech Limited</p>
+                  <p className="text-[10px] font-bold text-stone-500 dark:text-white/40 uppercase tracking-widest leading-relaxed">
                      লাঙল চষি, দু'মুঠো প্রেমের আশায়...
                   </p>
                </div>
@@ -116,8 +116,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                  <Palette className="w-6 h-6" />
               </div>
               <div>
-                 <h3 className="text-xl font-black text-primary dark:text-white">থিম কালার (Theme Color)</h3>
-                 <p className="text-xs font-bold text-primary/20 dark:text-white/20 uppercase tracking-widest mt-1">Select your primary accent color</p>
+                 <h3 className="text-xl font-black text-stone-900 dark:text-white">থিম কালার (Theme Color)</h3>
+                 <p className="text-xs font-bold text-stone-400 dark:text-white/20 uppercase tracking-widest mt-1">Select your primary accent color</p>
               </div>
            </div>
 
@@ -136,7 +136,7 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                       <Check className="w-5 h-5 text-white" />
                     </motion.div>
                   )}
-                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] font-black text-primary/20 uppercase tracking-widest">{color.name}</span>
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] font-black text-stone-400 uppercase tracking-widest">{color.name}</span>
                 </button>
               ))}
            </div>
@@ -149,8 +149,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                  <Type className="w-6 h-6" />
               </div>
               <div>
-                 <h3 className="text-xl font-black text-primary dark:text-white">ফন্ট সাইজ (Font Size)</h3>
-                 <p className="text-xs font-bold text-primary/20 dark:text-white/20 uppercase tracking-widest mt-1">Adjust text scale for better readability</p>
+                 <h3 className="text-xl font-black text-stone-900 dark:text-white">ফন্ট সাইজ (Font Size)</h3>
+                 <p className="text-xs font-bold text-stone-400 dark:text-white/20 uppercase tracking-widest mt-1">Adjust text scale for better readability</p>
               </div>
            </div>
 
@@ -162,8 +162,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                    className={`w-full flex items-center justify-between p-6 rounded-3xl border transition-all ${fontSize === font.value ? 'bg-primary text-white border-primary shadow-xl dark:bg-secondary dark:text-primary dark:border-secondary' : 'bg-bg-page/30 dark:bg-black/10 border-border-subtle dark:border-white/5 dark:text-white/60 hover:border-primary/30'}`}
                  >
                     <div className="flex items-center gap-6">
-                       <span className={`font-black text-lg ${fontSize === font.value ? 'text-white' : 'text-primary dark:text-white'}`}>{font.name}</span>
-                       <span className={`text-xs font-bold opacity-40 ${fontSize === font.value ? 'text-white' : 'text-primary dark:text-white'}`}>{font.label}</span>
+                       <span className={`font-black text-lg ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.name}</span>
+                       <span className={`text-xs font-bold opacity-40 ${fontSize === font.value ? 'text-white' : 'text-stone-900 dark:text-white'}`}>{font.label}</span>
                     </div>
                     {fontSize === font.value && <Check className="w-6 h-6 text-secondary dark:text-primary" />}
                  </button>
@@ -182,8 +182,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                     {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
                  </div>
                  <div>
-                    <p className="text-lg font-black text-primary dark:text-white">ডার্ক মোড (Dark Mode)</p>
-                    <p className="text-[10px] font-black text-primary/20 dark:text-white/20 uppercase tracking-widest">Enhanced for night viewing</p>
+                    <p className="text-lg font-black text-stone-900 dark:text-white">ডার্ক মোড (Dark Mode)</p>
+                    <p className="text-[10px] font-black text-stone-400 dark:text-white/20 uppercase tracking-widest">Enhanced for night viewing</p>
                  </div>
               </div>
               <div className={`w-14 h-8 rounded-full p-1 transition-colors ${darkMode ? 'bg-secondary' : 'bg-primary/10'}`}>
@@ -200,8 +200,8 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
                     <ShieldCheck className="w-6 h-6" />
                  </div>
                  <div>
-                    <p className="text-lg font-black text-primary dark:text-white">অটো ব্যাকআপ (Auto Backup)</p>
-                    <p className="text-[10px] font-black text-primary/20 dark:text-white/20 uppercase tracking-widest">Local storage synced</p>
+                    <p className="text-lg font-black text-stone-900 dark:text-white">অটো ব্যাকআপ (Auto Backup)</p>
+                    <p className="text-[10px] font-black text-stone-400 dark:text-white/20 uppercase tracking-widest">Local storage synced</p>
                  </div>
               </div>
               <div className="w-14 h-8 bg-emerald-500 rounded-full p-1 border border-emerald-600/20">
