@@ -126,11 +126,11 @@ export default function WeatherManager({ logs, onAddLog, onDeleteLog, onOpenSide
 
           {/* Tips Card */}
           <div className="p-8 bg-secondary/10 rounded-[2.5rem] border border-secondary/20">
-            <h3 className="font-black text-lime-400 flex items-center gap-2 mb-4">
+            <h3 className="font-black text-emerald-600 flex items-center gap-2 mb-4">
               <Info className="w-5 h-5" />
               টিপস
             </h3>
-            <p className="text-sm font-bold text-lime-400/70 leading-relaxed">
+            <p className="text-sm font-bold text-emerald-600/70 leading-relaxed">
               প্রতিদিনের বিশেষ আবহাওয়া বা কাজ লিখে রাখলে পরবর্তী ২ বছর পর্যন্ত একই সময়ে আপনি কি করেছিলেন তা এক নজরে দেখতে পারবেন।
             </p>
           </div>

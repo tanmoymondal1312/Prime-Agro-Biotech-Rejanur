@@ -72,7 +72,7 @@ export default function PlanManager({ plans, onAddPlan, onDeletePlan, onToggleSt
           </button>
           <div>
             <h1 className="text-3xl font-black text-stone-900 dark:text-white flex items-center gap-3">
-              <Sparkles className="w-8 h-8 text-lime-400" />
+              <Sparkles className="w-8 h-8 text-emerald-600" />
               চাষাবাদ পরিকল্পনা
             </h1>
             <p className="text-stone-700 font-bold mt-1">ভবিষ্যৎ ফসলের সময়সূচী এবং কার্যক্রম নির্ধারণ করুন</p>

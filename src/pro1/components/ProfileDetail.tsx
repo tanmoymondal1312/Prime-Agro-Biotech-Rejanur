@@ -129,7 +129,7 @@ export default function ProfileDetail({
           </button>
           <button
             onClick={onArchive}
-            className={`flex items-center gap-1.5 px-3 py-2.5 rounded-2xl border transition-all ${profile.status === 'archived' ? 'bg-secondary text-white border-transparent' : 'bg-white text-[#1a1a1a]/60 border-border-subtle hover:text-lime-400'}`}
+            className={`flex items-center gap-1.5 px-3 py-2.5 rounded-2xl border transition-all ${profile.status === 'archived' ? 'bg-secondary text-white border-transparent' : 'bg-white text-[#1a1a1a]/60 border-border-subtle hover:text-emerald-600'}`}
           >
             <Archive className="w-4 h-4 shrink-0" />
             <span className="text-xs font-black uppercase tracking-widest hidden sm:inline">
@@ -176,7 +176,7 @@ export default function ProfileDetail({
              <div className="text-xs font-black uppercase tracking-widest opacity-60">লভ্যাংশ বিশ্লেষণ (Status):</div>
              <div className="flex items-center gap-2">
                 <span className="text-xs font-bold opacity-60">{formatCurrency(totalSale)} - {formatCurrency(profileTotal)} =</span>
-                <span className={`text-lg font-black ${profit >= 0 ? 'text-lime-400-light' : 'text-red-200'}`}>
+                <span className={`text-lg font-black ${profit >= 0 ? 'text-emerald-600-light' : 'text-red-200'}`}>
                    {profit >= 0 ? 'মুনাফা' : 'লোকসান'} {formatCurrency(Math.abs(profit))}
                 </span>
              </div>
@@ -199,7 +199,7 @@ export default function ProfileDetail({
                 <p className="text-xs font-black uppercase tracking-widest opacity-60">রিপোর্ট কার্ড (Report Card)</p>
                 <h3 className="text-xl font-bold mt-1">{profit >= 0 ? 'নীট লাভ (Net Profit)' : 'নীট ক্ষতি (Net Loss)'}</h3>
               </div>
-              <div className={`text-3xl font-black ${profit >= 0 ? 'text-lime-400-light' : 'text-red-200'}`}>
+              <div className={`text-3xl font-black ${profit >= 0 ? 'text-emerald-600-light' : 'text-red-200'}`}>
                 {profitPercentage.toFixed(1)}%
               </div>
             </div>
@@ -241,8 +241,8 @@ export default function ProfileDetail({
                       </p>
                    </div>
                    <div className="bg-secondary/10 p-4 rounded-2xl border border-secondary/20 col-span-2">
-                      <p className="text-[8px] font-black text-lime-400 uppercase tracking-widest mb-1">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
-                      <p className="text-lg font-black text-lime-400 leading-none">{formatCurrency(totalActualSale)}</p>
+                      <p className="text-[8px] font-black text-emerald-600 uppercase tracking-widest mb-1">সর্বমোট বিক্রয়লব্ধ অর্থ</p>
+                      <p className="text-lg font-black text-emerald-600 leading-none">{formatCurrency(totalActualSale)}</p>
                    </div>
                 </div>
              </div>
@@ -255,7 +255,7 @@ export default function ProfileDetail({
       <div className="space-y-6">
         <div className="flex items-center justify-between px-1">
           <h2 className="text-sm font-black text-[#1e211f] uppercase tracking-widest flex items-center gap-2">
-            <Info className="w-5 h-5 text-lime-400" /> বিস্তারিত খরচসমূহ (Details)
+            <Info className="w-5 h-5 text-emerald-600" /> বিস্তারিত খরচসমূহ (Details)
           </h2>
         </div>
 

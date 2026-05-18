@@ -537,7 +537,7 @@ export default function StockManager({
                                        <p className="text-xs font-bold text-white/30 uppercase">{new Date(sale.date).toLocaleDateString('bn-BD')}</p>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                       <p className="text-sm font-black text-lime-400">{formatCurrency(sale.totalAmount)}</p>
+                                       <p className="text-sm font-black text-emerald-600">{formatCurrency(sale.totalAmount)}</p>
                                        <button 
                                           type="button"
                                           onClick={(e) => {
@@ -657,7 +657,7 @@ export default function StockManager({
                               placeholder="Calculated Cost"
                               className="w-full bg-secondary/10 border border-secondary/20 rounded-2xl px-6 py-4 font-black outline-none text-2xl text-[#1e211f]"
                            />
-                           <p className="text-xs font-bold text-lime-500/60 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
+                           <p className="text-xs font-bold text-emerald-600/70 px-2 italic mt-1">প্রজেক্টের মোট খরচ থেকে হিসাব করা হয়েছে</p>
                         </div>
                       )}
                     </div>
@@ -752,7 +752,7 @@ export default function StockManager({
                   <form onSubmit={handleAddSale} className="bg-white dark:bg-card-bg p-12 rounded-[4rem] border border-border-subtle shadow-premium space-y-8">
                      <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-4">
-                           <div className="w-12 h-12 bg-secondary/10 text-lime-500 rounded-2xl flex items-center justify-center">
+                           <div className="w-12 h-12 bg-secondary/10 text-emerald-600 rounded-2xl flex items-center justify-center">
                               <ShoppingCart className="w-6 h-6" />
                            </div>
                            <div>
@@ -767,7 +767,7 @@ export default function StockManager({
 
                      <div className="p-6 bg-secondary/10 rounded-3xl border-2 border-secondary/20 flex justify-between items-center">
                         <div>
-                           <p className="text-xs font-black text-lime-500 uppercase tracking-widest mb-1">Available for Sale</p>
+                           <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-1">Available for Sale</p>
                            <p className="text-2xl font-black text-stone-900 dark:text-white">
                               {getRemainingStock(selectedStock, selectedProfile!).bags} বস্তা / {getRemainingStock(selectedStock, selectedProfile!).quantity} {selectedStock.unit}
                            </p>
@@ -868,7 +868,7 @@ export default function StockManager({
                            />
                         </div>
                         {totalPrice && parseFloat(totalPrice) > 0 && (
-                          <p className="mt-2 text-xs font-bold text-lime-500/60 px-2 italic">
+                          <p className="mt-2 text-xs font-bold text-emerald-600/70 px-2 italic">
                             কথায়: {numberToBanglaWords(totalPrice)}
                           </p>
                         )}

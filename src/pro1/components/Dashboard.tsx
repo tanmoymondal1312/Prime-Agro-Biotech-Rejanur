@@ -529,7 +529,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                          <span className="text-lg font-bold opacity-60">বস্তা</span>
                        </div>
                        <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2">
-                          <Zap className="w-3 h-3 text-lime-400" />
+                          <Zap className="w-3 h-3 text-emerald-600" />
                           <p className="text-xs font-black uppercase tracking-widest text-emerald-100">ইনভেন্টরি রেডিনেস হাই</p>
                        </div>
                     </div>
@@ -623,7 +623,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
               <div className="relative z-10 flex flex-col justify-between h-full gap-8">
                 <div className="space-y-2">
                   <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                    <CloudSun className="w-6 h-6 text-lime-400" />
+                    <CloudSun className="w-6 h-6 text-emerald-600" />
                     আবহাওয়া লগার
                   </h2>
                   <p className="text-white/60 font-bold">
@@ -633,7 +633,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                 
                 {(lastYearSameMonthLogs.length > 0 || twoYearsAgoSameMonthLogs.length > 0) ? (
                   <div className="bg-white/10 backdrop-blur-md rounded-3xl p-4 border border-white/20">
-                    <p className="text-xs font-black text-lime-400 uppercase tracking-[0.2em] mb-2 leading-none">ইতিহাস থেকে:</p>
+                    <p className="text-xs font-black text-emerald-600 uppercase tracking-[0.2em] mb-2 leading-none">ইতিহাস থেকে:</p>
                     <div className="space-y-1">
                       {lastYearSameMonthLogs.length > 0 && (
                         <p className="text-xs text-white font-bold truncate">

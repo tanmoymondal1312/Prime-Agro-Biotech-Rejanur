@@ -117,7 +117,7 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                       <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-[1.5rem] flex items-center justify-center group-hover:scale-110 transition-transform">
                         <ShoppingCart className="w-7 h-7" />
                       </div>
-                      <div className="bg-secondary/20 text-lime-500 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
+                      <div className="bg-secondary/20 text-emerald-600 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest">
                         Live Now
                       </div>
                     </div>
@@ -176,8 +176,8 @@ export default function SalesManager({ profiles, onAddSale, onDeleteSale, onOpen
                       </p>
                     </div>
                     <div className="p-6 bg-secondary/10 backdrop-blur-md rounded-2xl border border-secondary/20">
-                      <p className="text-xs font-black text-lime-400 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
-                      <p className="text-2xl font-black text-lime-400">
+                      <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-2">বর্তমান বিক্রয়</p>
+                      <p className="text-2xl font-black text-emerald-600">
                         {formatCurrency(selectedProfile?.sales?.reduce((sum, s) => sum + s.totalAmount, 0) || 0)}
                       </p>
                     </div>

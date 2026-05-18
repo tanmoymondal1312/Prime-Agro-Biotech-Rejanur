@@ -263,10 +263,10 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
           <div className="bg-primary p-8 rounded-[2.5rem] shadow-premium group transition-all text-white relative overflow-hidden">
             <p className="text-xs font-black text-white/30 uppercase tracking-[0.25em] mb-4">সব সময়ের লাভ/ক্ষতি (Global)</p>
-            <h3 className={`text-3xl font-black tracking-tighter leading-none ${totalProfit >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+            <h3 className={`text-3xl font-black tracking-tighter leading-none ${totalProfit >= 0 ? 'text-emerald-600' : 'text-red-400'}`}>
                {formatCurrency(Math.abs(totalProfit))}
             </h3>
-            <p className={`text-xs font-bold mt-1 italic ${totalProfit >= 0 ? 'text-lime-400' : 'text-red-400/40'}`}>
+            <p className={`text-xs font-bold mt-1 italic ${totalProfit >= 0 ? 'text-emerald-600' : 'text-red-400/40'}`}>
               {numberToBanglaWords(Math.abs(totalProfit))}
             </p>
             <div className="mt-4 flex items-center gap-2">
@@ -316,10 +316,10 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
            <div className="md:col-span-1 text-right flex flex-col items-end">
               <p className="text-xs font-black text-stone-700 uppercase tracking-widest">মোট স্টক (বস্তা)</p>
               <div className="flex items-baseline justify-end gap-2 my-2">
-                 <span className="text-6xl font-black text-lime-500 tracking-tighter">{(stockStats.totalBags).toLocaleString('bn-BD')}</span>
+                 <span className="text-6xl font-black text-emerald-600 tracking-tighter">{(stockStats.totalBags).toLocaleString('bn-BD')}</span>
                  <span className="text-lg font-bold text-stone-700">টি</span>
               </div>
-              <p className="text-xs font-black text-lime-500/40 uppercase tracking-widest">Total Inventory Bags</p>
+              <p className="text-xs font-black text-emerald-600/50 uppercase tracking-widest">Total Inventory Bags</p>
            </div>
         </div>
 
@@ -352,14 +352,14 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
               <div className="bg-primary p-10 rounded-[3rem] space-y-8 shadow-2xl text-white">
                  <div className="flex items-center gap-4 border-b border-white/10 pb-6">
-                    <Clock className="w-8 h-8 text-lime-400" />
+                    <Clock className="w-8 h-8 text-emerald-600" />
                     <h3 className="text-xl font-black uppercase tracking-tight text-white">সময় ভিত্তিক রিটার্ন (Detailed Analysis)</h3>
                  </div>
                  
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 text-white">
                     <div>
                        <p className="text-xs font-black text-white/30 uppercase tracking-[0.2em] mb-2">মাসিক গড় লাভ (৩০ দিন)</p>
-                       <p className={`text-2xl font-black ${globalRates.perMonth >= 0 ? 'text-lime-400' : 'text-red-400'}`}>
+                       <p className={`text-2xl font-black ${globalRates.perMonth >= 0 ? 'text-emerald-600' : 'text-red-400'}`}>
                           {formatCurrency(globalRates.perMonth)}
                        </p>
                     </div>
@@ -384,7 +384,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
                     <h3 className="text-2xl font-black text-[#1e211f] leading-none tracking-tight">মাসিক মুনাফার গ্রাফ</h3>
                     <p className="text-xs font-bold text-stone-700 uppercase tracking-widest mt-2">Monthly Profit/Loss Overlap</p>
                  </div>
-                 <div className="w-12 h-12 bg-secondary/20 rounded-2xl flex items-center justify-center text-lime-500">
+                 <div className="w-12 h-12 bg-secondary/20 rounded-2xl flex items-center justify-center text-emerald-600">
                     <TrendingUp className="w-6 h-6" />
                  </div>
               </div>
@@ -439,11 +439,11 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
         <section className="space-y-10">
            <div className="flex items-end justify-between px-4">
               <div>
-                 <p className="text-sm font-black text-lime-500 bg-secondary/20 px-4 py-1 rounded-full w-fit mb-4 uppercase tracking-widest">লাইভ প্রজেক্টসমূহ (Live Now)</p>
+                 <p className="text-sm font-black text-emerald-600 bg-secondary/20 px-4 py-1 rounded-full w-fit mb-4 uppercase tracking-widest">লাইভ প্রজেক্টসমূহ (Live Now)</p>
                  <h2 className="text-4xl font-black text-[#1e211f] tracking-tighter">ব্যক্তিগত মুনাফার বিস্তারিত চিত্র</h2>
               </div>
               <div className="hidden lg:flex items-center gap-4 bg-white px-8 py-4 rounded-3xl border border-border-subtle shadow-sm">
-                 <Zap className="w-5 h-5 text-lime-500" />
+                 <Zap className="w-5 h-5 text-emerald-600" />
                  <span className="text-xs font-black uppercase tracking-widest text-stone-700">{liveProjects.length}টি সচল প্রজেক্ট</span>
               </div>
            </div>
@@ -495,7 +495,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
                           <div className="lg:col-span-5 p-12 bg-white">
                              <div className="flex items-center gap-3 mb-10">
-                                <TrendingUp className="w-5 h-5 text-lime-500" />
+                                <TrendingUp className="w-5 h-5 text-emerald-600" />
                                 <h4 className="text-[11px] font-black text-stone-700 uppercase tracking-[0.3em]">রিয়েল-টাইম রিটার্ন বিশ্লেষণ</h4>
                              </div>
 
