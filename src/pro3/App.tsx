@@ -268,10 +268,21 @@ export default function App() {
               </div>
             </motion.button>
           </div>
-          <button onClick={() => { window.location.href = '/home'; }} className="flex items-center gap-2 px-6 py-3 text-stone-400 hover:text-stone-600 transition-colors mx-auto">
-            <Home className="w-5 h-5" />
+          <motion.button
+            whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            onClick={() => { window.location.href = '/home'; }}
+            className="mx-auto flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-sm transition-all shadow-lg"
+            style={{
+              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+              color: '#ffffff',
+              boxShadow: '0 8px 24px rgba(16,185,129,0.35)',
+            }}
+          >
+            <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center">
+              <Home className="w-4 h-4" />
+            </div>
             হোমে ফিরুন
-          </button>
+          </motion.button>
         </div>
       </div>
     );
