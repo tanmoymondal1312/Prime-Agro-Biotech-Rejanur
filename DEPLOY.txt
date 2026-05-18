@@ -1,161 +1,348 @@
-============================================================
-   রেজা পোর্টাল — cPanel Deployment Guide
-   Combined portal for all 3 apps
-============================================================
-
-TECHNOLOGY STACK
------------------
-  Frontend  : React 19 + Vite (compiled to static HTML/CSS/JS)
-  Backend   : PHP (runs natively on cPanel)
-  Database  : SQLite (auto-created, zero config)
-  Auth      : PHP reads api/.env for credentials
+╔══════════════════════════════════════════════════════════════╗
+║          রেজা পোর্টাল — cPanel Deployment Guide             ║
+║          Prime Agro Biotech Limited                          ║
+║          সমন্বিত কৃষি ও খামার ব্যবস্থাপনা পোর্টাল          ║
+╚══════════════════════════════════════════════════════════════╝
 
 
-============================================================
-  STEP 1 — Configure Login Credentials
-============================================================
+════════════════════════════════════════════════════════════════
+  TECHNOLOGY STACK (ব্যবহৃত প্রযুক্তি)
+════════════════════════════════════════════════════════════════
 
-1. Copy the example credentials file:
-      .env.example  →  api/.env
+  FRONTEND (ক্লায়েন্ট সাইড)
+  ──────────────────────────
+  • React 19          — UI framework (component-based)
+  • TypeScript        — Type-safe JavaScript
+  • Vite 6            — Build tool & dev server
+  • Tailwind CSS v4   — Utility-first styling
+  • React Router v7   — Client-side routing (SPA)
+  • Framer Motion     — Animations & transitions
+  • Recharts          — Charts & data visualization
+  • Lucide React      — Icon library
+  • html2canvas       — HTML-to-image (PDF generation)
+  • jsPDF             — PDF creation (sale receipts)
+  • date-fns          — Date formatting
 
-2. Edit api/.env and set your actual phone number and password:
+  BACKEND (সার্ভার সাইড)
+  ───────────────────────
+  • PHP 8.x           — API endpoints (REST)
+  • MySQL 8.x         — Database (profiles, cows, transactions)
+  • PDO               — PHP database abstraction layer
 
-      APP_PHONE=01712345678
-      APP_PASSWORD=YourSecretPassword
+  APPS INSIDE THE PORTAL
+  ───────────────────────
+  • /home             — Portal home (app selector)
+  • /khamar           — রেজার খামার (Cow/Goat farm management)
+                        └── MySQL backend via PHP API
+  • /krishi           — সমন্বিত কৃষি ট্রেড (Agricultural trade)
+                        └── Browser localStorage
+  • /hisab            — দেনা পাওনার হিসাব (Loan tracker)
+                        └── Browser localStorage
 
-   IMPORTANT: Never upload .env.example to the server — only api/.env
-   IMPORTANT: The api/.htaccess blocks all direct web access to api/.env
-
-
-============================================================
-  STEP 2 — Build on Your Computer
-============================================================
-
-  Requirements: Node.js 18+ installed on your computer
-
-  cd combined/
-  npm install
-  npm run build
-
-  NOTE: If build fails with "Cannot find native binding" error:
-    npm install @tailwindcss/oxide-linux-x64-gnu   # on Linux
-    npm install @tailwindcss/oxide-darwin-arm64     # on Mac M-series
-    npm install @tailwindcss/oxide-darwin-x64       # on Mac Intel
-    npm install @tailwindcss/oxide-win32-x64-msvc   # on Windows
-    Then re-run: npm run build
-
-
-============================================================
-  STEP 3 — Upload Files to cPanel
-============================================================
-
-1. Log in to cPanel → File Manager
-
-2. Navigate to your website's root folder (e.g. /public_html/ or subdomain folder)
-
-3. Click "Settings" (top right) and enable "Show Hidden Files"
-   (so .htaccess files are visible)
-
-4. Upload the CONTENTS of dist/ to your web root
-   (NOT the dist folder itself — upload what's INSIDE it)
-
-5. Upload the entire api/ folder to your web root
-
-6. Upload api/.env to the api/ folder on the server
-
-Final structure on server:
-  /your-website/
-  ├── index.html              ← from dist/
-  ├── .htaccess               ← from dist/  (SPA routing — must be here!)
-  ├── assets/
-  │   ├── index-[hash].js
-  │   └── index-[hash].css
-  ├── logo.png
-  └── api/
-      ├── .htaccess           ← blocks .db and .env access
-      ├── .env                ← your credentials (PHP reads this)
-      ├── auth.php
-      ├── db.php
-      ├── profiles.php
-      ├── profile.php
-      ├── cows.php
-      └── cow.php
+  AUTHENTICATION
+  ──────────────
+  • Token-based login via api/auth.php
+  • Credentials stored in api/.env (server-side, never exposed)
+  • Login token persists in browser localStorage
 
 
-============================================================
-  STEP 4 — Set Folder Permissions
-============================================================
+════════════════════════════════════════════════════════════════
+  PRE-DEPLOYMENT CHECKLIST
+════════════════════════════════════════════════════════════════
 
-  The api/ folder needs write permission so PHP can create khamar.db:
-  File Manager → right-click api/ → Permissions → set to 755
-
-
-============================================================
-  STEP 5 — Test the Application
-============================================================
-
-1. Visit your website URL
-2. You should see the login page "রেজা পোর্টাল"
-3. Enter the phone + password you set in api/.env
-4. You should see 3 app options:
-     • রেজার খামার
-     • সমন্বিত কৃষি ট্রেড
-     • দেনা পাওনার হিসাব
-5. Click each app to verify it works
-6. After first login, browser remembers you — no re-login needed
-
-Test the API:
-   https://yoursite.com/api/profiles.php
-   Should return:  []  (empty array)
+  Before uploading, confirm you have:
+  [ ] Node.js 18+ installed on your local machine
+  [ ] A cPanel hosting account with PHP 8.0+ and MySQL
+  [ ] Your domain or subdomain ready
+  [ ] FTP/File Manager access to public_html
+  [ ] MySQL database created on cPanel
+  [ ] api/.env file configured (see Step 1)
 
 
-============================================================
-  HOW IT WORKS
-============================================================
+════════════════════════════════════════════════════════════════
+  STEP 1 — Configure api/.env
+════════════════════════════════════════════════════════════════
 
-AUTHENTICATION:
-  • Login page sends phone + password to api/auth.php
-  • PHP reads api/.env and compares credentials
-  • On success, a token is returned and stored in the browser
-  • All app routes are protected — redirects to login if not authenticated
-  • Token persists in browser localStorage — no re-login on same device
-  • To logout: click the logout button on the portal home page
+  Edit the file at:  api/.env
 
-DATA STORAGE:
-  • রেজার খামার   → SQLite database (api/khamar.db, auto-created)
-  • কৃষি ট্রেড    → Browser localStorage
-  • দেনা পাওনার   → Browser localStorage
+  ┌─────────────────────────────────────────────────────────┐
+  │  APP_PHONE=01712345678       ← login mobile number      │
+  │  APP_PASSWORD=YourPassword   ← login password           │
+  │                                                         │
+  │  DB_HOST=localhost                                      │
+  │  DB_PORT=3306                                           │
+  │  DB_NAME=your_db_name        ← MySQL database name      │
+  │  DB_USER=your_db_user        ← MySQL username           │
+  │  DB_PASS=your_db_password    ← MySQL password           │
+  └─────────────────────────────────────────────────────────┘
+
+  ⚠  IMPORTANT:
+     • Never upload .env.example to the server
+     • The api/.htaccess blocks direct web access to api/.env
+     • Use strong credentials — this protects all farm data
 
 
-============================================================
+════════════════════════════════════════════════════════════════
+  STEP 2 — Create MySQL Database on cPanel
+════════════════════════════════════════════════════════════════
+
+  1. cPanel → MySQL Databases
+  2. Create a new database  (e.g. username_khamar)
+  3. Create a new database user with a strong password
+  4. Add user to database — grant ALL PRIVILEGES
+  5. Note the database name, username, and password
+  6. Update api/.env with these values (DB_NAME, DB_USER, DB_PASS)
+
+  NOTE: All tables are created automatically on first API call.
+        No SQL import needed — db.php handles migrations.
+
+
+════════════════════════════════════════════════════════════════
+  STEP 3 — Build the Frontend on Your Computer
+════════════════════════════════════════════════════════════════
+
+  Requirements: Node.js 18+ must be installed locally.
+
+  Open terminal in project folder and run:
+
+    npm install
+    npm run build
+
+  This creates a  dist/  folder with the compiled website.
+
+  ⚠  If build fails with "Cannot find native binding":
+       Linux:   npm install @tailwindcss/oxide-linux-x64-gnu
+       Mac M1+: npm install @tailwindcss/oxide-darwin-arm64
+       Mac x64: npm install @tailwindcss/oxide-darwin-x64
+       Windows: npm install @tailwindcss/oxide-win32-x64-msvc
+     Then run:  npm run build  again.
+
+
+════════════════════════════════════════════════════════════════
+  STEP 4 — Upload Files to cPanel
+════════════════════════════════════════════════════════════════
+
+  1. Login to cPanel → File Manager
+
+  2. Navigate to your web root:
+       Main domain   → /public_html/
+       Subdomain     → /public_html/subdomain/
+
+  3. Click Settings (top-right) → enable "Show Hidden Files"
+     (required to see .htaccess files)
+
+  4. Upload CONTENTS of dist/ to web root:
+       ✓ index.html
+       ✓ .htaccess          ← CRITICAL for page refresh to work
+       ✓ assets/ folder
+       ✓ logo.png
+       ✓ portal-logo.png
+       ✓ icons/ folder
+       ✓ NotoSansBengali-Regular.ttf
+       ✓ NotoSansBengali-Bold.ttf
+       ✓ manifest.json
+
+  5. Upload the entire  api/  folder to web root:
+       ✓ api/.htaccess
+       ✓ api/.env           ← your credentials (configured in Step 1)
+       ✓ api/auth.php
+       ✓ api/db.php
+       ✓ api/profiles.php
+       ✓ api/profile.php
+       ✓ api/cows.php
+       ✓ api/cow.php
+       ✓ api/krishi_profiles.php
+       ✓ api/krishi_weather.php
+       ✓ api/krishi_plans.php
+       ✓ api/takatrack_borrowers.php
+       ✓ api/takatrack_loans.php
+       ✓ api/takatrack_stocks.php
+       ✓ api/takatrack_my_debts.php
+
+  6. Create uploads/ folder structure on server:
+       /public_html/uploads/
+       /public_html/uploads/profiles/     (chmod 755)
+       /public_html/uploads/animals/      (chmod 755)
+
+  Final directory structure on server:
+  ┌─────────────────────────────────────────────────────────┐
+  │  /public_html/                                          │
+  │  ├── index.html                ← from dist/             │
+  │  ├── .htaccess                 ← SPA routing (MUST!)    │
+  │  ├── assets/                                            │
+  │  ├── logo.png                                           │
+  │  ├── portal-logo.png                                    │
+  │  ├── NotoSansBengali-Regular.ttf                        │
+  │  ├── NotoSansBengali-Bold.ttf                           │
+  │  ├── icons/                                             │
+  │  ├── manifest.json                                      │
+  │  ├── api/                                               │
+  │  │   ├── .htaccess                                      │
+  │  │   ├── .env                  ← credentials            │
+  │  │   ├── db.php                                         │
+  │  │   ├── auth.php                                       │
+  │  │   ├── cows.php                                       │
+  │  │   └── [all other .php files]                         │
+  │  └── uploads/                                           │
+  │      ├── profiles/             ← profile photos         │
+  │      └── animals/              ← animal photos          │
+  └─────────────────────────────────────────────────────────┘
+
+
+════════════════════════════════════════════════════════════════
+  STEP 5 — Server Configuration on cPanel
+════════════════════════════════════════════════════════════════
+
+  PHP Version:
+    cPanel → MultiPHP Manager → set PHP 8.0 or 8.1 or 8.2
+
+  PHP Extensions (must be enabled):
+    cPanel → PHP Selector → Extensions:
+    ✓ pdo
+    ✓ pdo_mysql
+    ✓ json
+    ✓ mbstring
+    ✓ gd  (for image resizing)
+
+  Folder Permissions:
+    uploads/          → 755
+    uploads/profiles/ → 755
+    uploads/animals/  → 755
+    api/              → 755
+
+
+════════════════════════════════════════════════════════════════
+  STEP 6 — Test the Deployment
+════════════════════════════════════════════════════════════════
+
+  1. Visit:  https://yourdomain.com/
+             → Should show login page "রেজা পোর্টাল"
+
+  2. Login with the phone + password from api/.env
+
+  3. Test API directly:
+       https://yourdomain.com/api/profiles.php
+       → Should return:  []   (empty array — means PHP + MySQL work)
+
+  4. Test each section:
+     ✓ রেজার খামার  — add a profile and animal
+     ✓ সমন্বিত কৃষি ট্রেড — create a project
+     ✓ দেনা পাওনার হিসাব — add a borrower
+
+  5. Test page refresh:
+     → Navigate to /khamar, press F5
+     → Should NOT show 404 (if it does, .htaccess is missing)
+
+  6. Test from mobile (LAN or mobile data):
+     → All text should be visible and app fully functional
+
+
+════════════════════════════════════════════════════════════════
   TROUBLESHOOTING
-============================================================
+════════════════════════════════════════════════════════════════
 
-PROBLEM: White screen / app won't load
-FIX:
-  - Confirm index.html is at the web root
-  - Confirm .htaccess from dist/ is at the web root (check Show Hidden Files)
-  - cPanel → Error Logs → look for clues
+  PROBLEM: White screen / blank page
+  FIX:
+    • Confirm index.html is at the web root (not inside dist/)
+    • Confirm .htaccess from dist/ is uploaded (Show Hidden Files)
+    • cPanel → Error Logs → check for JS/PHP errors
 
-PROBLEM: Login fails with "Server credentials not configured"
-FIX:
-  - Create api/.env with APP_PHONE and APP_PASSWORD
-  - Verify the file is inside the api/ folder on the server
+  PROBLEM: Page refresh shows 404 Not Found
+  FIX:
+    • .htaccess is missing from web root — re-upload it
+    • Enable "Show Hidden Files" in File Manager to see it
 
-PROBLEM: Login fails even with correct credentials
-FIX:
-  - Check api/.env is not corrupted (no BOM, Unix line endings)
-  - Make sure no spaces around = sign: APP_PHONE=01712345678
+  PROBLEM: Login fails — "Server credentials not configured"
+  FIX:
+    • api/.env is missing or not inside the api/ folder
+    • Check APP_PHONE and APP_PASSWORD are set correctly
+    • No spaces around = sign:  APP_PHONE=01712345678  ✓
 
-PROBLEM: রেজার খামার shows error / data not saving
-FIX:
-  - File Manager → right-click api/ → Permissions → 755
-  - cPanel → MultiPHP Manager → set PHP 7.4 or 8.x
-  - cPanel → PHP Selector → Extensions → enable pdo_sqlite and sqlite3
+  PROBLEM: রেজার খামার — data not saving / 503 error
+  FIX:
+    • api/.env is missing DB_ variables
+    • MySQL user does not have permission on the database
+    • PHP pdo_mysql extension is not enabled
+    • Check cPanel → Error Logs for exact PHP error
 
-PROBLEM: Page refresh shows "404 Not Found"
-FIX:
-  - The .htaccess from dist/ is missing from the web root
-  - Re-upload dist/.htaccess and make sure Show Hidden Files is ON
+  PROBLEM: Photos not uploading
+  FIX:
+    • uploads/ folder does not exist on server — create it
+    • uploads/profiles/ and uploads/animals/ need 755 permissions
+    • PHP gd extension must be enabled
+    • Check PHP upload_max_filesize in cPanel → PHP Settings
 
-============================================================
+  PROBLEM: PDF download not working
+  FIX:
+    • PDF is generated client-side (no server needed)
+    • Ensure NotoSansBengali-Regular.ttf and -Bold.ttf are uploaded
+    • Allow popups in browser (PDF opens in new tab)
+
+  PROBLEM: Texts showing white / invisible colors on mobile
+  FIX:
+    • Disable "Force Dark Mode" in Chrome:
+      chrome://flags → search "dark" → Disable
+    • Or update Chrome/Edge to latest version
+
+  PROBLEM: /api/profiles.php returns error (not empty array)
+  FIX:
+    • Check cPanel → MySQL Databases → user has ALL PRIVILEGES
+    • Verify DB_HOST, DB_NAME, DB_USER, DB_PASS in api/.env
+    • Check cPanel → Error Logs for the exact PDOException
+
+
+════════════════════════════════════════════════════════════════
+  HOW THE SYSTEM WORKS
+════════════════════════════════════════════════════════════════
+
+  AUTHENTICATION FLOW:
+    Browser → POST /api/auth.php → PHP reads api/.env
+           → credentials match → returns token
+           → token stored in localStorage → user logged in
+    Token expires only when user logs out or clears browser data.
+
+  রেজার খামার DATA FLOW:
+    Browser → GET/POST/PUT/DELETE /api/*.php → PHP → MySQL
+    All farm data (profiles, animals, transactions, photos)
+    is stored permanently in MySQL on the server.
+
+  সমন্বিত কৃষি ট্রেড DATA FLOW:
+    All data stored in browser localStorage only.
+    Data is device-specific — does not sync between devices.
+
+  দেনা পাওনার হিসাব DATA FLOW:
+    All data stored in browser localStorage only.
+    Data is device-specific — does not sync between devices.
+
+  PDF RECEIPTS:
+    Generated 100% in the browser using html2canvas + jsPDF.
+    No server involvement — works offline after page loads.
+
+
+════════════════════════════════════════════════════════════════
+  QUICK DEPLOYMENT COMMANDS (Terminal)
+════════════════════════════════════════════════════════════════
+
+  # On your local machine (one-time setup):
+  npm install
+
+  # Every time you make changes and want to redeploy:
+  npm run build
+  # Then upload dist/ contents + api/ to cPanel
+
+  # To test locally before deploying:
+  Terminal 1:  php -S 0.0.0.0:8001 -t .
+  Terminal 2:  npm run dev
+  Browser:     http://localhost:8000/
+
+
+════════════════════════════════════════════════════════════════
+  SUPPORT & CONTACT
+════════════════════════════════════════════════════════════════
+
+  Project:   রেজা পোর্টাল — Prime Agro Biotech Limited
+  Version:   2.0 (MySQL Backend + Mobile-Optimized)
+  Built by:  Tanmoy Mondal
+  Stack:     React 19 + Vite + TypeScript + PHP 8 + MySQL 8
+
+════════════════════════════════════════════════════════════════
