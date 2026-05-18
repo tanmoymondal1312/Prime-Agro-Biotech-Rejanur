@@ -520,9 +520,9 @@ export default function App() {
           {/* Vertical divider */}
           <div className="w-px h-6 bg-gray-200 shrink-0" />
 
-          {/* App name — context-appropriate for this section */}
-          <span style={{ color: '#111827' }} className="text-sm font-black truncate hidden xs:block">
-            সমন্বিত কৃষি ট্রেড
+          {/* App name */}
+          <span style={{ color: '#111827' }} className="text-sm font-black truncate">
+            কৃষি ট্রেড
           </span>
 
           {/* Clock pushed to right */}

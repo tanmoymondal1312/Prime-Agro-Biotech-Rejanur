@@ -226,7 +226,7 @@ export default function StockManager({
                     }`}>
                       <Warehouse className="w-5 h-5" />
                     </div>
-                    <h3 className="font-black text-sm uppercase tracking-wider dark:text-white">{locLabel.split(' (')[0]}</h3>
+                    <h3 className="font-black text-sm uppercase tracking-wider text-gray-900 dark:text-white">{locLabel.split(' (')[0]}</h3>
                   </div>
                   
                   <div className="space-y-4">
@@ -246,21 +246,21 @@ export default function StockManager({
                                locKey === 'home' ? 'text-amber-600 dark:text-amber-400' : 
                                'text-emerald-600 dark:text-emerald-400'
                             }`}>{s.remaining.bags} বস্তা</p>
-                            <p className="text-xs font-bold opacity-40 uppercase dark:text-white/40">{s.remaining.quantity} {s.unit}</p>
+                            <p className="text-xs font-bold text-gray-500 uppercase">{s.remaining.quantity} {s.unit}</p>
                           </div>
                         </div>
                       ))
                     ) : (
-                      <div className="py-10 text-center opacity-20 flex flex-col items-center gap-2">
+                      <div className="py-10 text-center flex flex-col items-center gap-2 text-gray-500">
                         <Package className="w-8 h-8" />
-                        <p className="text-xs font-bold uppercase tracking-widest">কোন স্টক নেই</p>
+                        <p className="text-xs font-bold uppercase tracking-widest text-gray-500">কোন স্টক নেই</p>
                       </div>
                     )}
                   </div>
 
                   {totalLocBags > 0 && (
                     <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex justify-between items-end">
-                      <p className="text-xs font-black opacity-40 uppercase dark:text-white/40">মোট বস্তা সংখ্যা</p>
+                      <p className="text-xs font-black text-gray-500 uppercase">মোট বস্তা সংখ্যা</p>
                       <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">{totalLocBags}</p>
                     </div>
                   )}
@@ -483,7 +483,7 @@ export default function StockManager({
                               <div className="mb-6">
                                 <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">{LOCATION_LABELS[stock.location]}</p>
                                 <h4 className="text-xl font-black text-stone-900 dark:text-white">
-                                  {remaining.bags} / {stock.bags} <span className="text-sm font-bold opacity-30">বস্তা অবশিষ্ট</span>
+                                  {remaining.bags} / {stock.bags} <span className="text-sm font-bold text-gray-500">বস্তা অবশিষ্ট</span>
                                 </h4>
                               </div>
 
@@ -668,7 +668,7 @@ export default function StockManager({
                         <select 
                           value={location}
                           onChange={(e) => setLocation(e.target.value as any)}
-                          className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-primary outline-none dark:text-white"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-gray-900"
                         >
                           <option value="cold_store">কোল্ড স্টোর</option>
                           <option value="home">বাসার গোডাউন</option>
@@ -683,7 +683,7 @@ export default function StockManager({
                           required
                           value={stockDate}
                           onChange={(e) => setStockDate(e.target.value)}
-                          className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-primary outline-none dark:text-white"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-gray-900"
                         />
                       </div>
                     </div>
@@ -696,7 +696,7 @@ export default function StockManager({
                           value={bags || ''}
                           onChange={(e) => setBags(e.target.value)}
                           placeholder="০"
-                          className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-primary outline-none text-2xl dark:text-white"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-gray-900"
                         />
                       </div>
 
@@ -708,12 +708,12 @@ export default function StockManager({
                             value={quantity || ''}
                             onChange={(e) => setQuantity(e.target.value)}
                             placeholder="০.০০"
-                            className="flex-1 bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-primary outline-none text-2xl dark:text-white"
+                            className="flex-1 bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-gray-900"
                           />
                           <select 
                             value={unit}
                             onChange={(e) => setUnit(e.target.value)}
-                            className="w-24 bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-2 font-black text-xs uppercase"
+                            className="w-24 bg-gray-50 border border-gray-200 rounded-2xl px-2 font-black text-xs uppercase"
                           >
                             <option value="কেজি">কেজি</option>
                             <option value="মন">মন</option>
@@ -728,7 +728,7 @@ export default function StockManager({
                         value={note || ''}
                         onChange={(e) => setNote(e.target.value)}
                         placeholder="অতিরিক্ত তথ্য..."
-                        className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-3xl px-6 py-4 font-bold text-sm transition-all focus:border-primary outline-none min-h-[120px] resize-none dark:text-white"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-3xl px-6 py-4 font-bold text-sm transition-all focus:border-primary outline-none min-h-[120px] resize-none dark:text-white"
                       />
                     </div>
 
@@ -808,7 +808,7 @@ export default function StockManager({
                                  }
                               }}
                               placeholder="০"
-                              className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
                            />
                         </div>
                         <div className="space-y-4">
@@ -823,7 +823,7 @@ export default function StockManager({
                                  }
                               }}
                               placeholder="০.০০"
-                              className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
                            />
                         </div>
                      </div>
@@ -845,7 +845,7 @@ export default function StockManager({
                                  }
                               }}
                               placeholder="০.০০"
-                              className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl dark:text-white"
                            />
                         </div>
                         <div className="space-y-4">
@@ -864,7 +864,7 @@ export default function StockManager({
                                  }
                               }}
                               placeholder="০.০০"
-                              className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl border-secondary/20 dark:text-white"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none text-xl border-secondary/20 dark:text-white"
                            />
                         </div>
                         {totalPrice && parseFloat(totalPrice) > 0 && (
@@ -881,7 +881,7 @@ export default function StockManager({
                            required
                            value={saleDate}
                            onChange={(e) => setSaleDate(e.target.value)}
-                           className="w-full bg-bg-page dark:bg-black/20 border border-border-subtle dark:border-white/5 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none dark:text-white"
+                           className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-secondary outline-none dark:text-white"
                         />
                      </div>
 

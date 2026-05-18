@@ -747,11 +747,11 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       </div>
                       <div className="pt-4 grid grid-cols-2 gap-4">
                          <div>
-                            <p className="text-xs sm:text-[8px] font-black uppercase tracking-widest opacity-30">দৈনিক লাভ/ক্ষতি</p>
+                            <p className="text-xs font-black uppercase tracking-widest text-gray-500">দৈনিক লাভ/ক্ষতি</p>
                             <p className="text-sm font-black">{formatCurrency(stats.perDay)}</p>
                          </div>
                          <div>
-                            <p className="text-xs sm:text-[8px] font-black uppercase tracking-widest opacity-30">মাসিক গড়</p>
+                            <p className="text-xs sm:text-[8px] font-black uppercase tracking-widest text-gray-500">মাসিক গড়</p>
                             <p className="text-sm font-black">{formatCurrency(stats.perMonth)}</p>
                          </div>
                       </div>
@@ -893,7 +893,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                             </div>
                           ))
                         ) : (
-                          <div className="py-24 text-center opacity-20">
+                          <div className="py-24 text-center text-gray-400">
                             <AlertCircle className="w-20 h-20 mx-auto mb-6" />
                             <p className="text-lg font-black uppercase tracking-[0.4em]">No data records</p>
                           </div>
@@ -901,7 +901,7 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
                       </div>
                       
                       <div className="p-5 sm:p-10 bg-primary text-white flex justify-between items-center">
-                         <span className="text-xs font-black uppercase tracking-widest opacity-40">মাসিক মোট ইনভেষ্টমেন্ট</span>
+                         <span className="text-xs font-black uppercase tracking-widest text-gray-600">মাসিক মোট ইনভেষ্টমেন্ট</span>
                          <span className="text-3xl font-black">{formatCurrency(getMonthlyTotal(selectedMonthIndex))}</span>
                       </div>
                     </motion.div>
