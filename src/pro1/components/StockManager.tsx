@@ -226,7 +226,7 @@ export default function StockManager({
                     }`}>
                       <Warehouse className="w-5 h-5" />
                     </div>
-                    <h3 className="font-black text-sm uppercase tracking-wider text-gray-900 dark:text-white">{locLabel.split(' (')[0]}</h3>
+                    <h3 style={{ color:"#111827" }} className="font-black text-sm uppercase tracking-wider">{locLabel.split(' (')[0]}</h3>
                   </div>
                   
                   <div className="space-y-4">
@@ -234,7 +234,7 @@ export default function StockManager({
                       locStocks.map(s => (
                         <div key={s.id} className="p-4 bg-white/60 dark:bg-black/40 rounded-2xl border border-white/20 dark:border-white/5 flex justify-between items-center shadow-sm">
                           <div>
-                            <p className="text-xs font-black text-stone-900 dark:text-white truncate max-w-[120px]">{s.profileName}</p>
+                            <p style={{ color:"#111827" }} className="text-xs font-black truncate max-w-[120px]">{s.profileName}</p>
                             <div className="flex items-center gap-1.5 mt-1">
                               <Calendar className="w-3 h-3 opacity-30" />
                               <p className="text-xs font-bold text-stone-700 dark:text-white/30 uppercase">{calculateDaysHeld(s.date)} দিন ধরে আছে</p>
@@ -261,7 +261,7 @@ export default function StockManager({
                   {totalLocBags > 0 && (
                     <div className="mt-6 pt-4 border-t border-black/5 dark:border-white/5 flex justify-between items-end">
                       <p className="text-xs font-black text-gray-500 uppercase">মোট বস্তা সংখ্যা</p>
-                      <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">{totalLocBags}</p>
+                      <p style={{ color:"#111827" }} className="text-3xl font-black tracking-tighter">{totalLocBags}</p>
                     </div>
                   )}
                 </div>
@@ -303,7 +303,7 @@ export default function StockManager({
                           {profile.type === 'stock' ? 'Inventory' : 'Cultivation'}
                         </span>
                       </div>
-                      <h3 className="text-lg font-black text-stone-900 dark:text-white truncate">{profile.name}</h3>
+                      <h3 className="text-lg font-black text-[#111827] truncate">{profile.name}</h3>
                       <p className="text-xs font-bold text-stone-700 uppercase mt-1">{profile.landSize || 'Stock Unit'}</p>
                       
                       {/* Show stock summary if it's a stock type profile */}
@@ -367,7 +367,7 @@ export default function StockManager({
                         onClick={() => setSelectedProfileId(profile.id)}
                         className="w-full bg-white dark:bg-card-bg p-8 rounded-[3.5rem] shadow-premium border border-border-subtle text-left group-hover:border-indigo-500 transition-all overflow-hidden cursor-pointer"
                       >
-                        <h3 className="text-xl font-black text-stone-900 dark:text-white mb-4 truncate">{profile.name}</h3>
+                        <h3 className="text-xl font-black text-[#111827] mb-4 truncate">{profile.name}</h3>
                         <div className="space-y-3">
                           {isLive && allStocksWithMeta.length === 0 && (
                             <div className="p-4 bg-emerald-50 dark:bg-emerald-900/10 rounded-2xl border border-emerald-100 dark:border-emerald-900/20 flex flex-col items-center gap-2">
@@ -482,7 +482,7 @@ export default function StockManager({
                               
                               <div className="mb-6">
                                 <p className="text-xs font-black text-stone-700 uppercase tracking-widest mb-1">{LOCATION_LABELS[stock.location]}</p>
-                                <h4 className="text-xl font-black text-stone-900 dark:text-white">
+                                <h4 className="text-xl font-black text-[#111827]">
                                   {remaining.bags} / {stock.bags} <span className="text-sm font-bold text-gray-500">বস্তা অবশিষ্ট</span>
                                 </h4>
                               </div>
@@ -599,7 +599,7 @@ export default function StockManager({
                           <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-500 rounded-2xl flex items-center justify-center">
                              <Warehouse className="w-6 h-6" />
                           </div>
-                          <h3 className="text-2xl font-black text-stone-900 dark:text-white">নতুন স্টক এন্ট্রি</h3>
+                          <h3 className="text-2xl font-black text-[#111827]">নতুন স্টক এন্ট্রি</h3>
                        </div>
                        <button 
                           type="button"
@@ -668,7 +668,7 @@ export default function StockManager({
                         <select 
                           value={location}
                           onChange={(e) => setLocation(e.target.value as any)}
-                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-gray-900"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-[#111827]"
                         >
                           <option value="cold_store">কোল্ড স্টোর</option>
                           <option value="home">বাসার গোডাউন</option>
@@ -683,7 +683,7 @@ export default function StockManager({
                           required
                           value={stockDate}
                           onChange={(e) => setStockDate(e.target.value)}
-                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-gray-900"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-[#111827]"
                         />
                       </div>
                     </div>
@@ -696,7 +696,7 @@ export default function StockManager({
                           value={bags || ''}
                           onChange={(e) => setBags(e.target.value)}
                           placeholder="০"
-                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-gray-900"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-[#111827]"
                         />
                       </div>
 
@@ -708,7 +708,7 @@ export default function StockManager({
                             value={quantity || ''}
                             onChange={(e) => setQuantity(e.target.value)}
                             placeholder="০.০০"
-                            className="flex-1 bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-gray-900"
+                            className="flex-1 bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 font-black transition-all focus:border-emerald-500 outline-none text-2xl text-[#111827]"
                           />
                           <select 
                             value={unit}
@@ -756,7 +756,7 @@ export default function StockManager({
                               <ShoppingCart className="w-6 h-6" />
                            </div>
                            <div>
-                              <h3 className="text-2xl font-black text-stone-900 dark:text-white">স্টক থেকে বিক্রয়</h3>
+                              <h3 className="text-2xl font-black text-[#111827]">স্টক থেকে বিক্রয়</h3>
                               <p className="text-xs font-black text-stone-700 uppercase tracking-widest">{LOCATION_LABELS[selectedStock.location]}</p>
                            </div>
                         </div>
@@ -768,7 +768,7 @@ export default function StockManager({
                      <div className="p-6 bg-secondary/10 rounded-3xl border-2 border-secondary/20 flex justify-between items-center">
                         <div>
                            <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-1">Available for Sale</p>
-                           <p className="text-2xl font-black text-stone-900 dark:text-white">
+                           <p className="text-2xl font-black text-[#111827]">
                               {getRemainingStock(selectedStock, selectedProfile!).bags} বস্তা / {getRemainingStock(selectedStock, selectedProfile!).quantity} {selectedStock.unit}
                            </p>
                         </div>
