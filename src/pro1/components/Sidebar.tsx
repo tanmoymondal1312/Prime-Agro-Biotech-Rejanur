@@ -93,10 +93,12 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, onClose }: Si
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 h-screen sticky top-0 shrink-0">
+      {/* Desktop Sidebar — fixed so it never scrolls with content */}
+      <aside className="hidden lg:flex flex-col w-64 h-screen fixed left-0 top-0 z-20 shrink-0">
         {content}
       </aside>
+      {/* Spacer to push main content right of the fixed sidebar */}
+      <div className="hidden lg:block w-64 shrink-0" />
 
       {/* Mobile Drawer */}
       <AnimatePresence>

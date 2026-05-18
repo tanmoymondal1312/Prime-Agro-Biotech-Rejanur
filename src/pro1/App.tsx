@@ -513,9 +513,12 @@ export default function App() {
 
         {/* ── Global Sticky Header (all pages) ── */}
         <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-2.5 flex items-center gap-3 shadow-sm shrink-0">
-          {/* Logo */}
-          <img src="/portal-logo.png" alt="Prime Agro"
-            className="w-9 h-9 rounded-full object-cover shrink-0" />
+          {/* Logo — click to go home */}
+          <img
+            src="/portal-logo.png" alt="Prime Agro"
+            onClick={() => { window.location.href = '/home'; }}
+            className="w-9 h-9 rounded-full object-cover shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+          />
 
           {/* Vertical divider */}
           <div className="w-px h-6 bg-gray-200 shrink-0" />
