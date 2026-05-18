@@ -29,7 +29,18 @@
   DEPLOYMENT TARGET
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Everything goes into:  /public_html/
+  Upload path:  /home/{username}/{your-domain-folder}/
+
+  Example:
+    If your cPanel username is  rezaportal
+    and your domain folder is   khamar.primebiotech.com
+    → upload everything to:
+      /home/rezaportal/khamar.primebiotech.com/
+
+  How to find your domain folder path:
+    cPanel → Addon Domains (or Domains)
+    → Look at "Document Root" column next to your domain
+    → That is the exact path to upload to
 
   Your site will be live at:  https://yourdomain.com/
 
@@ -105,10 +116,14 @@
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  STEP 4 — Upload to public_html/
+  STEP 4 — Upload to Your Domain Folder
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  cPanel → File Manager → navigate to /public_html/
+  cPanel → File Manager
+  Navigate to:  /home/{username}/{your-domain-folder}/
+
+  Example path: /home/rezaportal/khamar.primebiotech.com/
+
   Click Settings (top-right) → enable "Show Hidden Files"
 
   ── A. Upload contents of dist/ ─────────────────────────────────
@@ -157,26 +172,28 @@
 
 
   FINAL STRUCTURE on server:
-  ┌─────────────────────────────────────────────────┐
-  │  public_html/                                   │
-  │  ├── index.html          ← React app entry      │
-  │  ├── .htaccess           ← SPA routing (MUST)   │
-  │  ├── assets/             ← JS/CSS bundles        │
-  │  ├── api/                                        │
-  │  │   ├── .htaccess                               │
-  │  │   ├── .env            ← DB + login creds      │
-  │  │   ├── db.php                                  │
-  │  │   ├── auth.php                                │
-  │  │   └── *.php           ← all API files         │
-  │  ├── uploads/                                    │
-  │  │   ├── profiles/       ← profile photos        │
-  │  │   └── animals/        ← animal photos         │
-  │  ├── logo.png                                    │
-  │  ├── portal-logo.png                             │
-  │  ├── NotoSansBengali-Regular.ttf                 │
-  │  ├── NotoSansBengali-Bold.ttf                    │
-  │  └── manifest.json                               │
-  └─────────────────────────────────────────────────┘
+  ┌──────────────────────────────────────────────────────────┐
+  │  /home/{username}/{your-domain-folder}/                  │
+  │  e.g. /home/rezaportal/khamar.primebiotech.com/          │
+  │                                                          │
+  │  ├── index.html          ← React app entry               │
+  │  ├── .htaccess           ← SPA routing (MUST)            │
+  │  ├── assets/             ← JS/CSS bundles                │
+  │  ├── api/                                                │
+  │  │   ├── .htaccess                                       │
+  │  │   ├── .env            ← DB + login creds              │
+  │  │   ├── db.php                                          │
+  │  │   ├── auth.php                                        │
+  │  │   └── *.php           ← all API files                 │
+  │  ├── uploads/                                            │
+  │  │   ├── profiles/       ← profile photos                │
+  │  │   └── animals/        ← animal photos                 │
+  │  ├── logo.png                                            │
+  │  ├── portal-logo.png                                     │
+  │  ├── NotoSansBengali-Regular.ttf                         │
+  │  ├── NotoSansBengali-Bold.ttf                            │
+  │  └── manifest.json                                       │
+  └──────────────────────────────────────────────────────────┘
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -191,10 +208,10 @@
       pdo  |  pdo_mysql  |  json  |  mbstring  |  gd
 
   Folder Permissions:
-    /public_html/uploads/          → 755
-    /public_html/uploads/profiles/ → 755
-    /public_html/uploads/animals/  → 755
-    /public_html/api/              → 755
+    /home/{username}/{domain-folder}/uploads/          → 755
+    /home/{username}/{domain-folder}/uploads/profiles/ → 755
+    /home/{username}/{domain-folder}/uploads/animals/  → 755
+    /home/{username}/{domain-folder}/api/              → 755
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
