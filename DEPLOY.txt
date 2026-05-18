@@ -1,0 +1,161 @@
+============================================================
+   রেজা পোর্টাল — cPanel Deployment Guide
+   Combined portal for all 3 apps
+============================================================
+
+TECHNOLOGY STACK
+-----------------
+  Frontend  : React 19 + Vite (compiled to static HTML/CSS/JS)
+  Backend   : PHP (runs natively on cPanel)
+  Database  : SQLite (auto-created, zero config)
+  Auth      : PHP reads api/.env for credentials
+
+
+============================================================
+  STEP 1 — Configure Login Credentials
+============================================================
+
+1. Copy the example credentials file:
+      .env.example  →  api/.env
+
+2. Edit api/.env and set your actual phone number and password:
+
+      APP_PHONE=01712345678
+      APP_PASSWORD=YourSecretPassword
+
+   IMPORTANT: Never upload .env.example to the server — only api/.env
+   IMPORTANT: The api/.htaccess blocks all direct web access to api/.env
+
+
+============================================================
+  STEP 2 — Build on Your Computer
+============================================================
+
+  Requirements: Node.js 18+ installed on your computer
+
+  cd combined/
+  npm install
+  npm run build
+
+  NOTE: If build fails with "Cannot find native binding" error:
+    npm install @tailwindcss/oxide-linux-x64-gnu   # on Linux
+    npm install @tailwindcss/oxide-darwin-arm64     # on Mac M-series
+    npm install @tailwindcss/oxide-darwin-x64       # on Mac Intel
+    npm install @tailwindcss/oxide-win32-x64-msvc   # on Windows
+    Then re-run: npm run build
+
+
+============================================================
+  STEP 3 — Upload Files to cPanel
+============================================================
+
+1. Log in to cPanel → File Manager
+
+2. Navigate to your website's root folder (e.g. /public_html/ or subdomain folder)
+
+3. Click "Settings" (top right) and enable "Show Hidden Files"
+   (so .htaccess files are visible)
+
+4. Upload the CONTENTS of dist/ to your web root
+   (NOT the dist folder itself — upload what's INSIDE it)
+
+5. Upload the entire api/ folder to your web root
+
+6. Upload api/.env to the api/ folder on the server
+
+Final structure on server:
+  /your-website/
+  ├── index.html              ← from dist/
+  ├── .htaccess               ← from dist/  (SPA routing — must be here!)
+  ├── assets/
+  │   ├── index-[hash].js
+  │   └── index-[hash].css
+  ├── logo.png
+  └── api/
+      ├── .htaccess           ← blocks .db and .env access
+      ├── .env                ← your credentials (PHP reads this)
+      ├── auth.php
+      ├── db.php
+      ├── profiles.php
+      ├── profile.php
+      ├── cows.php
+      └── cow.php
+
+
+============================================================
+  STEP 4 — Set Folder Permissions
+============================================================
+
+  The api/ folder needs write permission so PHP can create khamar.db:
+  File Manager → right-click api/ → Permissions → set to 755
+
+
+============================================================
+  STEP 5 — Test the Application
+============================================================
+
+1. Visit your website URL
+2. You should see the login page "রেজা পোর্টাল"
+3. Enter the phone + password you set in api/.env
+4. You should see 3 app options:
+     • রেজার খামার
+     • সমন্বিত কৃষি ট্রেড
+     • দেনা পাওনার হিসাব
+5. Click each app to verify it works
+6. After first login, browser remembers you — no re-login needed
+
+Test the API:
+   https://yoursite.com/api/profiles.php
+   Should return:  []  (empty array)
+
+
+============================================================
+  HOW IT WORKS
+============================================================
+
+AUTHENTICATION:
+  • Login page sends phone + password to api/auth.php
+  • PHP reads api/.env and compares credentials
+  • On success, a token is returned and stored in the browser
+  • All app routes are protected — redirects to login if not authenticated
+  • Token persists in browser localStorage — no re-login on same device
+  • To logout: click the logout button on the portal home page
+
+DATA STORAGE:
+  • রেজার খামার   → SQLite database (api/khamar.db, auto-created)
+  • কৃষি ট্রেড    → Browser localStorage
+  • দেনা পাওনার   → Browser localStorage
+
+
+============================================================
+  TROUBLESHOOTING
+============================================================
+
+PROBLEM: White screen / app won't load
+FIX:
+  - Confirm index.html is at the web root
+  - Confirm .htaccess from dist/ is at the web root (check Show Hidden Files)
+  - cPanel → Error Logs → look for clues
+
+PROBLEM: Login fails with "Server credentials not configured"
+FIX:
+  - Create api/.env with APP_PHONE and APP_PASSWORD
+  - Verify the file is inside the api/ folder on the server
+
+PROBLEM: Login fails even with correct credentials
+FIX:
+  - Check api/.env is not corrupted (no BOM, Unix line endings)
+  - Make sure no spaces around = sign: APP_PHONE=01712345678
+
+PROBLEM: রেজার খামার shows error / data not saving
+FIX:
+  - File Manager → right-click api/ → Permissions → 755
+  - cPanel → MultiPHP Manager → set PHP 7.4 or 8.x
+  - cPanel → PHP Selector → Extensions → enable pdo_sqlite and sqlite3
+
+PROBLEM: Page refresh shows "404 Not Found"
+FIX:
+  - The .htaccess from dist/ is missing from the web root
+  - Re-upload dist/.htaccess and make sure Show Hidden Files is ON
+
+============================================================

@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+api/.env
+api/khamar.db
+api/*.db
+# Keep upload directories but ignore actual uploaded files
+uploads/profiles/*
+uploads/animals/*
+!uploads/profiles/.gitkeep
+!uploads/animals/.gitkeep
