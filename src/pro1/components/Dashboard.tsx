@@ -3,12 +3,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   TrendingUp, 
   TrendingDown,
-  Clock,
   PieChart as PieIcon,
   Sprout,
   Plus,
   BarChart3,
-  Menu,
   ChevronRight,
   ArrowUpRight,
   X as XIcon,
@@ -384,35 +382,6 @@ export default function Dashboard({ view, profiles, allProfiles, weatherLogs = [
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-8 space-y-5 sm:space-y-8 overflow-x-hidden">
-      {/* Header — solid colors only, no CSS variables, no backdrop-blur */}
-      <header className="flex items-center justify-between gap-3 bg-white border border-gray-200 rounded-2xl px-4 py-3 sm:px-6 sm:py-4 shadow-sm">
-        {/* Left: Hamburger + Logo + Title */}
-        <div className="flex items-center gap-3 min-w-0">
-          <button onClick={onOpenSidebar}
-            className="lg:hidden shrink-0 w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">
-            <Menu className="w-5 h-5 text-gray-700" />
-          </button>
-          <img src="/portal-logo.png" alt="Logo"
-            className="hidden sm:block w-9 h-9 rounded-full object-cover shrink-0 border border-gray-100" />
-          <div className="min-w-0">
-            <h1 style={{ color: '#111827' }} className="text-base sm:text-xl font-black leading-tight truncate">
-              {getTitle()}
-            </h1>
-            <p style={{ color: '#059669' }} className="hidden sm:block text-xs font-bold leading-none mt-0.5">
-              Prime Agro Biotech
-            </p>
-          </div>
-        </div>
-
-        {/* Right: Clock */}
-        <div className="shrink-0 flex items-center gap-2 bg-gray-100 rounded-xl px-3 py-2">
-          <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span style={{ color: '#111827' }} className="text-sm font-bold font-mono tabular-nums">
-            {currentTime.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-          </span>
-        </div>
-      </header>
-
       <main className="space-y-12">
         {/* প্রধান রিপোর্ট সেকশন - Only Dashboard */}
         {view === 'dashboard' && (

@@ -196,27 +196,7 @@ export default function StockManager({
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-bg-page">
-      <header className="sticky top-0 z-30 bg-bg-page/80 backdrop-blur-md border-b border-border-subtle px-4 py-3 sm:px-6 sm:py-4 lg:p-8 flex items-center gap-3">
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={onOpenSidebar}
-            className="lg:hidden p-3 bg-white dark:bg-card-bg rounded-2xl shadow-sm border border-border-subtle"
-          >
-            <LayoutDashboard className="w-6 h-6 text-[#1e211f]" />
-          </button>
-          <div className="flex items-center gap-6">
-            <div className="w-12 h-12 bg-white dark:bg-card-bg rounded-2xl p-1.5 shadow-sm border border-border-subtle">
-               <img src="/portal-logo.png" alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-black text-gray-900 dark:text-white font-display tracking-tight leading-none">পণ্য স্টক (Stock Product)</h1>
-              <p className="text-sm font-bold text-lime-500 uppercase tracking-[0.2em] opacity-50 mt-2 pl-1">Warehouse & Inventory Management</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="p-8 lg:p-12 space-y-12 pb-24 max-w-7xl mx-auto w-full">
+            <main className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 lg:space-y-10 pb-24 max-w-7xl mx-auto w-full">
         {!selectedProfileId && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}

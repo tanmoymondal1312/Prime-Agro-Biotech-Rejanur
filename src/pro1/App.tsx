@@ -13,7 +13,7 @@ import { AddProfileModal, AddExpenseModal, HarvestModal } from './components/Mod
 import { CropProfile, CategoryType, Expense, SaleEntry, StockEntry, StockSaleEntry, WeatherLog, FarmPlan } from './types';
 import {
   AlertCircle, Trash2,
-  LayoutDashboard, Zap, Wallet, Package, BarChart3,
+  LayoutDashboard, Zap, Wallet, Package, BarChart3, Clock,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -35,6 +35,11 @@ export default function App() {
   const [currentView, setCurrentView] = useState<View>('dashboard');
   const [activeProfileId, setActiveProfileId] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const t = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
   
   // Custom dialog state
   const [dialog, setDialog] = useState<{ 
@@ -503,8 +508,32 @@ export default function App() {
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Main Content Area — extra bottom padding on mobile for bottom nav */}
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-y-auto overflow-x-hidden pb-20 lg:pb-0">
+
+        {/* ── Global Sticky Header (all pages) ── */}
+        <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-2.5 flex items-center gap-3 shadow-sm shrink-0">
+          {/* Logo */}
+          <img src="/portal-logo.png" alt="Prime Agro"
+            className="w-9 h-9 rounded-full object-cover shrink-0" />
+
+          {/* Vertical divider */}
+          <div className="w-px h-6 bg-gray-200 shrink-0" />
+
+          {/* App name — context-appropriate for this section */}
+          <span style={{ color: '#111827' }} className="text-sm font-black truncate hidden xs:block">
+            সমন্বিত কৃষি ট্রেড
+          </span>
+
+          {/* Clock pushed to right */}
+          <div className="ml-auto shrink-0 flex items-center gap-2 bg-gray-100 rounded-xl px-3 py-1.5">
+            <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span style={{ color: '#111827' }} className="text-sm font-bold font-mono tabular-nums">
+              {currentTime.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            </span>
+          </div>
+        </header>
+
         {renderContent()}
       </div>
 

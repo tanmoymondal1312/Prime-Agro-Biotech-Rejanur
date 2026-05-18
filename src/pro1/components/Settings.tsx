@@ -64,27 +64,7 @@ export default function Settings({ onOpenSidebar, onResetData }: SettingsProps) 
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-bg-page transition-colors duration-500">
-      <header className="sticky top-0 z-30 bg-bg-page/80 backdrop-blur-md border-b border-border-subtle px-4 py-3 sm:px-6 sm:py-4 lg:p-8 flex items-center gap-3">
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={onOpenSidebar}
-            className="w-12 h-12 bg-white dark:bg-card-bg rounded-2xl shadow-sm border border-border-subtle flex items-center justify-center text-stone-900 dark:text-white lg:hidden"
-          >
-            <LayoutDashboard className="w-6 h-6" />
-          </button>
-          <div className="flex items-center gap-6">
-            <div className="w-12 h-12 bg-white dark:bg-card-bg rounded-full overflow-hidden shadow-sm border border-border-subtle">
-               <img src="/portal-logo.png" alt="Prime Agro Biotech" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-black text-stone-900 dark:text-white font-display tracking-tight leading-none">সেটিংস (Settings)</h1>
-              <p className="text-sm font-bold text-stone-700 dark:text-white/30 uppercase tracking-[0.2em] mt-2 pl-1">Personalize your workspace</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main className="p-8 lg:p-12 space-y-12 pb-24 max-w-4xl mx-auto w-full">
+            <main className="p-8 lg:p-12 space-y-12 pb-24 max-w-4xl mx-auto w-full">
         {/* Logo — static display */}
         <section className="bg-white dark:bg-card-bg rounded-[3.5rem] border border-border-subtle shadow-premium p-12 transition-colors">
             <div className="flex items-center gap-4 mb-10">

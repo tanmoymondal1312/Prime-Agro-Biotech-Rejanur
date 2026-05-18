@@ -225,32 +225,7 @@ export default function Analytics({ profiles, onOpenSidebar }: AnalyticsProps) {
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-[#FDFEFA]">
-      <header className="sticky top-0 z-30 bg-[#FDFEFA]/90 backdrop-blur-md border-b border-border-subtle px-4 py-3 sm:p-6 lg:p-8 flex items-center gap-3">
-        <button
-          onClick={onOpenSidebar}
-          className="lg:hidden shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle"
-        >
-          <LayoutDashboard className="w-5 h-5 text-[#1e211f]" />
-        </button>
-        <div className="hidden sm:block w-10 h-10 bg-white rounded-xl p-1 shadow-sm border border-border-subtle shrink-0">
-          <img src="/portal-logo.png" alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
-        </div>
-        <div className="min-w-0">
-          <h1 className="text-lg sm:text-2xl lg:text-3xl font-black text-[#1e211f] font-display tracking-tight leading-none truncate">সার্বিক বিশ্লেষণ</h1>
-          <p className="text-xs font-bold text-emerald-600 uppercase tracking-[0.15em] mt-0.5 hidden sm:block">Profit/Loss Dynamics</p>
-        </div>
-        <button
-          onClick={() => { window.location.href = '/home'; }}
-          className="ml-auto shrink-0 p-2 bg-white rounded-xl shadow-sm border border-border-subtle text-stone-3000 hover:text-[#1e211f]"
-          title="হোম"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-          </svg>
-        </button>
-      </header>
-
-      <main className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-10 lg:space-y-12 pb-24 max-w-7xl mx-auto w-full">
+            <main className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-10 lg:space-y-12 pb-24 max-w-7xl mx-auto w-full">
         {/* Top Stats - High Impact Bento Style */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           <div className="bg-white p-8 rounded-[2rem] sm:rounded-[2.5rem] shadow-premium border border-border-subtle group transition-all">
