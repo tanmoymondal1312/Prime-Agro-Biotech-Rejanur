@@ -90,7 +90,7 @@ export function CowDetail({ cow: initialCow, profiles, onBack, onRefresh, onAddC
   }, [initialCow]);
   
   // Transaction Modal State
-  const [showTransactionModal, setShowTransactionModal] = useState<"loan" | "treatment" | null>(null);
+  const [showTransactionModal, setShowTransactionModal] = useState<"loan" | "treatment" | "expenses" | null>(null);
   const [txAmount, setTxAmount] = useState('');
   const [txDate, setTxDate] = useState(new Date().toISOString().split('T')[0]);
   const [txNote, setTxNote] = useState('');
@@ -173,6 +173,18 @@ export function CowDetail({ cow: initialCow, profiles, onBack, onRefresh, onAddC
   const handleAddTransaction = async () => {
     if (!txAmount || !showTransactionModal) return;
 
+    // "expenses" updates additionalExpenses directly — not stored in history
+    if (showTransactionModal === 'expenses') {
+      const updates = { additionalExpenses: Number(txAmount) };
+      const done = showSaveDialog('অতিরিক্ত খরচ আপডেট হয়েছে!');
+      setShowTransactionModal(null); setTxAmount(''); setTxNote('');
+      await storageService.updateCow(cow.id, { ...cow, ...updates });
+      setCow(prev => ({ ...prev, ...updates }));
+      done();
+      onSuccess?.('অতিরিক্ত খরচ আপডেট হয়েছে!');
+      return;
+    }
+
     const newTx: Transaction = {
       id: Math.random().toString(36).substr(2, 9),
       type: showTransactionModal,
@@ -190,7 +202,6 @@ export function CowDetail({ cow: initialCow, profiles, onBack, onRefresh, onAddC
     const done  = showSaveDialog(`${label} সফলভাবে যোগ হয়েছে!`);
     setShowTransactionModal(null); setTxAmount(''); setTxNote('');
 
-    // Pass full cow so cow.php UPDATE has all required fields
     await storageService.updateCow(cow.id, { ...cow, ...updates });
     setCow(prev => ({ ...prev, ...updates }));
     done();
@@ -716,6 +727,13 @@ window.addEventListener('load', generatePDF);
               <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100">
                 <Calculator className="w-6 h-6 text-white" />
               </div>
+              <button
+                onClick={() => setShowTransactionModal('expenses' as any)}
+                className="p-2 bg-white text-blue-600 rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors shadow-sm"
+                title="অতিরিক্ত খরচ আপডেট করুন"
+              >
+                <Pencil className="w-4 h-4" />
+              </button>
             </div>
             <p className="text-xs uppercase font-black text-blue-500 tracking-wider mb-1">অতিরিক্ত খরচ</p>
             <p className="text-3xl font-black text-stone-900 font-mono">৳ {cow.additionalExpenses.toLocaleString()}</p>
@@ -785,8 +803,8 @@ window.addEventListener('load', generatePDF);
               className="relative w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl"
             >
               <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
-                {showTransactionModal === 'loan' ? <Plus className="text-red-500" /> : <Plus className="text-amber-500" />}
-                {showTransactionModal === 'loan' ? 'নতুন ঋন যোগ করুন' : 'নতুন চিকিৎসা খরচ যোগ করুন'}
+                <Plus className={showTransactionModal === 'loan' ? 'text-red-500' : showTransactionModal === 'expenses' ? 'text-blue-500' : 'text-amber-500'} />
+                {showTransactionModal === 'loan' ? 'নতুন ঋন যোগ করুন' : showTransactionModal === 'expenses' ? 'অতিরিক্ত খরচ আপডেট করুন' : 'নতুন চিকিৎসা খরচ যোগ করুন'}
               </h3>
               <div className="space-y-4">
                 <div>
