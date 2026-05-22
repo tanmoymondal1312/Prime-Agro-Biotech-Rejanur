@@ -31,8 +31,9 @@ export function CowList({ profile, profiles = [], cows, category, onSelectCow, o
 
   const filteredCows = cows.filter(c => {
     const pName = profiles.find(p => p.id === c.profileId)?.name || '';
-    return c.notes.toLowerCase().includes(search.toLowerCase()) || 
-           c.address.toLowerCase().includes(search.toLowerCase()) ||
+    return (c.tag || '').toLowerCase().includes(search.toLowerCase()) ||
+           (c.notes || '').toLowerCase().includes(search.toLowerCase()) ||
+           (c.address || '').toLowerCase().includes(search.toLowerCase()) ||
            c.gender.toLowerCase().includes(search.toLowerCase()) ||
            pName.toLowerCase().includes(search.toLowerCase());
   });
