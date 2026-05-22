@@ -23,6 +23,10 @@ export function CowList({ profile, profiles = [], cows, category, onSelectCow, o
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
   const animalLabel = category === 'Cow' ? 'গরু' : 'ছাগল';
+
+  // Profile-level loan & treatment totals (all live cows in this profile)
+  const totalLoan      = cows.reduce((s, c) => s + (c.loanAmount      || 0), 0);
+  const totalTreatment = cows.reduce((s, c) => s + (c.treatmentCost   || 0), 0);
   const animalIcon = category === 'Cow' ? 'https://img.icons8.com/color/96/cow.png' : 'https://img.icons8.com/color/96/goat.png';
 
   const filteredCows = cows.filter(c => {
@@ -76,6 +80,24 @@ export function CowList({ profile, profiles = [], cows, category, onSelectCow, o
           <span className="hidden sm:inline">পশু যোগ করুন</span>
         </button>
       </div>
+
+      {/* Profile loan/treatment summary — shown only when inside a specific profile */}
+      {profile && (totalLoan > 0 || totalTreatment > 0) && (
+        <div className="flex gap-3">
+          {totalLoan > 0 && (
+            <div className="flex-1 bg-rose-50 border border-rose-200 rounded-2xl px-4 py-3">
+              <p className="text-[10px] font-black text-rose-500 uppercase tracking-widest mb-0.5">মোট ঋণ</p>
+              <p className="text-lg font-black text-rose-600">৳ {totalLoan.toLocaleString()}</p>
+            </div>
+          )}
+          {totalTreatment > 0 && (
+            <div className="flex-1 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3">
+              <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-0.5">চিকিৎসা ব্যয়</p>
+              <p className="text-lg font-black text-amber-600">৳ {totalTreatment.toLocaleString()}</p>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Search Bar */}
       <div className="relative">

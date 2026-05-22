@@ -79,10 +79,13 @@ export function CowDetail({ cow: initialCow, profiles, onBack, onRefresh, onAddC
     setSalePrice(initialCow.salePrice?.toString() || '');
     setIsEditingSale(!initialCow.isSold);
     setEditData({
-      entryDate: initialCow.entryDate,
-      profitType: initialCow.profitType,
-      gender: initialCow.gender,
-      address: initialCow.address
+      entryDate:          initialCow.entryDate,
+      profitType:         initialCow.profitType,
+      gender:             initialCow.gender,
+      address:            initialCow.address,
+      purchasePrice:      initialCow.purchasePrice,
+      additionalExpenses: initialCow.additionalExpenses || 0,
+      tag:                initialCow.tag || '',
     });
   }, [initialCow]);
   
@@ -94,10 +97,13 @@ export function CowDetail({ cow: initialCow, profiles, onBack, onRefresh, onAddC
 
   // Basic Info Edit State
   const [editData, setEditData] = useState({
-    entryDate: cow.entryDate,
-    profitType: cow.profitType,
-    gender: cow.gender,
-    address: cow.address
+    entryDate:          cow.entryDate,
+    profitType:         cow.profitType,
+    gender:             cow.gender,
+    address:            cow.address,
+    purchasePrice:      cow.purchasePrice,
+    additionalExpenses: cow.additionalExpenses || 0,
+    tag:                cow.tag || '',
   });
 
   const calculateDuration = (startDate: string, endDate?: string) => {
@@ -545,19 +551,54 @@ window.addEventListener('load', generatePDF);
 
         {isEditingBasic ? (
           <div className="space-y-4 animate-in fade-in zoom-in-95">
+            {/* Row 1: Tag + Entry Date */}
             <div className="grid grid-cols-2 gap-4">
               <div>
+                <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">ট্যাগ / নাম</label>
+                <input
+                  type="text"
+                  value={editData.tag}
+                  onChange={(e) => setEditData({...editData, tag: e.target.value})}
+                  placeholder="যেমন: লাল গরু"
+                  className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+              <div>
                 <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">এন্ট্রি তারিখ</label>
-                <input 
-                  type="date" 
+                <input
+                  type="date"
                   value={editData.entryDate}
                   onChange={(e) => setEditData({...editData, entryDate: e.target.value})}
                   className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
+            </div>
+            {/* Row 2: Purchase Price + Additional Expenses */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">ক্রয়মূল্য (৳)</label>
+                <input
+                  type="number"
+                  value={editData.purchasePrice}
+                  onChange={(e) => setEditData({...editData, purchasePrice: Number(e.target.value)})}
+                  className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">অতিরিক্ত খরচ (৳)</label>
+                <input
+                  type="number"
+                  value={editData.additionalExpenses}
+                  onChange={(e) => setEditData({...editData, additionalExpenses: Number(e.target.value)})}
+                  className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+            </div>
+            {/* Row 3: Gender + Profit Type */}
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">লিঙ্গ</label>
-                <select 
+                <select
                   value={editData.gender}
                   onChange={(e) => setEditData({...editData, gender: e.target.value as Gender})}
                   className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
@@ -568,11 +609,9 @@ window.addEventListener('load', generatePDF);
                   <option value="Calf">{cow.category === 'Cow' ? t.calf : t.kid}</option>
                 </select>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">লাভের ধরন</label>
-                <select 
+                <select
                   value={editData.profitType}
                   onChange={(e) => setEditData({...editData, profitType: e.target.value as ProfitType})}
                   className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
@@ -582,17 +621,18 @@ window.addEventListener('load', generatePDF);
                   <option value="One Fifth (3:2)">{t.oneFifth}</option>
                 </select>
               </div>
-              <div>
-                <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">ঠিকানা</label>
-                <input 
-                  type="text" 
-                  value={editData.address}
-                  onChange={(e) => setEditData({...editData, address: e.target.value})}
-                  className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
-                />
-              </div>
             </div>
-            <button 
+            {/* Row 4: Address */}
+            <div>
+              <label className="text-[10px] uppercase font-bold text-stone-400 ml-1">ঠিকানা</label>
+              <input
+                type="text"
+                value={editData.address}
+                onChange={(e) => setEditData({...editData, address: e.target.value})}
+                className="w-full p-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+              />
+            </div>
+            <button
               onClick={handleUpdateBasicInfo}
               className="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl flex items-center justify-center gap-2"
             >

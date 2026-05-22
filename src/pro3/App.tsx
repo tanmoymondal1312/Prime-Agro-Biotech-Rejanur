@@ -141,6 +141,7 @@ export default function App() {
   const [genderFilter, setGenderFilter]       = useState<string | null>(null);
   const [toast, setToast]                     = useState<string | null>(null);
   const [fullscreenImg, setFullscreenImg]     = useState<string | null>(null);
+  const [liveSearch, setLiveSearch]           = useState('');
 
   const t            = translations[lang];
   const filteredCows = selectedCategory ? cows.filter(c => c.category === selectedCategory) : [];
@@ -392,8 +393,24 @@ export default function App() {
                     মোট {profiles.filter(p => cows.some(c => c.profileId === p.id && !c.isSold && c.category === selectedCategory)).length} মালিক
                   </div>
                 </div>
+                {/* Search bar */}
+                <div className="relative">
+                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input
+                    type="text"
+                    placeholder="খুঁজুন..."
+                    value={liveSearch}
+                    onChange={(e) => setLiveSearch(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 bg-white border border-stone-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none shadow-sm text-stone-800"
+                  />
+                </div>
                 <ProfileList
-                  profiles={profiles.filter(p => cows.some(c => c.profileId === p.id && !c.isSold && c.category === selectedCategory))}
+                  profiles={profiles
+                    .filter(p => cows.some(c => c.profileId === p.id && !c.isSold && c.category === selectedCategory))
+                    .filter(p => !liveSearch || p.name.toLowerCase().includes(liveSearch.toLowerCase()))
+                  }
                   cows={cows}
                   hideHeader
                   onSelectProfile={(p) => {
@@ -442,7 +459,7 @@ export default function App() {
                 profile={selectedProfile}
                 profiles={profiles}
                 category={selectedCategory}
-                cows={filteredCows.filter(c => c.profileId === selectedProfile.id)}
+                cows={filteredCows.filter(c => c.profileId === selectedProfile.id && !c.isSold)}
                 onSelectCow={(c) => { setSelectedCow(c); goTo('cow-detail', { cowId: c.id }); }}
                 onAddCow={() => setView('add-cow')}
                 onRefresh={refreshData}
