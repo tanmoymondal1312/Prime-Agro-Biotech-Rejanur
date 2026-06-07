@@ -17,7 +17,7 @@ function rowToDebt(array $r): array {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $debts = array_map('rowToDebt', $db->query("SELECT * FROM takatrack_my_debts ORDER BY rowid DESC")->fetchAll());
+    $debts = array_map('rowToDebt', $db->query("SELECT * FROM takatrack_my_debts ORDER BY date DESC")->fetchAll());
     echo json_encode($debts);
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {

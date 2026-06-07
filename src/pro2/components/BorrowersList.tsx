@@ -5,13 +5,20 @@ import { useFirebase } from '../lib/FirebaseContext';
 
 const StatusBadge = ({ status }: { status: string }) => {
   const colors: any = {
-    'Overdue': 'bg-red-500/10 text-red-500 border-red-500/20',
-    'Pending': 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
-    'Paid': 'bg-green-500/10 text-green-500 border-green-500/20',
+    'Overdue':  'bg-red-500/10 text-red-500 border-red-500/20',
+    'Pending':  'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
+    'Paid':     'bg-green-500/10 text-green-500 border-green-500/20',
+    'No Loans': 'bg-gray-500/10 text-gray-400 border-white/10',
+  };
+  const labels: any = {
+    'No Loans': 'ঋণ নেই',
+    'Pending':  'বাকি আছে',
+    'Paid':     'পরিশোধিত',
+    'Overdue':  'মেয়াদোত্তীর্ণ',
   };
   return (
-    <span className={`text-[10px] px-2 py-0.5 rounded-full border font-bold uppercase ${colors[status] || 'bg-gray-500/10 text-gray-400 border-white/10'}`}>
-      {status}
+    <span className={`text-[10px] px-2 py-0.5 rounded-full border font-bold ${colors[status] || 'bg-gray-500/10 text-gray-400 border-white/10'}`}>
+      {labels[status] || status}
     </span>
   );
 };
@@ -61,8 +68,11 @@ export const BorrowersList = ({ onSelectBorrower }: { onSelectBorrower: (id: str
         <AnimatePresence>
           {filteredBorrowers.map((borrower, i) => {
             const borrowerLoans = loans.filter(l => l.borrowerId === borrower.id);
-            const totalDue = borrowerLoans.reduce((acc, l) => acc + (Number(l.remainingAmount) || 0), 0);
-            
+            const totalDue   = borrowerLoans.reduce((acc, l) => acc + (Number(l.remainingAmount) || 0), 0);
+            const totalLent  = borrowerLoans.reduce((acc, l) => acc + (Number(l.amount)          || 0), 0);
+            const hasLoans   = borrowerLoans.length > 0;
+            const badgeStatus = !hasLoans ? 'No Loans' : totalDue > 0 ? 'Pending' : 'Paid';
+
             // Calculate debt age (days since oldest active loan)
             const activeLoans = borrowerLoans.filter(l => l.remainingAmount > 0);
             const oldestLoan = activeLoans.length > 0 
@@ -92,7 +102,7 @@ export const BorrowersList = ({ onSelectBorrower }: { onSelectBorrower: (id: str
                   <div className="flex justify-between items-start">
                     <h3 className="font-bold font-bengali text-lg">{borrower.name}</h3>
                     <div className="flex gap-2 items-center">
-                      <StatusBadge status={totalDue > 0 ? 'Pending' : 'Paid'} />
+                      <StatusBadge status={badgeStatus} />
                       <button 
                         onClick={(e) => { e.stopPropagation(); setDeleteId(borrower.id); }}
                         className="p-2 text-gray-500 hover:text-red-500 transition-all active:scale-95"
@@ -110,9 +120,21 @@ export const BorrowersList = ({ onSelectBorrower }: { onSelectBorrower: (id: str
                     )}
                   </div>
                   <div className="flex justify-between items-end mt-2">
-                    <div>
-                      <p className="text-[10px] text-gray-500 font-bengali uppercase tracking-wider">মোট বাকি টাকা</p>
-                      <p className="font-bold text-indigo-400 text-lg">৳{totalDue.toLocaleString()}</p>
+                    <div className="flex gap-4">
+                      {hasLoans && (
+                        <div>
+                          <p className="text-[10px] text-gray-500 font-bengali uppercase tracking-wider">মোট দেওয়া</p>
+                          <p className="font-bold text-gray-400 text-sm">৳{totalLent.toLocaleString()}</p>
+                        </div>
+                      )}
+                      <div>
+                        <p className="text-[10px] text-gray-500 font-bengali uppercase tracking-wider">
+                          {hasLoans ? 'বাকি টাকা' : 'কোনো ঋণ নেই'}
+                        </p>
+                        <p className={`font-bold text-lg ${totalDue > 0 ? 'text-yellow-400' : hasLoans ? 'text-green-400' : 'text-gray-500'}`}>
+                          {hasLoans ? `৳${totalDue.toLocaleString()}` : '—'}
+                        </p>
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <a href={`tel:${borrower.phone}`} onClick={e => e.stopPropagation()} className="p-2.5 bg-green-500/10 text-green-500 rounded-xl hover:bg-green-500/20 transition-all"><Phone size={18} /></a>

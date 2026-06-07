@@ -4,7 +4,7 @@ require_once __DIR__ . '/db.php';
 $db = getDB();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $rows = $db->query("SELECT * FROM takatrack_borrowers ORDER BY rowid DESC")->fetchAll();
+    $rows = $db->query("SELECT * FROM takatrack_borrowers ORDER BY name ASC")->fetchAll();
     $borrowers = array_map(fn($r) => [
         'id'        => $r['id'],
         'name'      => $r['name'],

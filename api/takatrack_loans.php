@@ -20,7 +20,7 @@ function rowToLoan(array $r): array {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $loans = array_map('rowToLoan', $db->query("SELECT * FROM takatrack_loans ORDER BY rowid DESC")->fetchAll());
+    $loans = array_map('rowToLoan', $db->query("SELECT * FROM takatrack_loans ORDER BY give_date DESC")->fetchAll());
     echo json_encode($loans);
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {

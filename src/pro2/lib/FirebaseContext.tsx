@@ -44,15 +44,34 @@ const API = {
   myDebts:   '/api/takatrack_my_debts.php',
 };
 
-function rand() { return Math.random().toString(36).substr(2, 9); }
-function post(url: string, body: unknown) {
-  return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(console.error);
+function uid() { return Math.random().toString(36).substr(2, 9); }
+
+function toStr(d: Date | string | undefined): string | undefined {
+  if (!d) return undefined;
+  return d instanceof Date ? d.toISOString() : d;
 }
-function put(url: string, body: unknown) {
-  return fetch(url, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(console.error);
+
+async function apiPost(url: string, body: unknown): Promise<void> {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`POST ${url} failed: ${res.status}`);
 }
-function del(url: string) {
-  return fetch(url, { method: 'DELETE' }).catch(console.error);
+
+async function apiPut(url: string, body: unknown): Promise<void> {
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`PUT ${url} failed: ${res.status}`);
+}
+
+async function apiDelete(url: string): Promise<void> {
+  const res = await fetch(url, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`DELETE ${url} failed: ${res.status}`);
 }
 
 export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -69,7 +88,6 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     localStorage.setItem('takatrack_theme', t);
   };
 
-  // ── Load all data from API on mount ──────────────────────────────────────
   useEffect(() => {
     (async () => {
       const savedTheme = localStorage.getItem('takatrack_theme') as 'dark' | 'light' | null;
@@ -83,11 +101,9 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           fetch(API.myDebts),
         ]);
 
-        const borrowersData: Borrower[] = bRes.ok ? await bRes.json() : [];
-        setBorrowers(borrowersData);
+        setBorrowers(bRes.ok ? await bRes.json() : []);
 
         const loansRaw = lRes.ok ? await lRes.json() : [];
-        // Dates come as strings from API — parse them back to Date objects
         setLoans(loansRaw.map((l: any) => ({
           ...l,
           giveDate: new Date(l.giveDate),
@@ -99,11 +115,12 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         if (stocksData.length > 0) {
           setStocks(stocksData.map(s => ({ ...s, lastUpdated: new Date(s.lastUpdated) })));
         } else {
-          // First run: seed initial stocks into DB
           setStocks(INITIAL_STOCKS);
-          for (const s of INITIAL_STOCKS) {
-            post(API.stocks, { ...s, lastUpdated: s.lastUpdated.toISOString() });
-          }
+          await Promise.all(
+            INITIAL_STOCKS.map(s =>
+              apiPost(API.stocks, { ...s, lastUpdated: s.lastUpdated.toISOString() }).catch(() => {})
+            )
+          );
         }
 
         const debtsRaw = dRes.ok ? await dRes.json() : [];
@@ -121,150 +138,133 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     })();
   }, []);
 
-  const login = () => { /* auto-logged in by portal */ };
+  const login = () => {};
 
   // ── Borrowers ─────────────────────────────────────────────────────────────
-  const addBorrower = async (data: Omit<Borrower, 'id' | 'riskLevel'>) => {
-    const nb: Borrower = { ...data, id: rand(), riskLevel: 'Low' };
+  const addBorrower = async (data: Omit<Borrower, 'id' | 'riskLevel'>): Promise<string> => {
+    const nb: Borrower = { ...data, id: uid(), riskLevel: 'Low' };
+    await apiPost(API.borrowers, nb);
     setBorrowers(prev => [nb, ...prev]);
-    post(API.borrowers, nb);
     return nb.id;
   };
 
-  const deleteBorrower = async (id: string) => {
+  const deleteBorrower = async (id: string): Promise<void> => {
+    await apiDelete(`${API.borrowers}?id=${id}`);
     setBorrowers(prev => prev.filter(b => b.id !== id));
     setLoans(prev => prev.filter(l => l.borrowerId !== id));
-    del(`${API.borrowers}?id=${id}`);
   };
 
   // ── Loans ─────────────────────────────────────────────────────────────────
-  const addLoan = async (data: Omit<Loan, 'id' | 'status' | 'remainingAmount' | 'payments'>) => {
+  const addLoan = async (data: Omit<Loan, 'id' | 'status' | 'remainingAmount' | 'payments'>): Promise<void> => {
     const amount = Number(data.amount) || 0;
-    const nl: Loan = { ...data, amount, id: rand(), remainingAmount: amount, status: 'Active' as any, payments: [] };
-    setLoans(prev => [nl, ...prev]);
-    post(API.loans, {
+    const nl: Loan = { ...data, amount, id: uid(), remainingAmount: amount, status: 'Active' as any, payments: [] };
+    await apiPost(API.loans, {
       ...nl,
-      giveDate: nl.giveDate instanceof Date ? nl.giveDate.toISOString() : nl.giveDate,
-      dueDate:  nl.dueDate  instanceof Date ? nl.dueDate.toISOString()  : nl.dueDate,
+      giveDate: toStr(nl.giveDate),
+      dueDate:  toStr(nl.dueDate),
     });
+    setLoans(prev => [nl, ...prev]);
   };
 
-  const addPayment = async (loanId: string, amount: number, date: Date, note?: string) => {
-    let updatedLoan: Loan | undefined;
-    setLoans(prev => prev.map(loan => {
-      if (loan.id !== loanId) return loan;
-      const newRemaining = Math.max(0, (loan.remainingAmount || loan.amount) - amount);
-      const newPayment = { id: rand(), amount, date, note };
-      updatedLoan = {
-        ...loan,
-        remainingAmount: newRemaining,
-        status: newRemaining === 0 ? 'Paid' : 'Partial Paid' as any,
-        payments: [...(loan.payments || []), newPayment],
-      };
-      return updatedLoan;
-    }));
-    if (updatedLoan) {
-      put(`${API.loans}?id=${loanId}`, {
-        remainingAmount: updatedLoan.remainingAmount,
-        status: updatedLoan.status,
-        payments: updatedLoan.payments.map(p => ({ ...p, date: p.date instanceof Date ? p.date.toISOString() : p.date })),
-      });
-    }
+  const addPayment = async (loanId: string, amount: number, date: Date, note?: string): Promise<void> => {
+    const loan = loans.find(l => l.id === loanId);
+    if (!loan) return;
+    const newRemaining = Math.max(0, (loan.remainingAmount || loan.amount) - amount);
+    const updated: Loan = {
+      ...loan,
+      remainingAmount: newRemaining,
+      status: newRemaining === 0 ? 'Paid' : 'Partial Paid' as any,
+      payments: [...(loan.payments || []), { id: uid(), amount, date, note }],
+    };
+    await apiPut(`${API.loans}?id=${loanId}`, {
+      remainingAmount: updated.remainingAmount,
+      status: updated.status,
+      payments: updated.payments.map(p => ({ ...p, date: toStr(p.date) })),
+    });
+    setLoans(prev => prev.map(l => l.id === loanId ? updated : l));
   };
 
-  const deleteLoan = async (id: string) => {
+  const deleteLoan = async (id: string): Promise<void> => {
+    await apiDelete(`${API.loans}?id=${id}`);
     setLoans(prev => prev.filter(l => l.id !== id));
-    del(`${API.loans}?id=${id}`);
   };
 
   // ── Stocks ────────────────────────────────────────────────────────────────
-  const updateStock = async (id: string, quantity: number, note?: string) => {
+  const updateStock = async (id: string, quantity: number, note?: string): Promise<void> => {
+    await apiPut(`${API.stocks}?id=${id}`, { quantity, note });
     setStocks(prev => prev.map(s => s.id === id ? { ...s, quantity, note: note ?? s.note, lastUpdated: new Date() } : s));
-    put(`${API.stocks}?id=${id}`, { quantity, note });
   };
 
-  const addStockItem = async (item: Omit<StockItem, 'id' | 'lastUpdated'>) => {
-    const ns: StockItem = { ...item, id: rand(), lastUpdated: new Date() };
+  const addStockItem = async (item: Omit<StockItem, 'id' | 'lastUpdated'>): Promise<void> => {
+    const ns: StockItem = { ...item, id: uid(), lastUpdated: new Date() };
+    await apiPost(API.stocks, { ...ns, lastUpdated: ns.lastUpdated.toISOString() });
     setStocks(prev => [...prev, ns]);
-    post(API.stocks, { ...ns, lastUpdated: ns.lastUpdated.toISOString() });
   };
 
-  const deleteStockItem = async (id: string) => {
+  const deleteStockItem = async (id: string): Promise<void> => {
+    await apiDelete(`${API.stocks}?id=${id}`);
     setStocks(prev => prev.filter(s => s.id !== id));
-    del(`${API.stocks}?id=${id}`);
   };
 
   // ── My Debts ──────────────────────────────────────────────────────────────
-  const addMyDebt = async (debt: Omit<MyDebt, 'id' | 'remainingAmount' | 'payments'>) => {
+  const addMyDebt = async (debt: Omit<MyDebt, 'id' | 'remainingAmount' | 'payments'>): Promise<void> => {
     const total = Number(debt.totalAmount) || 0;
-    const nd: MyDebt = { ...debt, totalAmount: total, id: rand(), remainingAmount: total, payments: [] };
-    setMyDebts(prev => [...prev, nd]);
-    post(API.myDebts, {
+    const nd: MyDebt = { ...debt, totalAmount: total, id: uid(), remainingAmount: total, payments: [] };
+    await apiPost(API.myDebts, {
       ...nd,
-      date:    nd.date    instanceof Date ? nd.date.toISOString()    : nd.date,
-      dueDate: nd.dueDate instanceof Date ? nd.dueDate.toISOString() : nd.dueDate,
+      date:    toStr(nd.date),
+      dueDate: toStr(nd.dueDate),
     });
+    setMyDebts(prev => [...prev, nd]);
   };
 
-  const updateMyDebt = async (id: string, updates: Partial<MyDebt>) => {
-    let updated: MyDebt | undefined;
-    setMyDebts(prev => prev.map(d => {
-      if (d.id !== id) return d;
-      updated = { ...d, ...updates };
-      return updated;
-    }));
-    if (updated) {
-      put(`${API.myDebts}?id=${id}`, {
-        remainingAmount: updated.remainingAmount,
-        note: updated.note,
-        dueDate: updated.dueDate instanceof Date ? updated.dueDate.toISOString() : updated.dueDate,
-        payments: (updated.payments || []).map(p => ({ ...p, date: p.date instanceof Date ? p.date.toISOString() : p.date })),
-      });
-    }
+  const updateMyDebt = async (id: string, updates: Partial<MyDebt>): Promise<void> => {
+    const current = myDebts.find(d => d.id === id);
+    if (!current) return;
+    const updated = { ...current, ...updates };
+    await apiPut(`${API.myDebts}?id=${id}`, {
+      remainingAmount: updated.remainingAmount,
+      note:    updated.note,
+      dueDate: toStr(updated.dueDate),
+      payments: (updated.payments || []).map(p => ({ ...p, date: toStr(p.date) })),
+    });
+    setMyDebts(prev => prev.map(d => d.id === id ? updated : d));
   };
 
-  const deleteMyDebt = async (id: string) => {
+  const deleteMyDebt = async (id: string): Promise<void> => {
+    await apiDelete(`${API.myDebts}?id=${id}`);
     setMyDebts(prev => prev.filter(d => d.id !== id));
-    del(`${API.myDebts}?id=${id}`);
   };
 
-  const addMyDebtPayment = async (debtId: string, amount: number, date: Date, note?: string) => {
-    const newPayment: MyDebtPayment = { id: rand(), amount, date, note };
-    let updated: MyDebt | undefined;
-    setMyDebts(prev => prev.map(debt => {
-      if (debt.id !== debtId) return debt;
-      const payments = [...debt.payments, newPayment];
-      const remaining = debt.totalAmount - payments.reduce((s, p) => s + p.amount, 0);
-      updated = { ...debt, payments, remainingAmount: remaining };
-      return updated;
-    }));
-    if (updated) {
-      put(`${API.myDebts}?id=${debtId}`, {
-        remainingAmount: updated.remainingAmount,
-        note: updated.note,
-        dueDate: updated.dueDate instanceof Date ? updated.dueDate.toISOString() : updated.dueDate,
-        payments: updated.payments.map(p => ({ ...p, date: p.date instanceof Date ? p.date.toISOString() : p.date })),
-      });
-    }
+  const addMyDebtPayment = async (debtId: string, amount: number, date: Date, note?: string): Promise<void> => {
+    const debt = myDebts.find(d => d.id === debtId);
+    if (!debt) return;
+    const newPayment: MyDebtPayment = { id: uid(), amount, date, note };
+    const payments = [...debt.payments, newPayment];
+    const remainingAmount = Math.max(0, debt.totalAmount - payments.reduce((s, p) => s + p.amount, 0));
+    const updated = { ...debt, payments, remainingAmount };
+    await apiPut(`${API.myDebts}?id=${debtId}`, {
+      remainingAmount: updated.remainingAmount,
+      note:    updated.note,
+      dueDate: toStr(updated.dueDate),
+      payments: updated.payments.map(p => ({ ...p, date: toStr(p.date) })),
+    });
+    setMyDebts(prev => prev.map(d => d.id === debtId ? updated : d));
   };
 
-  const deleteMyDebtPayment = async (debtId: string, paymentId: string) => {
-    let updated: MyDebt | undefined;
-    setMyDebts(prev => prev.map(debt => {
-      if (debt.id !== debtId) return debt;
-      const payments = debt.payments.filter(p => p.id !== paymentId);
-      const remaining = debt.totalAmount - payments.reduce((s, p) => s + p.amount, 0);
-      updated = { ...debt, payments, remainingAmount: remaining };
-      return updated;
-    }));
-    if (updated) {
-      put(`${API.myDebts}?id=${debtId}`, {
-        remainingAmount: updated.remainingAmount,
-        note: updated.note,
-        dueDate: updated.dueDate instanceof Date ? updated.dueDate.toISOString() : updated.dueDate,
-        payments: updated.payments.map(p => ({ ...p, date: p.date instanceof Date ? p.date.toISOString() : p.date })),
-      });
-    }
+  const deleteMyDebtPayment = async (debtId: string, paymentId: string): Promise<void> => {
+    const debt = myDebts.find(d => d.id === debtId);
+    if (!debt) return;
+    const payments = debt.payments.filter(p => p.id !== paymentId);
+    const remainingAmount = Math.max(0, debt.totalAmount - payments.reduce((s, p) => s + p.amount, 0));
+    const updated = { ...debt, payments, remainingAmount };
+    await apiPut(`${API.myDebts}?id=${debtId}`, {
+      remainingAmount: updated.remainingAmount,
+      note:    updated.note,
+      dueDate: toStr(updated.dueDate),
+      payments: updated.payments.map(p => ({ ...p, date: toStr(p.date) })),
+    });
+    setMyDebts(prev => prev.map(d => d.id === debtId ? updated : d));
   };
 
   return (

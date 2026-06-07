@@ -147,14 +147,18 @@ function getDB(): PDO {
                 remaining_amount DECIMAL(15,2) NOT NULL,
                 category         VARCHAR(50)   NOT NULL,
                 reason           TEXT          NULL,
-                give_date        VARCHAR(20)   NOT NULL,
-                due_date         VARCHAR(20)   NOT NULL,
+                give_date        VARCHAR(35)   NOT NULL,
+                due_date         VARCHAR(35)   NOT NULL,
                 status           VARCHAR(20)   NOT NULL,
                 notes            TEXT          NULL,
                 payments         LONGTEXT,
                 FOREIGN KEY (borrower_id) REFERENCES takatrack_borrowers(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
         ");
+
+        // Expand date columns if they were created with old VARCHAR(20) schema
+        try { $pdo->exec("ALTER TABLE takatrack_loans MODIFY COLUMN give_date VARCHAR(35) NOT NULL"); } catch (PDOException) {}
+        try { $pdo->exec("ALTER TABLE takatrack_loans MODIFY COLUMN due_date  VARCHAR(35) NOT NULL"); } catch (PDOException) {}
 
         $pdo->exec("
             CREATE TABLE IF NOT EXISTS takatrack_stocks (

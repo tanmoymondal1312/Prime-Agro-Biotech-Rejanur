@@ -48,43 +48,67 @@ export const StockManagement = ({ category, onBack }: { category: StockCategory,
   const totalQuantity = (category === 'Fertilizer' ? filteredStocks : stocks.filter(s => s.category === 'Other' && s.subCategory === selectedSubCat))
     .reduce((acc, s) => acc + s.quantity, 0);
 
-  const handleUpdate = (id: string, current: number, delta: number) => {
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [addingSaving, setAddingSaving] = useState(false);
+
+  const handleUpdate = async (id: string, current: number, delta: number) => {
+    if (updatingId === id) return;
     const newValue = Math.max(0, current + delta);
-    updateStock(id, newValue);
+    setUpdatingId(id);
+    try {
+      await updateStock(id, newValue);
+    } finally {
+      setUpdatingId(null);
+    }
   };
 
-  const handleManualEntry = (id: string) => {
+  const handleManualEntry = async (id: string) => {
     const val = parseInt(tempValue);
     if (!isNaN(val) && val >= 0) {
-      updateStock(id, val);
-      setEditingId(null);
-      setTempValue('');
+      setUpdatingId(id);
+      try {
+        await updateStock(id, val);
+        setEditingId(null);
+        setTempValue('');
+      } finally {
+        setUpdatingId(null);
+      }
     }
   };
 
-  const handleNoteSave = (id: string) => {
+  const handleNoteSave = async (id: string) => {
     const item = stocks.find(s => s.id === id);
     if (item) {
-      updateStock(id, item.quantity, tempNote);
-      setEditingNoteId(null);
-      setTempNote('');
+      setUpdatingId(id);
+      try {
+        await updateStock(id, item.quantity, tempNote);
+        setEditingNoteId(null);
+        setTempNote('');
+      } finally {
+        setUpdatingId(null);
+      }
     }
   };
 
-  const handleAddItem = () => {
+  const handleAddItem = async () => {
     if (!newItemName || !newItemQty) return;
-    addStockItem({
-      name: newItemName,
-      quantity: parseInt(newItemQty),
-      category: 'Other',
-      subCategory: selectedSubCat || 'other',
-      note: newItemNote,
-      date: new Date()
-    });
-    setNewItemName('');
-    setNewItemQty('');
-    setNewItemNote('');
-    setShowAddForm(false);
+    setAddingSaving(true);
+    try {
+      await addStockItem({
+        name: newItemName,
+        quantity: parseInt(newItemQty),
+        category: 'Other',
+        subCategory: selectedSubCat || 'other',
+        note: newItemNote,
+        date: new Date()
+      });
+      setNewItemName('');
+      setNewItemQty('');
+      setNewItemNote('');
+      setShowAddForm(false);
+    } finally {
+      setAddingSaving(false);
+    }
   };
 
   // Sub-category Menu for 'Other'
@@ -196,14 +220,15 @@ export const StockManagement = ({ category, onBack }: { category: StockCategory,
                 </div>
               </div>
               <div className="flex gap-3 mt-4">
-                <button 
+                <button
                   onClick={() => setShowAddForm(false)}
                   className="flex-1 py-4 glass rounded-2xl font-bold font-bengali text-gray-400"
                 >বাতিল</button>
-                <button 
+                <button
                   onClick={handleAddItem}
-                  className="flex-1 py-4 bg-indigo-500 rounded-2xl font-bold font-bengali text-white"
-                >নিশ্চিত করুন</button>
+                  disabled={addingSaving}
+                  className="flex-1 py-4 bg-indigo-500 rounded-2xl font-bold font-bengali text-white disabled:opacity-60"
+                >{addingSaving ? 'সংরক্ষণ...' : 'নিশ্চিত করুন'}</button>
               </div>
             </motion.div>
           </motion.div>
@@ -281,9 +306,10 @@ export const StockManagement = ({ category, onBack }: { category: StockCategory,
             </div>
 
             <div className="flex gap-2">
-              <button 
+              <button
                 onClick={() => handleUpdate(item.id, item.quantity, -1)}
-                className="flex-1 py-3 glass rounded-2xl flex items-center justify-center text-red-400 hover:bg-red-500/10 transition-all active:scale-95"
+                disabled={updatingId === item.id}
+                className="flex-1 py-3 glass rounded-2xl flex items-center justify-center text-red-400 hover:bg-red-500/10 transition-all active:scale-95 disabled:opacity-40"
               >
                 <Minus size={20} />
               </button>
@@ -317,9 +343,10 @@ export const StockManagement = ({ category, onBack }: { category: StockCategory,
                 </button>
               )}
 
-              <button 
+              <button
                 onClick={() => handleUpdate(item.id, item.quantity, 1)}
-                className="flex-1 py-3 glass rounded-2xl flex items-center justify-center text-green-400 hover:bg-green-500/10 transition-all active:scale-95"
+                disabled={updatingId === item.id}
+                className="flex-1 py-3 glass rounded-2xl flex items-center justify-center text-green-400 hover:bg-green-500/10 transition-all active:scale-95 disabled:opacity-40"
               >
                 <Plus size={20} />
               </button>

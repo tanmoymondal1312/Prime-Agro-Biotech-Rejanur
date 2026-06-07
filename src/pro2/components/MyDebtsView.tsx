@@ -291,12 +291,18 @@ const QuickPayModal = ({ onClose, debts, onAdd }: { onClose: () => void, debts: 
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [note, setNote] = useState('');
+  const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!debtId || !amount) return;
-    onAdd(debtId, parseFloat(amount), new Date(date), note);
-    onClose();
+    setSaving(true);
+    try {
+      await onAdd(debtId, parseFloat(amount), new Date(date), note);
+      onClose();
+    } catch {
+      setSaving(false);
+    }
   };
 
   return (
@@ -354,11 +360,12 @@ const QuickPayModal = ({ onClose, debts, onAdd }: { onClose: () => void, debts: 
           </div>
         </div>
         
-        <button 
+        <button
           type="submit"
-          className="w-full py-4 bg-emerald-500 rounded-2xl font-bold font-bengali text-white mt-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all"
+          disabled={saving}
+          className="w-full py-4 bg-emerald-500 rounded-2xl font-bold font-bengali text-white mt-2 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all disabled:opacity-60"
         >
-          পরিশোধ নিশ্চিত করুন
+          {saving ? 'সংরক্ষণ হচ্ছে...' : 'পরিশোধ নিশ্চিত করুন'}
         </button>
       </motion.form>
     </motion.div>
@@ -371,18 +378,24 @@ const AddDebtModal = ({ onClose, onAdd }: { onClose: () => void, onAdd: any }) =
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [dueDate, setDueDate] = useState('');
   const [note, setNote] = useState('');
+  const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !amount) return;
-    onAdd({
-      lenderName: name,
-      totalAmount: parseFloat(amount),
-      date: new Date(date),
-      dueDate: dueDate ? new Date(dueDate) : undefined,
-      note
-    });
-    onClose();
+    setSaving(true);
+    try {
+      await onAdd({
+        lenderName: name,
+        totalAmount: parseFloat(amount),
+        date: new Date(date),
+        dueDate: dueDate ? new Date(dueDate) : undefined,
+        note
+      });
+      onClose();
+    } catch {
+      setSaving(false);
+    }
   };
 
   return (
@@ -441,11 +454,12 @@ const AddDebtModal = ({ onClose, onAdd }: { onClose: () => void, onAdd: any }) =
           </div>
         </div>
         
-        <button 
+        <button
           type="submit"
-          className="w-full py-4 bg-indigo-500 rounded-2xl font-bold font-bengali text-white mt-2 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all"
+          disabled={saving}
+          className="w-full py-4 bg-indigo-500 rounded-2xl font-bold font-bengali text-white mt-2 shadow-lg shadow-indigo-500/20 active:scale-95 transition-all disabled:opacity-60"
         >
-          তথ্য জমা দিন
+          {saving ? 'সংরক্ষণ হচ্ছে...' : 'তথ্য জমা দিন'}
         </button>
       </motion.form>
     </motion.div>
@@ -459,18 +473,30 @@ const DebtDetailPage = ({ debt, onBack }: { debt: MyDebt, onBack: () => void }) 
   const [payAmount, setPayAmount] = useState('');
   const [payDate, setPayDate] = useState(new Date().toISOString().split('T')[0]);
   const [payNote, setPayNote] = useState('');
+  const [savingPayment, setSavingPayment] = useState(false);
+  const [deletingDebt, setDeletingDebt] = useState(false);
 
-  const handleAddPayment = () => {
+  const handleAddPayment = async () => {
     if (!payAmount) return;
-    addMyDebtPayment(debt.id, parseFloat(payAmount), new Date(payDate), payNote);
-    setShowAddPayment(false);
-    setPayAmount('');
-    setPayNote('');
+    setSavingPayment(true);
+    try {
+      await addMyDebtPayment(debt.id, parseFloat(payAmount), new Date(payDate), payNote);
+      setShowAddPayment(false);
+      setPayAmount('');
+      setPayNote('');
+    } finally {
+      setSavingPayment(false);
+    }
   };
 
-  const handleDeleteDebt = () => {
-    deleteMyDebt(debt.id);
-    onBack();
+  const handleDeleteDebt = async () => {
+    setDeletingDebt(true);
+    try {
+      await deleteMyDebt(debt.id);
+      onBack();
+    } finally {
+      setDeletingDebt(false);
+    }
   };
 
   return (
@@ -503,17 +529,18 @@ const DebtDetailPage = ({ debt, onBack }: { debt: MyDebt, onBack: () => void }) 
                 <p className="text-gray-400 font-bengali text-sm">এই ঋণের সকল তথ্য চিরতরে মুছে যাবে।</p>
               </div>
               <div className="flex gap-4">
-                <button 
+                <button
                   onClick={() => setShowDeleteConfirm(false)}
                   className="flex-1 py-4 glass rounded-2xl font-bold font-bengali transition-all active:scale-95"
                 >
                   না, থাক
                 </button>
-                <button 
+                <button
                   onClick={handleDeleteDebt}
-                  className="flex-1 py-4 bg-red-500 text-white rounded-2xl font-bold font-bengali transition-all active:scale-95 shadow-lg shadow-red-500/20"
+                  disabled={deletingDebt}
+                  className="flex-1 py-4 bg-red-500 text-white rounded-2xl font-bold font-bengali transition-all active:scale-95 shadow-lg shadow-red-500/20 disabled:opacity-60"
                 >
-                  হ্যাঁ, ডিলিট
+                  {deletingDebt ? 'মুছছে...' : 'হ্যাঁ, ডিলিট'}
                 </button>
               </div>
             </motion.div>
@@ -600,7 +627,9 @@ const DebtDetailPage = ({ debt, onBack }: { debt: MyDebt, onBack: () => void }) 
               </div>
               <div className="flex gap-2">
                 <button onClick={() => setShowAddPayment(false)} className="flex-1 py-3 glass rounded-xl font-bold font-bengali text-sm">বাতিল</button>
-                <button onClick={handleAddPayment} className="flex-1 py-3 bg-indigo-500 rounded-xl font-bold font-bengali text-sm">যোগ করুন</button>
+                <button onClick={handleAddPayment} disabled={savingPayment} className="flex-1 py-3 bg-indigo-500 rounded-xl font-bold font-bengali text-sm disabled:opacity-60">
+                  {savingPayment ? 'সংরক্ষণ...' : 'যোগ করুন'}
+                </button>
               </div>
             </motion.div>
           )}

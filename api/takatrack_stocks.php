@@ -16,7 +16,7 @@ function rowToStock(array $r): array {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $stocks = array_map('rowToStock', $db->query("SELECT * FROM takatrack_stocks ORDER BY rowid ASC")->fetchAll());
+    $stocks = array_map('rowToStock', $db->query("SELECT * FROM takatrack_stocks ORDER BY category ASC, name ASC")->fetchAll());
     echo json_encode($stocks);
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
