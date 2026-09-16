@@ -58,7 +58,7 @@ export default function HomePage() {
             className="w-full h-full object-cover"
           />
         </div>
-        <h1 className="text-3xl font-black text-stone-900 tracking-tight">রেজা পোর্টাল</h1>
+        <h1 className="text-3xl font-black text-stone-900 tracking-tight">Prime Agro Biotech</h1>
         <p className="text-stone-400 text-sm mt-1 font-medium">একটি অ্যাপ থেকে সব কিছু পরিচালনা করুন</p>
       </motion.div>
 

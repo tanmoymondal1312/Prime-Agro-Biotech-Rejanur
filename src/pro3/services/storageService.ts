@@ -156,18 +156,37 @@ export const storageService = {
     return newCow;
   },
 
-  updateCow: async (id: string, updates: Partial<Cow>): Promise<void> => {
-    // Callers must pass the full cow object (or at minimum all required fields).
-    // Do NOT re-fetch from server here — that returns stale data and loses
-    // in-memory state (e.g. history accumulated before this call).
-    await fetch(`${API.cow}?id=${id}`, {
-      method:  'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(updates),
-    });
+  updateCow: async (
+    id: string,
+    updates: Partial<Cow>,
+    cowImageFile?: File | null,
+    receiptImageFile?: File | null,
+    onProgress?: (pct: number) => void
+  ): Promise<void> => {
+    if (cowImageFile || receiptImageFile) {
+      const fd = new FormData();
+      fd.append('data', JSON.stringify(updates));
+      if (cowImageFile)     fd.append('cowImage',     cowImageFile);
+      if (receiptImageFile) fd.append('receiptImage', receiptImageFile);
+      await xhrRequest('POST', `${API.cow}?id=${id}`, fd, onProgress);
+    } else {
+      const res = await fetch(`${API.cow}?id=${id}`, {
+        method:  'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(updates),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ message: 'Update failed' }));
+        throw new Error(err.message || 'Failed to update animal');
+      }
+    }
   },
 
   deleteCow: async (id: string): Promise<void> => {
-    await fetch(`${API.cow}?id=${id}`, { method: 'DELETE' });
+    const res = await fetch(`${API.cow}?id=${id}`, { method: 'DELETE' });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ message: 'Delete failed' }));
+      throw new Error(err.message || 'Failed to delete animal');
+    }
   },
 };

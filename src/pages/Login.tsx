@@ -43,15 +43,15 @@ export default function LoginPage() {
         className="w-full max-w-sm"
       >
         {/* Logo / Header */}
-        <div className="text-center mb-10">
-          <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-2 border-emerald-100">
+        <div className="text-center mb-10 md:mb-5">
+          <div className="w-28 h-28 mx-auto mb-2 rounded-full overflow-hidden shadow-lg border-2 border-emerald-100">
             <img
               src="/portal-logo.png"
               alt="Prime Agro Biotech"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-3xl font-black text-stone-900 tracking-tight">রেজা পোর্টাল</h1>
+          <h1 className="text-3xl font-black text-stone-900 tracking-tight">Prime Agro Biotech</h1>
           <p className="text-stone-400 text-sm mt-1 font-medium">আপনার তথ্য দিয়ে প্রবেশ করুন</p>
         </div>
 
@@ -119,6 +119,23 @@ export default function LoginPage() {
               )}
             </button>
           </form>
+        </div>
+
+        {/* Made with Mediaghor badge */}
+        <div className="mt-2 md:mt-1 text-center">
+          <a
+            href="https://mediaghor.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Made with Mediaghor - visit mediaghor.com"
+          >
+            <img
+              src="/mediaghor-badge.png"
+              alt="Made with Mediaghor - মিডিয়া ঘর"
+              className="mx-auto h-[70px] md:h-[100px] w-auto opacity-80 hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+          </a>
         </div>
       </motion.div>
     </div>
